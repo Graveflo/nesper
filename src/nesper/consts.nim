@@ -1,30 +1,47 @@
-include soc
+include soc, strutils, macros
 
 type
   esp_err_t* = int32
   # maybe try distinct type later
   esp_intr_flags* = distinct uint32
+  EspErrorCode* = distinct cint
+  IdfTarget* = enum
+    unKnown, esp32, esp32s2, esp32s3
 
+const IdfTargetDefinition {. define: "IDF_TARGET" .} = $IdfTarget.unKnown
+const espVariant* = parseEnum[IdfTarget](IdfTargetDefinition, IdfTarget.unKnown)
 
 ##  Definitions for error constants.
 
-const
-  ESP_OK* = 0
-  ESP_FAIL* = -1
-  ESP_ERR_NO_MEM* = 0x00000101
-  ESP_ERR_INVALID_ARG* = 0x00000102
-  ESP_ERR_INVALID_STATE* = 0x00000103
-  ESP_ERR_INVALID_SIZE* = 0x00000104
-  ESP_ERR_NOT_FOUND* = 0x00000105
-  ESP_ERR_NOT_SUPPORTED* = 0x00000106
-  ESP_ERR_TIMEOUT* = 0x00000107
-  ESP_ERR_INVALID_RESPONSE* = 0x00000108
-  ESP_ERR_INVALID_CRC* = 0x00000109
-  ESP_ERR_INVALID_VERSION* = 0x0000010A
-  ESP_ERR_INVALID_MAC* = 0x0000010B
-  ESP_ERR_WIFI_BASE* = 0x00003000
-  ESP_ERR_MESH_BASE* = 0x00004000
-  ESP_ERR_FLASH_BASE* = 0x00006000
+macro import_vals*(tn: typed, header_file: typed, names: untyped) =
+  names.expectKind(nnkStmtList)
+  var transformed = newTree(nnkStmtList)
+  for child in names:
+    transformed.add quote do:
+      let `child.strVal`* {. importc, header: `header_file`.}: `tn`
+  transformed
+
+import_vals EspErrorCode, "esp_err.h":
+  ESP_OK
+  ESP_FAIL
+  ESP_ERR_NO_MEM
+  ESP_ERR_INVALID_ARG
+  ESP_ERR_INVALID_STATE
+  ESP_ERR_INVALID_SIZE
+  ESP_ERR_NOT_FOUND
+  ESP_ERR_NOT_SUPPORTED
+  ESP_ERR_TIMEOUT
+  ESP_ERR_INVALID_RESPONSE
+  ESP_ERR_INVALID_CRC
+  ESP_ERR_INVALID_VERSION
+  ESP_ERR_INVALID_MAC
+  ESP_ERR_NOT_FINISHED
+  ESP_ERR_NOT_ALLOWED
+  ESP_ERR_WIFI_BASE
+  ESP_ERR_MESH_BASE
+  ESP_ERR_FLASH_BASE
+  ESP_ERR_HW_CRYPTO_BASE
+  ESP_ERR_MEMPROT_BASE
 
 ##  This is used to provide SystemView with positive IRQ IDs, otherwise sheduler events are not shown properly
 ##  #define ETS_INTERNAL_INTR_SOURCE_OFF		(-ETS_INTERNAL_PROFILING_INTR_SOURCE)
@@ -53,6 +70,7 @@ type
 borrowBasicOperations(SzBytes)
 borrowBasicOperations(SzKiloBytes)
 borrowBasicOperations(SzMegaBytes)
+borrowBasicOperations(EspErrorCode)
 
 converter toSzBytes*(kb: SzKiloBytes): SzBytes = SzBytes(1024 * kb.int)
 converter toSzytes*(kb: SzMegaBytes): SzBytes = SzBytes(1024 * 1024 * kb.int)

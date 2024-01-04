@@ -1,6 +1,8 @@
 
 import os, strutils, sequtils
-import strformat, tables, sugar
+import strformat, tables
+
+
 
 type
   NimbleArgs = object
@@ -66,9 +68,7 @@ proc parseNimbleArgs(): NimbleArgs =
 
   let
     npathcmd = "nimble --silent path nesper"
-    (nesperPath, rcode) = system.gorgeEx(npathcmd)
-  if rcode != 0:
-    raise newException( ValueError, "error running getting Nesper path using: `%#`" % [npathcmd])
+    nesperPath = currentSourcePath().parentDir.parentDir
 
   # Try setting wifi password
   let wifi_ssid = getEnv("ESP_WIFI_SSID")
@@ -175,7 +175,8 @@ task esp_install_headers, "Install nim headers":
     let nimbasepath = selfExe().splitFile.dir.parentDir / "lib" / "nimbase.h"
 
     echo("...copying nimbase file into the Nim cache directory ($#)" % [cachedir/"nimbase.h"])
-    cpFile(nimbasepath, cachedir / "nimbase.h")
+    echo nimbasepath
+    cpFile(nimbasepath, (cachedir / "nimbase.h"))
   else:
     echo("...nimbase.h already exists")
 
@@ -218,9 +219,8 @@ task esp_compile, "Compile Nim project for esp-idf program":
   if nopts.distclean:
     echo "...cleaning esp-idf build cache"
     rmDir(nopts.projdir / "build")
-
-  let
-    nimargs = @[
+  
+  var nimargs = @[
       "c",
       "--path:" & thisDir() / nopts.appsrc,
       "--nomain",
@@ -228,10 +228,20 @@ task esp_compile, "Compile Nim project for esp-idf program":
       "--nimcache:" & nopts.cachedir.quoteShell(),
       "-d:NimAppMain",
       "-d:" & nopts.esp_idf_version
-    ].join(" ") 
+    ]
+  var ebt = getEnv("IDF_TARGET", "")
+  if ebt == "" and fileExists("sdkconfig"):
+    let conts = readFile("sdkconfig")
+    let ip = conts.find("IDF_TARGET=")
+    if (ip >= 8) and (conts[ip-8] == '\n'):
+      let vs = conts.find("=\"", start=ip)+2
+      ebt = conts[vs..<conts.find('\n', start=vs)-1]
+  if ebt != "": nimargs.add "-d:IDF_TARGET:" & ebt
+      
+  let
     childargs = nopts.child_args.mapIt(it.quoteShell()).join(" ")
     wifidefs = nopts.wifi_args
-    compiler_cmd = nimargs & " " & wifidefs & " " & childargs & " " & nopts.projfile.quoteShell() 
+    compiler_cmd = nimargs.join(" ") & " " & wifidefs & " " & childargs & " " & nopts.projfile.quoteShell() 
   
   echo "compiler_cmd: ", compiler_cmd
   echo "compiler_childargs: ", nopts.child_args
@@ -242,23 +252,16 @@ task esp_compile, "Compile Nim project for esp-idf program":
   # selfExec("error")
   cd(nopts.projdir)
   selfExec(compiler_cmd)
+  espInstallHeadersTask()
 
 task esp_build, "Build esp-idf project":
-  echo "\n[Nesper ESP] Building ESP-IDF project:"
-
   if findExe("idf.py") == "":
     echo "\nError: idf.py not found. Please run the esp-idf export commands: `. $IDF_PATH/export.sh` and try again.\n"
     quit(2)
-
-  exec("idf.py reconfigure")
-  exec("idf.py build")
-
-
-### Actions to ensure correct steps occur before/after certain tasks ###
-
-after esp_compile:
-  espInstallHeadersTask()
-
-before esp_build:
+  if getEnv("IDF_TARGET", "") != "":
+    exec("idf.py set-target " & getEnv("IDF_TARGET", ""))
+  else:
+    exec("idf.py reconfigure")
   espCompileTask()
-  espInstallHeadersTask()
+  echo "\n[Nesper ESP] Building ESP-IDF project:"
+  exec("idf.py build")
