@@ -108,7 +108,7 @@ type
 ##          ESP_OK otherwise
 ##
 
-proc esp_intr_mark_shared*(intno: cint; cpu: cint; is_in_iram: bool): esp_err_t {.
+proc esp_intr_mark_shared*(intno: cint; cpu: cint; is_in_iram: bool): EspErrorCode {.
     importc: "esp_intr_mark_shared", header: "esp_intr_alloc.h".}
 
 
@@ -125,7 +125,7 @@ proc esp_intr_mark_shared*(intno: cint; cpu: cint; is_in_iram: bool): esp_err_t 
 ##          ESP_OK otherwise
 ##
 
-proc esp_intr_reserve*(intno: cint; cpu: cint): esp_err_t {.
+proc esp_intr_reserve*(intno: cint; cpu: cint): EspErrorCode {.
     importc: "esp_intr_reserve", header: "esp_intr_alloc.h".}
 
 
@@ -164,7 +164,7 @@ proc esp_intr_reserve*(intno: cint; cpu: cint): esp_err_t {.
 ##
 
 proc esp_intr_alloc*(source: cint; flags: cint; handler: intr_handler_t; arg: pointer;
-                    ret_handle: ptr intr_handle_t): esp_err_t {.
+                    ret_handle: ptr intr_handle_t): EspErrorCode {.
     importc: "esp_intr_alloc", header: "esp_intr_alloc.h".}
 
 
@@ -206,7 +206,7 @@ proc esp_intr_alloc*(source: cint; flags: cint; handler: intr_handler_t; arg: po
 
 proc esp_intr_alloc_intrstatus*(source: cint; flags: cint; intrstatusreg: uint32;
                                intrstatusmask: uint32; handler: intr_handler_t;
-                               arg: pointer; ret_handle: ptr intr_handle_t): esp_err_t {.
+                               arg: pointer; ret_handle: ptr intr_handle_t): EspErrorCode {.
     importc: "esp_intr_alloc_intrstatus", header: "esp_intr_alloc.h".}
 
 ## *
@@ -228,7 +228,7 @@ proc esp_intr_alloc_intrstatus*(source: cint; flags: cint; intrstatusreg: uint32
 ##          ESP_OK otherwise
 ##
 
-proc esp_intr_free*(handle: intr_handle_t): esp_err_t {.importc: "esp_intr_free",
+proc esp_intr_free*(handle: intr_handle_t): EspErrorCode {.importc: "esp_intr_free",
     header: "esp_intr_alloc.h".}
 
 
@@ -273,7 +273,7 @@ proc esp_intr_get_intno*(handle: intr_handle_t): cint {.
 ##          ESP_OK otherwise
 ##
 
-proc esp_intr_disable*(handle: intr_handle_t): esp_err_t {.
+proc esp_intr_disable*(handle: intr_handle_t): EspErrorCode {.
     importc: "esp_intr_disable", header: "esp_intr_alloc.h".}
 
 
@@ -289,7 +289,7 @@ proc esp_intr_disable*(handle: intr_handle_t): esp_err_t {.
 ##          ESP_OK otherwise
 ##
 
-proc esp_intr_enable*(handle: intr_handle_t): esp_err_t {.
+proc esp_intr_enable*(handle: intr_handle_t): EspErrorCode {.
     importc: "esp_intr_enable", header: "esp_intr_alloc.h".}
 
 
@@ -306,7 +306,7 @@ proc esp_intr_enable*(handle: intr_handle_t): esp_err_t {.
 ##          ESP_OK otherwise
 ##
 
-proc esp_intr_set_in_iram*(handle: intr_handle_t; is_in_iram: bool): esp_err_t {.
+proc esp_intr_set_in_iram*(handle: intr_handle_t; is_in_iram: bool): EspErrorCode {.
     importc: "esp_intr_set_in_iram", header: "esp_intr_alloc.h".}
 
 

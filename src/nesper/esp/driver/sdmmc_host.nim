@@ -65,7 +65,7 @@ proc SDMMC_SLOT_CONFIG_DEFAULT*() : sdmmc_slot_config_t =
 ##     - ESP_ERR_NO_MEM if memory can not be allocated
 ##
 
-proc sdmmc_host_init*() : esp_err_t {.cdecl, importc: "sdmmc_host_init", header: theader.}
+proc sdmmc_host_init*() : EspErrorCode {.cdecl, importc: "sdmmc_host_init", header: theader.}
 
 
 ##
@@ -87,7 +87,7 @@ proc sdmmc_host_init*() : esp_err_t {.cdecl, importc: "sdmmc_host_init", header:
 ##      - ESP_ERR_INVALID_STATE if host has not been initialized using sdmmc_host_init
 ##
 
-proc sdmmc_host_init_slot*(slot : int,  slot_config : ptr sdmmc_slot_config_t) : esp_err_t {.cdecl, importc: "sdmmc_host_init_slot", header: theader.}
+proc sdmmc_host_init_slot*(slot : int,  slot_config : ptr sdmmc_slot_config_t) : EspErrorCode {.cdecl, importc: "sdmmc_host_init_slot", header: theader.}
 
 
 ## 
@@ -105,7 +105,7 @@ proc sdmmc_host_init_slot*(slot : int,  slot_config : ptr sdmmc_slot_config_t) :
 ##       - ESP_ERR_INVALID_ARG if slot number or width is not valid
 ## 
 
-proc sdmmc_host_set_bus_width*(slot : int, width : uint32) : esp_err_t {.cdecl, importc: "sdmmc_host_set_bus_width", header: theader.}
+proc sdmmc_host_set_bus_width*(slot : int, width : uint32) : EspErrorCode {.cdecl, importc: "sdmmc_host_set_bus_width", header: theader.}
 
 
 ##
@@ -134,7 +134,7 @@ proc sdmmc_host_get_slot_width*(slot : int) : uint32 {.cdecl, importc: "sdmmc_ho
 ##      - other error codes may be returned in the future
 ##
 
-proc sdmmc_host_set_card_clk*(slot : int, freq_khz : uint32) : esp_err_t {.cdecl, importc: "sdmmc_host_set_card_clk", header: theader.}
+proc sdmmc_host_set_card_clk*(slot : int, freq_khz : uint32) : EspErrorCode {.cdecl, importc: "sdmmc_host_set_card_clk", header: theader.}
 
 
 ##
@@ -146,7 +146,7 @@ proc sdmmc_host_set_card_clk*(slot : int, freq_khz : uint32) : esp_err_t {.cdecl
 ##      - ESP_ERR_NOT_SUPPORTED if DDR mode is not supported on this slot
 ##
 
-proc sdmmc_host_set_bus_ddr_mode*(slot : int, ddr_enabled : bool) : esp_err_t {.cdecl, importc: "sdmmc_host_set_bus_ddr_mode", header: theader.}
+proc sdmmc_host_set_bus_ddr_mode*(slot : int, ddr_enabled : bool) : EspErrorCode {.cdecl, importc: "sdmmc_host_set_bus_ddr_mode", header: theader.}
 
 
 ##
@@ -173,7 +173,7 @@ proc sdmmc_host_set_bus_ddr_mode*(slot : int, ddr_enabled : bool) : esp_err_t {.
 ##      - ESP_ERR_INVALID_ARG if the data buffer is not in DMA capable memory
 ##
 
-proc sdmmc_host_do_transaction*(slot : int, cmdinfo : ptr sdmmc_command_t) : esp_err_t {.cdecl, importc: "sdmmc_host_do_transaction", header: theader.}
+proc sdmmc_host_do_transaction*(slot : int, cmdinfo : ptr sdmmc_command_t) : EspErrorCode {.cdecl, importc: "sdmmc_host_do_transaction", header: theader.}
 
 
 
@@ -186,7 +186,7 @@ proc sdmmc_host_do_transaction*(slot : int, cmdinfo : ptr sdmmc_command_t) : esp
 ## @return returns ESP_OK, other errors possible in the future
 ##
 
-proc sdmmc_host_io_int_enable*(slot : int) : esp_err_t {.cdecl, importc: "sdmmc_host_io_int_enable", header: theader.}
+proc sdmmc_host_io_int_enable*(slot : int) : EspErrorCode {.cdecl, importc: "sdmmc_host_io_int_enable", header: theader.}
 
 
 ##
@@ -198,7 +198,7 @@ proc sdmmc_host_io_int_enable*(slot : int) : esp_err_t {.cdecl, importc: "sdmmc_
 ##  - ESP_ERR_TIMEOUT if the interrupt did not occur within timeout_ticks
 ##
 
-proc sdmmc_host_io_int_wait*(slot : int, timeout_ticks : TickType_t) : esp_err_t {.cdecl, importc: "sdmmc_host_io_int_wait", header: theader.}
+proc sdmmc_host_io_int_wait*(slot : int, timeout_ticks : TickType_t) : EspErrorCode {.cdecl, importc: "sdmmc_host_io_int_wait", header: theader.}
 
 
 ##
@@ -211,7 +211,7 @@ proc sdmmc_host_io_int_wait*(slot : int, timeout_ticks : TickType_t) : esp_err_t
 ##      - ESP_ERR_INVALID_STATE if sdmmc_host_init function has not been called
 ##
 
-proc sdmmc_host_deinit*() : esp_err_t {.cdecl, importc: "sdmmc_host_deinit", header: theader.}
+proc sdmmc_host_deinit*() : EspErrorCode {.cdecl, importc: "sdmmc_host_deinit", header: theader.}
 
 
 ##
@@ -230,7 +230,7 @@ proc sdmmc_host_deinit*() : esp_err_t {.cdecl, importc: "sdmmc_host_deinit", hea
 ##              support
 ##
 
-proc sdmmc_host_pullup_en*(slot : int, width : int) : esp_err_t {.cdecl, importc: "sdmmc_host_pullup_en", header: theader.}
+proc sdmmc_host_pullup_en*(slot : int, width : int) : EspErrorCode {.cdecl, importc: "sdmmc_host_pullup_en", header: theader.}
 
 
 ## 

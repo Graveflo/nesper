@@ -102,7 +102,7 @@ type
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc pcnt_unit_config*(pcnt_config: ptr pcnt_config_t): esp_err_t {.
+proc pcnt_unit_config*(pcnt_config: ptr pcnt_config_t): EspErrorCode {.
     importc: "pcnt_unit_config", header: "pcnt.h".}
 ## *
 ##  @brief Get pulse counter value
@@ -115,7 +115,7 @@ proc pcnt_unit_config*(pcnt_config: ptr pcnt_config_t): esp_err_t {.
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc pcnt_get_counter_value*(pcnt_unit: pcnt_unit_t; count: ptr int16): esp_err_t {.
+proc pcnt_get_counter_value*(pcnt_unit: pcnt_unit_t; count: ptr int16): EspErrorCode {.
     importc: "pcnt_get_counter_value", header: "pcnt.h".}
 ## *
 ##  @brief Pause PCNT counter of PCNT unit
@@ -127,7 +127,7 @@ proc pcnt_get_counter_value*(pcnt_unit: pcnt_unit_t; count: ptr int16): esp_err_
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc pcnt_counter_pause*(pcnt_unit: pcnt_unit_t): esp_err_t {.
+proc pcnt_counter_pause*(pcnt_unit: pcnt_unit_t): EspErrorCode {.
     importc: "pcnt_counter_pause", header: "pcnt.h".}
 ## *
 ##  @brief Resume counting for PCNT counter
@@ -139,7 +139,7 @@ proc pcnt_counter_pause*(pcnt_unit: pcnt_unit_t): esp_err_t {.
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc pcnt_counter_resume*(pcnt_unit: pcnt_unit_t): esp_err_t {.
+proc pcnt_counter_resume*(pcnt_unit: pcnt_unit_t): EspErrorCode {.
     importc: "pcnt_counter_resume", header: "pcnt.h".}
 ## *
 ##  @brief Clear and reset PCNT counter value to zero
@@ -151,7 +151,7 @@ proc pcnt_counter_resume*(pcnt_unit: pcnt_unit_t): esp_err_t {.
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc pcnt_counter_clear*(pcnt_unit: pcnt_unit_t): esp_err_t {.
+proc pcnt_counter_clear*(pcnt_unit: pcnt_unit_t): EspErrorCode {.
     importc: "pcnt_counter_clear", header: "pcnt.h".}
 ## *
 ##  @brief Enable PCNT interrupt for PCNT unit
@@ -166,7 +166,7 @@ proc pcnt_counter_clear*(pcnt_unit: pcnt_unit_t): esp_err_t {.
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc pcnt_intr_enable*(pcnt_unit: pcnt_unit_t): esp_err_t {.
+proc pcnt_intr_enable*(pcnt_unit: pcnt_unit_t): EspErrorCode {.
     importc: "pcnt_intr_enable", header: "pcnt.h".}
 ## *
 ##  @brief Disable PCNT interrupt for PCNT unit
@@ -178,7 +178,7 @@ proc pcnt_intr_enable*(pcnt_unit: pcnt_unit_t): esp_err_t {.
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc pcnt_intr_disable*(pcnt_unit: pcnt_unit_t): esp_err_t {.
+proc pcnt_intr_disable*(pcnt_unit: pcnt_unit_t): EspErrorCode {.
     importc: "pcnt_intr_disable", header: "pcnt.h".}
 ## *
 ##  @brief Enable PCNT event of PCNT unit
@@ -191,7 +191,7 @@ proc pcnt_intr_disable*(pcnt_unit: pcnt_unit_t): esp_err_t {.
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc pcnt_event_enable*(unit: pcnt_unit_t; evt_type: pcnt_evt_type_t): esp_err_t {.
+proc pcnt_event_enable*(unit: pcnt_unit_t; evt_type: pcnt_evt_type_t): EspErrorCode {.
     importc: "pcnt_event_enable", header: "pcnt.h".}
 ## *
 ##  @brief Disable PCNT event of PCNT unit
@@ -204,7 +204,7 @@ proc pcnt_event_enable*(unit: pcnt_unit_t; evt_type: pcnt_evt_type_t): esp_err_t
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc pcnt_event_disable*(unit: pcnt_unit_t; evt_type: pcnt_evt_type_t): esp_err_t {.
+proc pcnt_event_disable*(unit: pcnt_unit_t; evt_type: pcnt_evt_type_t): EspErrorCode {.
     importc: "pcnt_event_disable", header: "pcnt.h".}
 ## *
 ##  @brief Set PCNT event value of PCNT unit
@@ -221,7 +221,7 @@ proc pcnt_event_disable*(unit: pcnt_unit_t; evt_type: pcnt_evt_type_t): esp_err_
 ##
 
 proc pcnt_set_event_value*(unit: pcnt_unit_t; evt_type: pcnt_evt_type_t;
-                          value: int16): esp_err_t {.
+                          value: int16): EspErrorCode {.
     importc: "pcnt_set_event_value", header: "pcnt.h".}
 ## *
 ##  @brief Get PCNT event value of PCNT unit
@@ -237,7 +237,7 @@ proc pcnt_set_event_value*(unit: pcnt_unit_t; evt_type: pcnt_evt_type_t;
 ##
 
 proc pcnt_get_event_value*(unit: pcnt_unit_t; evt_type: pcnt_evt_type_t;
-                          value: ptr int16): esp_err_t {.
+                          value: ptr int16): EspErrorCode {.
     importc: "pcnt_get_event_value", header: "pcnt.h".}
 ## *
 ##  @brief Register PCNT interrupt handler, the handler is an ISR.
@@ -259,7 +259,7 @@ proc pcnt_get_event_value*(unit: pcnt_unit_t; evt_type: pcnt_evt_type_t;
 ##
 
 proc pcnt_isr_register*(fn: proc (a1: pointer) {.cdecl.}; arg: pointer; intr_alloc_flags: esp_intr_flags;
-                       handle: ptr pcnt_isr_handle_t): esp_err_t {.
+                       handle: ptr pcnt_isr_handle_t): EspErrorCode {.
     importc: "pcnt_isr_register", header: "pcnt.h".}
 ## *
 ##  @brief Configure PCNT pulse signal input pin and control input pin
@@ -277,7 +277,7 @@ proc pcnt_isr_register*(fn: proc (a1: pointer) {.cdecl.}; arg: pointer; intr_all
 ##
 
 proc pcnt_set_pin*(unit: pcnt_unit_t; channel: pcnt_channel_t; pulse_io: cint;
-                  ctrl_io: cint): esp_err_t {.importc: "pcnt_set_pin",
+                  ctrl_io: cint): EspErrorCode {.importc: "pcnt_set_pin",
     header: "pcnt.h".}
 ## *
 ##  @brief Enable PCNT input filter
@@ -289,7 +289,7 @@ proc pcnt_set_pin*(unit: pcnt_unit_t; channel: pcnt_channel_t; pulse_io: cint;
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc pcnt_filter_enable*(unit: pcnt_unit_t): esp_err_t {.
+proc pcnt_filter_enable*(unit: pcnt_unit_t): EspErrorCode {.
     importc: "pcnt_filter_enable", header: "pcnt.h".}
 ## *
 ##  @brief Disable PCNT input filter
@@ -301,7 +301,7 @@ proc pcnt_filter_enable*(unit: pcnt_unit_t): esp_err_t {.
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc pcnt_filter_disable*(unit: pcnt_unit_t): esp_err_t {.
+proc pcnt_filter_disable*(unit: pcnt_unit_t): EspErrorCode {.
     importc: "pcnt_filter_disable", header: "pcnt.h".}
 ## *
 ##  @brief Set PCNT filter value
@@ -317,7 +317,7 @@ proc pcnt_filter_disable*(unit: pcnt_unit_t): esp_err_t {.
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc pcnt_set_filter_value*(unit: pcnt_unit_t; filter_val: uint16): esp_err_t {.
+proc pcnt_set_filter_value*(unit: pcnt_unit_t; filter_val: uint16): EspErrorCode {.
     importc: "pcnt_set_filter_value", header: "pcnt.h".}
 ## *
 ##  @brief Get PCNT filter value
@@ -330,7 +330,7 @@ proc pcnt_set_filter_value*(unit: pcnt_unit_t; filter_val: uint16): esp_err_t {.
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc pcnt_get_filter_value*(unit: pcnt_unit_t; filter_val: ptr uint16): esp_err_t {.
+proc pcnt_get_filter_value*(unit: pcnt_unit_t; filter_val: ptr uint16): EspErrorCode {.
     importc: "pcnt_get_filter_value", header: "pcnt.h".}
 ## *
 ##  @brief Set PCNT counter mode
@@ -349,7 +349,7 @@ proc pcnt_get_filter_value*(unit: pcnt_unit_t; filter_val: ptr uint16): esp_err_
 
 proc pcnt_set_mode*(unit: pcnt_unit_t; channel: pcnt_channel_t;
                    pos_mode: pcnt_count_mode_t; neg_mode: pcnt_count_mode_t;
-                   hctrl_mode: pcnt_ctrl_mode_t; lctrl_mode: pcnt_ctrl_mode_t): esp_err_t {.
+                   hctrl_mode: pcnt_ctrl_mode_t; lctrl_mode: pcnt_ctrl_mode_t): EspErrorCode {.
     importc: "pcnt_set_mode", header: "pcnt.h".}
 ## *
 ##  @brief Add ISR handler for specified unit.
@@ -376,7 +376,7 @@ proc pcnt_set_mode*(unit: pcnt_unit_t; channel: pcnt_channel_t;
 ##
 
 proc pcnt_isr_handler_add*(unit: pcnt_unit_t; isr_handler: proc (a1: pointer) {.cdecl.};
-                          args: pointer): esp_err_t {.
+                          args: pointer): EspErrorCode {.
     importc: "pcnt_isr_handler_add", header: "pcnt.h".}
 ## *
 ##  @brief Install PCNT ISR service.
@@ -393,7 +393,7 @@ proc pcnt_isr_handler_add*(unit: pcnt_unit_t; isr_handler: proc (a1: pointer) {.
 ##      - ESP_ERR_INVALID_STATE ISR service already installed
 ##
 
-proc pcnt_isr_service_install*(intr_alloc_flags: esp_intr_flags): esp_err_t {.
+proc pcnt_isr_service_install*(intr_alloc_flags: esp_intr_flags): EspErrorCode {.
     importc: "pcnt_isr_service_install", header: "pcnt.h".}
 ## *
 ##  @brief Uninstall PCNT ISR service, freeing related resources.
@@ -411,7 +411,7 @@ proc pcnt_isr_service_uninstall*() {.importc: "pcnt_isr_service_uninstall",
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc pcnt_isr_handler_remove*(unit: pcnt_unit_t): esp_err_t {.
+proc pcnt_isr_handler_remove*(unit: pcnt_unit_t): EspErrorCode {.
     importc: "pcnt_isr_handler_remove", header: "pcnt.h".}
 ## *
 ##  @addtogroup pcnt-examples

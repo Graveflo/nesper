@@ -134,7 +134,7 @@ type
 ##
 
 proc nvs_open*(name: cstring; open_mode: nvs_open_mode_t;
-              out_handle: ptr nvs_handle_t): esp_err_t {.cdecl, importc: "nvs_open",
+              out_handle: ptr nvs_handle_t): EspErrorCode {.cdecl, importc: "nvs_open",
     header: "nvs.h".}
 
 
@@ -166,7 +166,7 @@ proc nvs_open*(name: cstring; open_mode: nvs_open_mode_t;
 ##
 proc nvs_open_from_partition*(part_name: cstring; name: cstring;
                              open_mode: nvs_open_mode_t;
-                             out_handle: ptr nvs_handle_t): esp_err_t {.cdecl,
+                             out_handle: ptr nvs_handle_t): EspErrorCode {.cdecl,
     importc: "nvs_open_from_partition", header: "nvs.h".}
 
 
@@ -200,23 +200,23 @@ proc nvs_open_from_partition*(part_name: cstring; name: cstring;
 ##              - ESP_ERR_NVS_VALUE_TOO_LONG if the string value is too long
 ##
 
-proc nvs_set_i8*(handle: nvs_handle_t; key: cstring; value: int8): esp_err_t {.cdecl,
+proc nvs_set_i8*(handle: nvs_handle_t; key: cstring; value: int8): EspErrorCode {.cdecl,
     importc: "nvs_set_i8", header: "nvs.h".}
-proc nvs_set_u8*(handle: nvs_handle_t; key: cstring; value: uint8): esp_err_t {.cdecl,
+proc nvs_set_u8*(handle: nvs_handle_t; key: cstring; value: uint8): EspErrorCode {.cdecl,
     importc: "nvs_set_u8", header: "nvs.h".}
-proc nvs_set_i16*(handle: nvs_handle_t; key: cstring; value: int16): esp_err_t {.
+proc nvs_set_i16*(handle: nvs_handle_t; key: cstring; value: int16): EspErrorCode {.
     cdecl, importc: "nvs_set_i16", header: "nvs.h".}
-proc nvs_set_u16*(handle: nvs_handle_t; key: cstring; value: uint16): esp_err_t {.
+proc nvs_set_u16*(handle: nvs_handle_t; key: cstring; value: uint16): EspErrorCode {.
     cdecl, importc: "nvs_set_u16", header: "nvs.h".}
-proc nvs_set_i32*(handle: nvs_handle_t; key: cstring; value: int32): esp_err_t {.
+proc nvs_set_i32*(handle: nvs_handle_t; key: cstring; value: int32): EspErrorCode {.
     cdecl, importc: "nvs_set_i32", header: "nvs.h".}
-proc nvs_set_u32*(handle: nvs_handle_t; key: cstring; value: uint32): esp_err_t {.
+proc nvs_set_u32*(handle: nvs_handle_t; key: cstring; value: uint32): EspErrorCode {.
     cdecl, importc: "nvs_set_u32", header: "nvs.h".}
-proc nvs_set_i64*(handle: nvs_handle_t; key: cstring; value: int64): esp_err_t {.
+proc nvs_set_i64*(handle: nvs_handle_t; key: cstring; value: int64): EspErrorCode {.
     cdecl, importc: "nvs_set_i64", header: "nvs.h".}
-proc nvs_set_u64*(handle: nvs_handle_t; key: cstring; value: uint64): esp_err_t {.
+proc nvs_set_u64*(handle: nvs_handle_t; key: cstring; value: uint64): EspErrorCode {.
     cdecl, importc: "nvs_set_u64", header: "nvs.h".}
-proc nvs_set_str*(handle: nvs_handle_t; key: cstring; value: cstring): esp_err_t {.
+proc nvs_set_str*(handle: nvs_handle_t; key: cstring; value: cstring): EspErrorCode {.
     cdecl, importc: "nvs_set_str", header: "nvs.h".}
 
 
@@ -249,7 +249,7 @@ proc nvs_set_str*(handle: nvs_handle_t; key: cstring; value: cstring): esp_err_t
 ##              - ESP_ERR_NVS_VALUE_TOO_LONG if the value is too long
 ##
 
-proc nvs_set_blob*(handle: nvs_handle_t; key: cstring; value: pointer; length: csize_t): esp_err_t {.
+proc nvs_set_blob*(handle: nvs_handle_t; key: cstring; value: pointer; length: csize_t): EspErrorCode {.
     cdecl, importc: "nvs_set_blob", header: "nvs.h".}
 
 
@@ -269,7 +269,7 @@ proc nvs_set_blob*(handle: nvs_handle_t; key: cstring; value: pointer; length: c
 ##  \code{c}
 ##  // Example of using nvs_get_i32:
 ##  int32_t max_buffer_size = 4096; // default value
-##  esp_err_t err = nvs_get_i32(my_handle, "max_buffer_size", &max_buffer_size);
+##  EspErrorCode err = nvs_get_i32(my_handle, "max_buffer_size", &max_buffer_size);
 ##  assert(err == ESP_OK || err == ESP_ERR_NVS_NOT_FOUND);
 ##  // if ESP_ERR_NVS_NOT_FOUND was returned, max_buffer_size will still
 ##  // have its default value.
@@ -292,21 +292,21 @@ proc nvs_set_blob*(handle: nvs_handle_t; key: cstring; value: pointer; length: c
 ##              - ESP_ERR_NVS_INVALID_LENGTH if length is not sufficient to store data
 ##
 
-proc nvs_get_i8*(handle: nvs_handle_t; key: cstring; out_value: ptr int8): esp_err_t {.
+proc nvs_get_i8*(handle: nvs_handle_t; key: cstring; out_value: ptr int8): EspErrorCode {.
     cdecl, importc: "nvs_get_i8", header: "nvs.h".}
-proc nvs_get_u8*(handle: nvs_handle_t; key: cstring; out_value: ptr uint8): esp_err_t {.
+proc nvs_get_u8*(handle: nvs_handle_t; key: cstring; out_value: ptr uint8): EspErrorCode {.
     cdecl, importc: "nvs_get_u8", header: "nvs.h".}
-proc nvs_get_i16*(handle: nvs_handle_t; key: cstring; out_value: ptr int16): esp_err_t {.
+proc nvs_get_i16*(handle: nvs_handle_t; key: cstring; out_value: ptr int16): EspErrorCode {.
     cdecl, importc: "nvs_get_i16", header: "nvs.h".}
-proc nvs_get_u16*(handle: nvs_handle_t; key: cstring; out_value: ptr uint16): esp_err_t {.
+proc nvs_get_u16*(handle: nvs_handle_t; key: cstring; out_value: ptr uint16): EspErrorCode {.
     cdecl, importc: "nvs_get_u16", header: "nvs.h".}
-proc nvs_get_i32*(handle: nvs_handle_t; key: cstring; out_value: ptr int32): esp_err_t {.
+proc nvs_get_i32*(handle: nvs_handle_t; key: cstring; out_value: ptr int32): EspErrorCode {.
     cdecl, importc: "nvs_get_i32", header: "nvs.h".}
-proc nvs_get_u32*(handle: nvs_handle_t; key: cstring; out_value: ptr uint32): esp_err_t {.
+proc nvs_get_u32*(handle: nvs_handle_t; key: cstring; out_value: ptr uint32): EspErrorCode {.
     cdecl, importc: "nvs_get_u32", header: "nvs.h".}
-proc nvs_get_i64*(handle: nvs_handle_t; key: cstring; out_value: ptr int64): esp_err_t {.
+proc nvs_get_i64*(handle: nvs_handle_t; key: cstring; out_value: ptr int64): EspErrorCode {.
     cdecl, importc: "nvs_get_i64", header: "nvs.h".}
-proc nvs_get_u64*(handle: nvs_handle_t; key: cstring; out_value: ptr uint64): esp_err_t {.
+proc nvs_get_u64*(handle: nvs_handle_t; key: cstring; out_value: ptr uint64): EspErrorCode {.
     cdecl, importc: "nvs_get_u64", header: "nvs.h".}
 
 
@@ -371,10 +371,10 @@ proc nvs_get_u64*(handle: nvs_handle_t; key: cstring; out_value: ptr uint64): es
 ## *@{
 
 proc nvs_get_str*(handle: nvs_handle_t; key: cstring; out_value: cstring;
-                 length: ptr csize_t): esp_err_t {.cdecl, importc: "nvs_get_str",
+                 length: ptr csize_t): EspErrorCode {.cdecl, importc: "nvs_get_str",
     header: "nvs.h".}
 proc nvs_get_blob*(handle: nvs_handle_t; key: cstring; out_value: pointer;
-                  length: ptr csize_t): esp_err_t {.cdecl, importc: "nvs_get_blob",
+                  length: ptr csize_t): EspErrorCode {.cdecl, importc: "nvs_get_blob",
     header: "nvs.h".}
 
 
@@ -400,7 +400,7 @@ proc nvs_get_blob*(handle: nvs_handle_t; key: cstring; out_value: pointer;
 ##               - other error codes from the underlying storage driver
 ##
 
-proc nvs_erase_key*(handle: nvs_handle_t; key: cstring): esp_err_t {.cdecl,
+proc nvs_erase_key*(handle: nvs_handle_t; key: cstring): EspErrorCode {.cdecl,
     importc: "nvs_erase_key", header: "nvs.h".}
 
 
@@ -419,7 +419,7 @@ proc nvs_erase_key*(handle: nvs_handle_t; key: cstring): esp_err_t {.cdecl,
 ##               - other error codes from the underlying storage driver
 ##
 
-proc nvs_erase_all*(handle: nvs_handle_t): esp_err_t {.cdecl,
+proc nvs_erase_all*(handle: nvs_handle_t): EspErrorCode {.cdecl,
     importc: "nvs_erase_all", header: "nvs.h".}
 
 
@@ -439,7 +439,7 @@ proc nvs_erase_all*(handle: nvs_handle_t): esp_err_t {.cdecl,
 ##              - other error codes from the underlying storage driver
 ##
 
-proc nvs_commit*(handle: nvs_handle_t): esp_err_t {.cdecl, importc: "nvs_commit",
+proc nvs_commit*(handle: nvs_handle_t): EspErrorCode {.cdecl, importc: "nvs_commit",
     header: "nvs.h".}
 
 
@@ -504,7 +504,7 @@ type
 ##                not all pages will be counted. Counting will be interrupted at the first INVALID page.
 ##
 
-proc nvs_get_stats*(part_name: cstring; nvs_stats: ptr nvs_stats_t): esp_err_t {.cdecl,
+proc nvs_get_stats*(part_name: cstring; nvs_stats: ptr nvs_stats_t): EspErrorCode {.cdecl,
     importc: "nvs_get_stats", header: "nvs.h".}
 
 
@@ -545,7 +545,7 @@ proc nvs_get_stats*(part_name: cstring; nvs_stats: ptr nvs_stats_t): esp_err_t {
 ##                Return param used_entries will be filled 0.
 ##
 
-proc nvs_get_used_entry_count*(handle: nvs_handle_t; used_entries: ptr csize_t): esp_err_t {.
+proc nvs_get_used_entry_count*(handle: nvs_handle_t; used_entries: ptr csize_t): EspErrorCode {.
     cdecl, importc: "nvs_get_used_entry_count", header: "nvs.h".}
 
 

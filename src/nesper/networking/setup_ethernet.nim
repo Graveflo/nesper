@@ -132,7 +132,7 @@ proc networkingConnect*[ET](eth: var ET) =
 
   eth.ethernetStart()
 
-proc networkingDisconnect*(): esp_err_t =
+proc networkingDisconnect*(): EspErrorCode =
   if networkConnectEventGroup == nil:
     raise newException(ValueError, "missing net conn group")
 

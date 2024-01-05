@@ -136,7 +136,7 @@ type
 ##
 
 proc esp_partition_table_verify*(partition_table: ptr esp_partition_info_t;
-                                log_errors: bool; num_partitions: ptr cint): esp_err_t {.
+                                log_errors: bool; num_partitions: ptr cint): EspErrorCode {.
     importc: "esp_partition_table_verify", header: "esp_flash_partitions.h".}
 
 

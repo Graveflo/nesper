@@ -40,7 +40,7 @@ type
 ##       - one of the error codes from the underlying flash storage driver
 ##
 
-proc nvs_flash_init*(): esp_err_t {.cdecl, importc: "nvs_flash_init",
+proc nvs_flash_init*(): EspErrorCode {.cdecl, importc: "nvs_flash_init",
                                  header: "nvs_flash.h".}
 ## *
 ##  @brief Initialize NVS flash storage for the specified partition.
@@ -56,7 +56,7 @@ proc nvs_flash_init*(): esp_err_t {.cdecl, importc: "nvs_flash_init",
 ##       - one of the error codes from the underlying flash storage driver
 ##
 
-proc nvs_flash_init_partition*(partition_label: cstring): esp_err_t {.cdecl,
+proc nvs_flash_init_partition*(partition_label: cstring): EspErrorCode {.cdecl,
     importc: "nvs_flash_init_partition", header: "nvs_flash.h".}
 ## *
 ##  @brief Deinitialize NVS storage for the default NVS partition
@@ -68,7 +68,7 @@ proc nvs_flash_init_partition*(partition_label: cstring): esp_err_t {.cdecl,
 ##       - ESP_ERR_NVS_NOT_INITIALIZED if the storage was not initialized prior to this call
 ##
 
-proc nvs_flash_deinit*(): esp_err_t {.cdecl, importc: "nvs_flash_deinit",
+proc nvs_flash_deinit*(): EspErrorCode {.cdecl, importc: "nvs_flash_deinit",
                                    header: "nvs_flash.h".}
 ## *
 ##  @brief Deinitialize NVS storage for the given NVS partition
@@ -81,7 +81,7 @@ proc nvs_flash_deinit*(): esp_err_t {.cdecl, importc: "nvs_flash_deinit",
 ##         initialized prior to this call
 ##
 
-proc nvs_flash_deinit_partition*(partition_label: cstring): esp_err_t {.cdecl,
+proc nvs_flash_deinit_partition*(partition_label: cstring): EspErrorCode {.cdecl,
     importc: "nvs_flash_deinit_partition", header: "nvs_flash.h".}
 ## *
 ##  @brief Erase the default NVS partition
@@ -94,7 +94,7 @@ proc nvs_flash_deinit_partition*(partition_label: cstring): esp_err_t {.cdecl,
 ##         partition table
 ##
 
-proc nvs_flash_erase*(): esp_err_t {.cdecl, importc: "nvs_flash_erase",
+proc nvs_flash_erase*(): EspErrorCode {.cdecl, importc: "nvs_flash_erase",
                                   header: "nvs_flash.h".}
 ## *
 ##  @brief Erase specified NVS partition
@@ -109,7 +109,7 @@ proc nvs_flash_erase*(): esp_err_t {.cdecl, importc: "nvs_flash_erase",
 ##         in the partition table
 ##
 
-proc nvs_flash_erase_partition*(part_name: cstring): esp_err_t {.cdecl,
+proc nvs_flash_erase_partition*(part_name: cstring): EspErrorCode {.cdecl,
     importc: "nvs_flash_erase_partition", header: "nvs_flash.h".}
 ## *
 ##  @brief Initialize the default NVS partition.
@@ -128,7 +128,7 @@ proc nvs_flash_erase_partition*(part_name: cstring): esp_err_t {.cdecl,
 ##       - one of the error codes from the underlying flash storage driver
 ##
 
-proc nvs_flash_secure_init*(cfg: ptr nvs_sec_cfg_t): esp_err_t {.cdecl,
+proc nvs_flash_secure_init*(cfg: ptr nvs_sec_cfg_t): EspErrorCode {.cdecl,
     importc: "nvs_flash_secure_init", header: "nvs_flash.h".}
 ## *
 ##  @brief Initialize NVS flash storage for the specified partition.
@@ -147,7 +147,7 @@ proc nvs_flash_secure_init*(cfg: ptr nvs_sec_cfg_t): esp_err_t {.cdecl,
 ##
 
 proc nvs_flash_secure_init_partition*(partition_label: cstring;
-                                     cfg: ptr nvs_sec_cfg_t): esp_err_t {.cdecl,
+                                     cfg: ptr nvs_sec_cfg_t): EspErrorCode {.cdecl,
     importc: "nvs_flash_secure_init_partition", header: "nvs_flash.h".}
 ## *
 ##  @brief Generate and store NVS keys in the provided esp partition
@@ -165,7 +165,7 @@ proc nvs_flash_secure_init_partition*(partition_label: cstring;
 ##       -or error codes from esp_partition_write/erase APIs.
 ##
 
-# proc nvs_flash_generate_keys*(partition: ptr esp_partition_t; cfg: ptr nvs_sec_cfg_t): esp_err_t {.
+# proc nvs_flash_generate_keys*(partition: ptr esp_partition_t; cfg: ptr nvs_sec_cfg_t): EspErrorCode {.
     # cdecl, importc: "nvs_flash_generate_keys", header: "nvs_flash.h".}
 ## *
 ##  @brief Read NVS security configuration from a partition.
@@ -186,6 +186,6 @@ proc nvs_flash_secure_init_partition*(partition_label: cstring;
 ##
 
 # proc nvs_flash_read_security_cfg*(partition: ptr esp_partition_t;
-                                #  cfg: ptr nvs_sec_cfg_t): esp_err_t {.cdecl,
+                                #  cfg: ptr nvs_sec_cfg_t): EspErrorCode {.cdecl,
     # importc: "nvs_flash_read_security_cfg", header: "nvs_flash.h".}
 

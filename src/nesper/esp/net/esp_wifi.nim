@@ -250,7 +250,7 @@ const
 ##     - others: refer to error code esp_err.h
 ##
 
-proc esp_wifi_init*(config: ptr wifi_init_config_t): esp_err_t {.
+proc esp_wifi_init*(config: ptr wifi_init_config_t): EspErrorCode {.
     importc: "esp_wifi_init", header: "esp_wifi.h".}
 ## *
 ##  @brief  Deinit WiFi
@@ -263,7 +263,7 @@ proc esp_wifi_init*(config: ptr wifi_init_config_t): esp_err_t {.
 ##     - ESP_ERR_WIFI_NOT_INIT: WiFi is not initialized by esp_wifi_init
 ##
 
-proc esp_wifi_deinit*(): esp_err_t {.importc: "esp_wifi_deinit", header: "esp_wifi.h".}
+proc esp_wifi_deinit*(): EspErrorCode {.importc: "esp_wifi_deinit", header: "esp_wifi.h".}
 ## *
 ##  @brief     Set the WiFi operating mode
 ##
@@ -279,7 +279,7 @@ proc esp_wifi_deinit*(): esp_err_t {.importc: "esp_wifi_deinit", header: "esp_wi
 ##     - others: refer to error code in esp_err.h
 ##
 
-proc esp_wifi_set_mode*(mode: wifi_mode_t): esp_err_t {.
+proc esp_wifi_set_mode*(mode: wifi_mode_t): EspErrorCode {.
     importc: "esp_wifi_set_mode", header: "esp_wifi.h".}
 ## *
 ##  @brief  Get current operating mode of WiFi
@@ -292,7 +292,7 @@ proc esp_wifi_set_mode*(mode: wifi_mode_t): esp_err_t {.
 ##     - ESP_ERR_INVALID_ARG: invalid argument
 ##
 
-proc esp_wifi_get_mode*(mode: ptr wifi_mode_t): esp_err_t {.
+proc esp_wifi_get_mode*(mode: ptr wifi_mode_t): EspErrorCode {.
     importc: "esp_wifi_get_mode", header: "esp_wifi.h".}
 ## *
 ##  @brief  Start WiFi according to current configuration
@@ -309,7 +309,7 @@ proc esp_wifi_get_mode*(mode: ptr wifi_mode_t): esp_err_t {.
 ##     - ESP_FAIL: other WiFi internal errors
 ##
 
-proc esp_wifi_start*(): esp_err_t {.importc: "esp_wifi_start", header: "esp_wifi.h".}
+proc esp_wifi_start*(): EspErrorCode {.importc: "esp_wifi_start", header: "esp_wifi.h".}
 ## *
 ##  @brief  Stop WiFi
 ##          If mode is WIFI_MODE_STA, it stop station and free station control block
@@ -321,7 +321,7 @@ proc esp_wifi_start*(): esp_err_t {.importc: "esp_wifi_start", header: "esp_wifi
 ##     - ESP_ERR_WIFI_NOT_INIT: WiFi is not initialized by esp_wifi_init
 ##
 
-proc esp_wifi_stop*(): esp_err_t {.importc: "esp_wifi_stop", header: "esp_wifi.h".}
+proc esp_wifi_stop*(): EspErrorCode {.importc: "esp_wifi_stop", header: "esp_wifi.h".}
 ## *
 ##  @brief  Restore WiFi stack persistent settings to default values
 ##
@@ -336,7 +336,7 @@ proc esp_wifi_stop*(): esp_err_t {.importc: "esp_wifi_stop", header: "esp_wifi.h
 ##     - ESP_ERR_WIFI_NOT_INIT: WiFi is not initialized by esp_wifi_init
 ##
 
-proc esp_wifi_restore*(): esp_err_t {.importc: "esp_wifi_restore",
+proc esp_wifi_restore*(): EspErrorCode {.importc: "esp_wifi_restore",
                                    header: "esp_wifi.h".}
 ## *
 ##  @brief     Connect the ESP32 WiFi station to the AP.
@@ -358,7 +358,7 @@ proc esp_wifi_restore*(): esp_err_t {.importc: "esp_wifi_restore",
 ##     - ESP_ERR_WIFI_SSID: SSID of AP which station connects is invalid
 ##
 
-proc esp_wifi_connect*(): esp_err_t {.importc: "esp_wifi_connect",
+proc esp_wifi_connect*(): EspErrorCode {.importc: "esp_wifi_connect",
                                    header: "esp_wifi.h".}
 ## *
 ##  @brief     Disconnect the ESP32 WiFi station from the AP.
@@ -370,7 +370,7 @@ proc esp_wifi_connect*(): esp_err_t {.importc: "esp_wifi_connect",
 ##     - ESP_FAIL: other WiFi internal errors
 ##
 
-proc esp_wifi_disconnect*(): esp_err_t {.importc: "esp_wifi_disconnect",
+proc esp_wifi_disconnect*(): EspErrorCode {.importc: "esp_wifi_disconnect",
                                       header: "esp_wifi.h".}
 ## *
 ##  @brief     Currently this API is just an stub API
@@ -381,7 +381,7 @@ proc esp_wifi_disconnect*(): esp_err_t {.importc: "esp_wifi_disconnect",
 ##     - others: fail
 ##
 
-proc esp_wifi_clear_fast_connect*(): esp_err_t {.
+proc esp_wifi_clear_fast_connect*(): EspErrorCode {.
     importc: "esp_wifi_clear_fast_connect", header: "esp_wifi.h".}
 ## *
 ##  @brief     deauthenticate all stations or associated id equals to aid
@@ -396,7 +396,7 @@ proc esp_wifi_clear_fast_connect*(): esp_err_t {.
 ##     - ESP_ERR_WIFI_MODE: WiFi mode is wrong
 ##
 
-proc esp_wifi_deauth_sta*(aid: uint16): esp_err_t {.
+proc esp_wifi_deauth_sta*(aid: uint16): EspErrorCode {.
     importc: "esp_wifi_deauth_sta", header: "esp_wifi.h".}
 ## *
 ##  @brief     Scan all available APs.
@@ -420,7 +420,7 @@ proc esp_wifi_deauth_sta*(aid: uint16): esp_err_t {.
 ##     - others: refer to error code in esp_err.h
 ##
 
-proc esp_wifi_scan_start*(config: ptr wifi_scan_config_t; `block`: bool): esp_err_t {.
+proc esp_wifi_scan_start*(config: ptr wifi_scan_config_t; `block`: bool): EspErrorCode {.
     importc: "esp_wifi_scan_start", header: "esp_wifi.h".}
 ## *
 ##  @brief     Stop the scan in process
@@ -431,7 +431,7 @@ proc esp_wifi_scan_start*(config: ptr wifi_scan_config_t; `block`: bool): esp_er
 ##     - ESP_ERR_WIFI_NOT_STARTED: WiFi is not started by esp_wifi_start
 ##
 
-proc esp_wifi_scan_stop*(): esp_err_t {.importc: "esp_wifi_scan_stop",
+proc esp_wifi_scan_stop*(): EspErrorCode {.importc: "esp_wifi_scan_stop",
                                      header: "esp_wifi.h".}
 ## *
 ##  @brief     Get number of APs found in last scan
@@ -447,7 +447,7 @@ proc esp_wifi_scan_stop*(): esp_err_t {.importc: "esp_wifi_scan_stop",
 ##     - ESP_ERR_INVALID_ARG: invalid argument
 ##
 
-proc esp_wifi_scan_get_ap_num*(number: ptr uint16): esp_err_t {.
+proc esp_wifi_scan_get_ap_num*(number: ptr uint16): EspErrorCode {.
     importc: "esp_wifi_scan_get_ap_num", header: "esp_wifi.h".}
 ## *
 ##  @brief     Get AP list found in last scan
@@ -465,7 +465,7 @@ proc esp_wifi_scan_get_ap_num*(number: ptr uint16): esp_err_t {.
 ##
 
 proc esp_wifi_scan_get_ap_records*(number: ptr uint16;
-                                  ap_records: ptr wifi_ap_record_t): esp_err_t {.
+                                  ap_records: ptr wifi_ap_record_t): EspErrorCode {.
     importc: "esp_wifi_scan_get_ap_records", header: "esp_wifi.h".}
 ## *
 ##  @brief     Get information of AP which the ESP32 station is associated with
@@ -481,7 +481,7 @@ proc esp_wifi_scan_get_ap_records*(number: ptr uint16;
 ##     - ESP_ERR_WIFI_NOT_CONNECT: The station is in disconnect status
 ##
 
-proc esp_wifi_sta_get_ap_info*(ap_info: ptr wifi_ap_record_t): esp_err_t {.
+proc esp_wifi_sta_get_ap_info*(ap_info: ptr wifi_ap_record_t): EspErrorCode {.
     importc: "esp_wifi_sta_get_ap_info", header: "esp_wifi.h".}
 ## *
 ##  @brief     Set current WiFi power save type
@@ -493,7 +493,7 @@ proc esp_wifi_sta_get_ap_info*(ap_info: ptr wifi_ap_record_t): esp_err_t {.
 ##  @return    ESP_OK: succeed
 ##
 
-proc esp_wifi_set_ps*(`type`: wifi_ps_type_t): esp_err_t {.
+proc esp_wifi_set_ps*(`type`: wifi_ps_type_t): EspErrorCode {.
     importc: "esp_wifi_set_ps", header: "esp_wifi.h".}
 ## *
 ##  @brief     Get current WiFi power save type
@@ -505,7 +505,7 @@ proc esp_wifi_set_ps*(`type`: wifi_ps_type_t): esp_err_t {.
 ##  @return    ESP_OK: succeed
 ##
 
-proc esp_wifi_get_ps*(`type`: ptr wifi_ps_type_t): esp_err_t {.
+proc esp_wifi_get_ps*(`type`: ptr wifi_ps_type_t): EspErrorCode {.
     importc: "esp_wifi_get_ps", header: "esp_wifi.h".}
 ## *
 ##  @brief     Set protocol type of specified interface
@@ -523,7 +523,7 @@ proc esp_wifi_get_ps*(`type`: ptr wifi_ps_type_t): esp_err_t {.
 ##     - others: refer to error codes in esp_err.h
 ##
 
-proc esp_wifi_set_protocol*(ifx: wifi_interface_t; protocol_bitmap: uint8): esp_err_t {.
+proc esp_wifi_set_protocol*(ifx: wifi_interface_t; protocol_bitmap: uint8): EspErrorCode {.
     importc: "esp_wifi_set_protocol", header: "esp_wifi.h".}
 ## *
 ##  @brief     Get the current protocol bitmap of the specified interface
@@ -539,7 +539,7 @@ proc esp_wifi_set_protocol*(ifx: wifi_interface_t; protocol_bitmap: uint8): esp_
 ##     - others: refer to error codes in esp_err.h
 ##
 
-proc esp_wifi_get_protocol*(ifx: wifi_interface_t; protocol_bitmap: ptr uint8): esp_err_t {.
+proc esp_wifi_get_protocol*(ifx: wifi_interface_t; protocol_bitmap: ptr uint8): EspErrorCode {.
     importc: "esp_wifi_get_protocol", header: "esp_wifi.h".}
 ## *
 ##  @brief     Set the bandwidth of ESP32 specified interface
@@ -558,7 +558,7 @@ proc esp_wifi_get_protocol*(ifx: wifi_interface_t; protocol_bitmap: ptr uint8): 
 ##     - others: refer to error codes in esp_err.h
 ##
 
-proc esp_wifi_set_bandwidth*(ifx: wifi_interface_t; bw: wifi_bandwidth_t): esp_err_t {.
+proc esp_wifi_set_bandwidth*(ifx: wifi_interface_t; bw: wifi_bandwidth_t): EspErrorCode {.
     importc: "esp_wifi_set_bandwidth", header: "esp_wifi.h".}
 ## *
 ##  @brief     Get the bandwidth of ESP32 specified interface
@@ -575,7 +575,7 @@ proc esp_wifi_set_bandwidth*(ifx: wifi_interface_t; bw: wifi_bandwidth_t): esp_e
 ##     - ESP_ERR_INVALID_ARG: invalid argument
 ##
 
-proc esp_wifi_get_bandwidth*(ifx: wifi_interface_t; bw: ptr wifi_bandwidth_t): esp_err_t {.
+proc esp_wifi_get_bandwidth*(ifx: wifi_interface_t; bw: ptr wifi_bandwidth_t): EspErrorCode {.
     importc: "esp_wifi_get_bandwidth", header: "esp_wifi.h".}
 ## *
 ##  @brief     Set primary/secondary channel of ESP32
@@ -595,7 +595,7 @@ proc esp_wifi_get_bandwidth*(ifx: wifi_interface_t; bw: ptr wifi_bandwidth_t): e
 ##     - ESP_ERR_INVALID_ARG: invalid argument
 ##
 
-proc esp_wifi_set_channel*(primary: uint8; second: wifi_second_chan_t): esp_err_t {.
+proc esp_wifi_set_channel*(primary: uint8; second: wifi_second_chan_t): EspErrorCode {.
     importc: "esp_wifi_set_channel", header: "esp_wifi.h".}
 ## *
 ##  @brief     Get the primary/secondary channel of ESP32
@@ -611,7 +611,7 @@ proc esp_wifi_set_channel*(primary: uint8; second: wifi_second_chan_t): esp_err_
 ##     - ESP_ERR_INVALID_ARG: invalid argument
 ##
 
-proc esp_wifi_get_channel*(primary: ptr uint8; second: ptr wifi_second_chan_t): esp_err_t {.
+proc esp_wifi_get_channel*(primary: ptr uint8; second: ptr wifi_second_chan_t): EspErrorCode {.
     importc: "esp_wifi_get_channel", header: "esp_wifi.h".}
 ## *
 ##  @brief     configure country info
@@ -638,7 +638,7 @@ proc esp_wifi_get_channel*(primary: ptr uint8; second: ptr wifi_second_chan_t): 
 ##     - ESP_ERR_INVALID_ARG: invalid argument
 ##
 
-proc esp_wifi_set_country*(country: ptr wifi_country_t): esp_err_t {.
+proc esp_wifi_set_country*(country: ptr wifi_country_t): EspErrorCode {.
     importc: "esp_wifi_set_country", header: "esp_wifi.h".}
 ## *
 ##  @brief     get the current country info
@@ -651,7 +651,7 @@ proc esp_wifi_set_country*(country: ptr wifi_country_t): esp_err_t {.
 ##     - ESP_ERR_INVALID_ARG: invalid argument
 ##
 
-proc esp_wifi_get_country*(country: ptr wifi_country_t): esp_err_t {.
+proc esp_wifi_get_country*(country: ptr wifi_country_t): EspErrorCode {.
     importc: "esp_wifi_get_country", header: "esp_wifi.h".}
 ## *
 ##  @brief     Set MAC address of the ESP32 WiFi station or the soft-AP interface.
@@ -674,7 +674,7 @@ proc esp_wifi_get_country*(country: ptr wifi_country_t): esp_err_t {.
 ##     - others: refer to error codes in esp_err.h
 ##
 
-proc esp_wifi_set_mac*(ifx: wifi_interface_t; mac: array[6, uint8]): esp_err_t {.
+proc esp_wifi_set_mac*(ifx: wifi_interface_t; mac: array[6, uint8]): EspErrorCode {.
     importc: "esp_wifi_set_mac", header: "esp_wifi.h".}
 ## *
 ##  @brief     Get mac of specified interface
@@ -689,7 +689,7 @@ proc esp_wifi_set_mac*(ifx: wifi_interface_t; mac: array[6, uint8]): esp_err_t {
 ##     - ESP_ERR_WIFI_IF: invalid interface
 ##
 
-proc esp_wifi_get_mac*(ifx: wifi_interface_t; mac: array[6, uint8]): esp_err_t {.
+proc esp_wifi_get_mac*(ifx: wifi_interface_t; mac: array[6, uint8]): EspErrorCode {.
     importc: "esp_wifi_get_mac", header: "esp_wifi.h".}
 ## *
 ##  @brief The RX callback function in the promiscuous mode.
@@ -715,7 +715,7 @@ type
 ##     - ESP_ERR_WIFI_NOT_INIT: WiFi is not initialized by esp_wifi_init
 ##
 
-proc esp_wifi_set_promiscuous_rx_cb*(cb: wifi_promiscuous_cb_t): esp_err_t {.
+proc esp_wifi_set_promiscuous_rx_cb*(cb: wifi_promiscuous_cb_t): EspErrorCode {.
     importc: "esp_wifi_set_promiscuous_rx_cb", header: "esp_wifi.h".}
 ## *
 ##  @brief     Enable the promiscuous mode.
@@ -727,7 +727,7 @@ proc esp_wifi_set_promiscuous_rx_cb*(cb: wifi_promiscuous_cb_t): esp_err_t {.
 ##     - ESP_ERR_WIFI_NOT_INIT: WiFi is not initialized by esp_wifi_init
 ##
 
-proc esp_wifi_set_promiscuous*(en: bool): esp_err_t {.
+proc esp_wifi_set_promiscuous*(en: bool): EspErrorCode {.
     importc: "esp_wifi_set_promiscuous", header: "esp_wifi.h".}
 ## *
 ##  @brief     Get the promiscuous mode.
@@ -740,7 +740,7 @@ proc esp_wifi_set_promiscuous*(en: bool): esp_err_t {.
 ##     - ESP_ERR_INVALID_ARG: invalid argument
 ##
 
-proc esp_wifi_get_promiscuous*(en: ptr bool): esp_err_t {.
+proc esp_wifi_get_promiscuous*(en: ptr bool): EspErrorCode {.
     importc: "esp_wifi_get_promiscuous", header: "esp_wifi.h".}
 ## *
 ##  @brief Enable the promiscuous mode packet type filter.
@@ -754,7 +754,7 @@ proc esp_wifi_get_promiscuous*(en: ptr bool): esp_err_t {.
 ##     - ESP_ERR_WIFI_NOT_INIT: WiFi is not initialized by esp_wifi_init
 ##
 
-proc esp_wifi_set_promiscuous_filter*(filter: ptr wifi_promiscuous_filter_t): esp_err_t {.
+proc esp_wifi_set_promiscuous_filter*(filter: ptr wifi_promiscuous_filter_t): EspErrorCode {.
     importc: "esp_wifi_set_promiscuous_filter", header: "esp_wifi.h".}
 ## *
 ##  @brief     Get the promiscuous filter.
@@ -767,7 +767,7 @@ proc esp_wifi_set_promiscuous_filter*(filter: ptr wifi_promiscuous_filter_t): es
 ##     - ESP_ERR_INVALID_ARG: invalid argument
 ##
 
-proc esp_wifi_get_promiscuous_filter*(filter: ptr wifi_promiscuous_filter_t): esp_err_t {.
+proc esp_wifi_get_promiscuous_filter*(filter: ptr wifi_promiscuous_filter_t): EspErrorCode {.
     importc: "esp_wifi_get_promiscuous_filter", header: "esp_wifi.h".}
 ## *
 ##  @brief Enable subtype filter of the control packet in promiscuous mode.
@@ -781,7 +781,7 @@ proc esp_wifi_get_promiscuous_filter*(filter: ptr wifi_promiscuous_filter_t): es
 ##     - ESP_ERR_WIFI_NOT_INIT: WiFi is not initialized by esp_wifi_init
 ##
 
-proc esp_wifi_set_promiscuous_ctrl_filter*(filter: ptr wifi_promiscuous_filter_t): esp_err_t {.
+proc esp_wifi_set_promiscuous_ctrl_filter*(filter: ptr wifi_promiscuous_filter_t): EspErrorCode {.
     importc: "esp_wifi_set_promiscuous_ctrl_filter", header: "esp_wifi.h".}
 ## *
 ##  @brief     Get the subtype filter of the control packet in promiscuous mode.
@@ -794,7 +794,7 @@ proc esp_wifi_set_promiscuous_ctrl_filter*(filter: ptr wifi_promiscuous_filter_t
 ##     - ESP_ERR_WIFI_ARG: invalid argument
 ##
 
-proc esp_wifi_get_promiscuous_ctrl_filter*(filter: ptr wifi_promiscuous_filter_t): esp_err_t {.
+proc esp_wifi_get_promiscuous_ctrl_filter*(filter: ptr wifi_promiscuous_filter_t): EspErrorCode {.
     importc: "esp_wifi_get_promiscuous_ctrl_filter", header: "esp_wifi.h".}
 ## *
 ##  @brief     Set the configuration of the ESP32 STA or AP
@@ -818,7 +818,7 @@ proc esp_wifi_get_promiscuous_ctrl_filter*(filter: ptr wifi_promiscuous_filter_t
 ##     - others: refer to the erro code in esp_err.h
 ##
 
-proc esp_wifi_set_config*(`interface`: wifi_interface_t; conf: ptr wifi_config_t): esp_err_t {.
+proc esp_wifi_set_config*(`interface`: wifi_interface_t; conf: ptr wifi_config_t): EspErrorCode {.
     importc: "esp_wifi_set_config", header: "esp_wifi.h".}
 ## *
 ##  @brief     Get configuration of specified interface
@@ -833,7 +833,7 @@ proc esp_wifi_set_config*(`interface`: wifi_interface_t; conf: ptr wifi_config_t
 ##     - ESP_ERR_WIFI_IF: invalid interface
 ##
 
-proc esp_wifi_get_config*(`interface`: wifi_interface_t; conf: ptr wifi_config_t): esp_err_t {.
+proc esp_wifi_get_config*(`interface`: wifi_interface_t; conf: ptr wifi_config_t): EspErrorCode {.
     importc: "esp_wifi_get_config", header: "esp_wifi.h".}
 ## *
 ##  @brief     Get STAs associated with soft-AP
@@ -853,7 +853,7 @@ proc esp_wifi_get_config*(`interface`: wifi_interface_t; conf: ptr wifi_config_t
 ##     - ESP_ERR_WIFI_CONN: WiFi internal error, the station/soft-AP control block is invalid
 ##
 
-proc esp_wifi_ap_get_sta_list*(sta: ptr wifi_sta_list_t): esp_err_t {.
+proc esp_wifi_ap_get_sta_list*(sta: ptr wifi_sta_list_t): EspErrorCode {.
     importc: "esp_wifi_ap_get_sta_list", header: "esp_wifi.h".}
 ## *
 ##  @brief     Set the WiFi API configuration storage type
@@ -868,7 +868,7 @@ proc esp_wifi_ap_get_sta_list*(sta: ptr wifi_sta_list_t): esp_err_t {.
 ##    - ESP_ERR_INVALID_ARG: invalid argument
 ##
 
-proc esp_wifi_set_storage*(storage: wifi_storage_t): esp_err_t {.
+proc esp_wifi_set_storage*(storage: wifi_storage_t): EspErrorCode {.
     importc: "esp_wifi_set_storage", header: "esp_wifi.h".}
 ## *
 ##  @brief     Function signature for received Vendor-Specific Information Element callback.
@@ -902,7 +902,7 @@ type
 ##
 
 proc esp_wifi_set_vendor_ie*(enable: bool; `type`: wifi_vendor_ie_type_t;
-                            idx: wifi_vendor_ie_id_t; vnd_ie: pointer): esp_err_t {.
+                            idx: wifi_vendor_ie_id_t; vnd_ie: pointer): EspErrorCode {.
     importc: "esp_wifi_set_vendor_ie", header: "esp_wifi.h".}
 ## *
 ##  @brief     Register Vendor-Specific Information Element monitoring callback.
@@ -915,7 +915,7 @@ proc esp_wifi_set_vendor_ie*(enable: bool; `type`: wifi_vendor_ie_type_t;
 ##     - ESP_ERR_WIFI_NOT_INIT: WiFi is not initialized by esp_wifi_init
 ##
 
-proc esp_wifi_set_vendor_ie_cb*(cb: esp_vendor_ie_cb_t; ctx: pointer): esp_err_t {.
+proc esp_wifi_set_vendor_ie_cb*(cb: esp_vendor_ie_cb_t; ctx: pointer): EspErrorCode {.
     importc: "esp_wifi_set_vendor_ie_cb", header: "esp_wifi.h".}
 ## *
 ##  @brief     Set maximum WiFi transmitting power
@@ -929,7 +929,7 @@ proc esp_wifi_set_vendor_ie_cb*(cb: esp_vendor_ie_cb_t; ctx: pointer): esp_err_t
 ##     - ESP_ERR_WIFI_NOT_ARG: invalid argument
 ##
 
-proc esp_wifi_set_max_tx_power*(power: int8): esp_err_t {.
+proc esp_wifi_set_max_tx_power*(power: int8): EspErrorCode {.
     importc: "esp_wifi_set_max_tx_power", header: "esp_wifi.h".}
 ## *
 ##  @brief     Get maximum WiFi transmiting power
@@ -943,7 +943,7 @@ proc esp_wifi_set_max_tx_power*(power: int8): esp_err_t {.
 ##     - ESP_ERR_INVALID_ARG: invalid argument
 ##
 
-proc esp_wifi_get_max_tx_power*(power: ptr int8): esp_err_t {.
+proc esp_wifi_get_max_tx_power*(power: ptr int8): EspErrorCode {.
     importc: "esp_wifi_get_max_tx_power", header: "esp_wifi.h".}
 ## *
 ##  @brief     Set mask to enable or disable some WiFi events
@@ -961,7 +961,7 @@ proc esp_wifi_get_max_tx_power*(power: ptr int8): esp_err_t {.
 ##     - ESP_ERR_WIFI_NOT_INIT: WiFi is not initialized by esp_wifi_init
 ##
 
-proc esp_wifi_set_event_mask*(mask: uint32): esp_err_t {.
+proc esp_wifi_set_event_mask*(mask: uint32): EspErrorCode {.
     importc: "esp_wifi_set_event_mask", header: "esp_wifi.h".}
 ## *
 ##  @brief     Get mask of WiFi events
@@ -974,7 +974,7 @@ proc esp_wifi_set_event_mask*(mask: uint32): esp_err_t {.
 ##     - ESP_ERR_WIFI_ARG: invalid argument
 ##
 
-proc esp_wifi_get_event_mask*(mask: ptr uint32): esp_err_t {.
+proc esp_wifi_get_event_mask*(mask: ptr uint32): EspErrorCode {.
     importc: "esp_wifi_get_event_mask", header: "esp_wifi.h".}
 ## *
 ##  @brief     Send raw ieee80211 data
@@ -1002,7 +1002,7 @@ proc esp_wifi_get_event_mask*(mask: ptr uint32): esp_err_t {.
 ##
 
 proc esp_wifi_80211_tx*(ifx: wifi_interface_t; buffer: pointer; len: cint;
-                       en_sys_seq: bool): esp_err_t {.importc: "esp_wifi_80211_tx",
+                       en_sys_seq: bool): EspErrorCode {.importc: "esp_wifi_80211_tx",
     header: "esp_wifi.h".}
 ## *
 ##  @brief The RX callback function of Channel State Information(CSI)  data.
@@ -1030,7 +1030,7 @@ type
 ##     - ESP_ERR_WIFI_NOT_INIT: WiFi is not initialized by esp_wifi_init
 ##
 
-proc esp_wifi_set_csi_rx_cb*(cb: wifi_csi_cb_t; ctx: pointer): esp_err_t {.
+proc esp_wifi_set_csi_rx_cb*(cb: wifi_csi_cb_t; ctx: pointer): EspErrorCode {.
     importc: "esp_wifi_set_csi_rx_cb", header: "esp_wifi.h".}
 ## *
 ##  @brief Set CSI data configuration
@@ -1044,7 +1044,7 @@ proc esp_wifi_set_csi_rx_cb*(cb: wifi_csi_cb_t; ctx: pointer): esp_err_t {.
 ##     - ESP_ERR_INVALID_ARG: invalid argument
 ##
 
-proc esp_wifi_set_csi_config*(config: ptr wifi_csi_config_t): esp_err_t {.
+proc esp_wifi_set_csi_config*(config: ptr wifi_csi_config_t): EspErrorCode {.
     importc: "esp_wifi_set_csi_config", header: "esp_wifi.h".}
 ## *
 ##  @brief Enable or disable CSI
@@ -1058,7 +1058,7 @@ proc esp_wifi_set_csi_config*(config: ptr wifi_csi_config_t): esp_err_t {.
 ##     - ESP_ERR_INVALID_ARG: invalid argument
 ##
 
-proc esp_wifi_set_csi*(en: bool): esp_err_t {.importc: "esp_wifi_set_csi",
+proc esp_wifi_set_csi*(en: bool): EspErrorCode {.importc: "esp_wifi_set_csi",
     header: "esp_wifi.h".}
 ## *
 ##  @brief     Set antenna GPIO configuration
@@ -1071,7 +1071,7 @@ proc esp_wifi_set_csi*(en: bool): esp_err_t {.importc: "esp_wifi_set_csi",
 ##     - ESP_ERR_WIFI_ARG: Invalid argument, e.g. parameter is NULL, invalid GPIO number etc
 ##
 
-proc esp_wifi_set_ant_gpio*(config: ptr wifi_ant_gpio_config_t): esp_err_t {.
+proc esp_wifi_set_ant_gpio*(config: ptr wifi_ant_gpio_config_t): EspErrorCode {.
     importc: "esp_wifi_set_ant_gpio", header: "esp_wifi.h".}
 ## *
 ##  @brief     Get current antenna GPIO configuration
@@ -1084,7 +1084,7 @@ proc esp_wifi_set_ant_gpio*(config: ptr wifi_ant_gpio_config_t): esp_err_t {.
 ##     - ESP_ERR_WIFI_ARG: invalid argument, e.g. parameter is NULL
 ##
 
-proc esp_wifi_get_ant_gpio*(config: ptr wifi_ant_gpio_config_t): esp_err_t {.
+proc esp_wifi_get_ant_gpio*(config: ptr wifi_ant_gpio_config_t): EspErrorCode {.
     importc: "esp_wifi_get_ant_gpio", header: "esp_wifi.h".}
 ## *
 ##  @brief     Set antenna configuration
@@ -1097,7 +1097,7 @@ proc esp_wifi_get_ant_gpio*(config: ptr wifi_ant_gpio_config_t): esp_err_t {.
 ##     - ESP_ERR_WIFI_ARG: Invalid argument, e.g. parameter is NULL, invalid antenna mode or invalid GPIO number
 ##
 
-proc esp_wifi_set_ant*(config: ptr wifi_ant_config_t): esp_err_t {.
+proc esp_wifi_set_ant*(config: ptr wifi_ant_config_t): EspErrorCode {.
     importc: "esp_wifi_set_ant", header: "esp_wifi.h".}
 ## *
 ##  @brief     Get current antenna configuration
@@ -1110,5 +1110,5 @@ proc esp_wifi_set_ant*(config: ptr wifi_ant_config_t): esp_err_t {.
 ##     - ESP_ERR_WIFI_ARG: invalid argument, e.g. parameter is NULL
 ##
 
-proc esp_wifi_get_ant*(config: ptr wifi_ant_config_t): esp_err_t {.
+proc esp_wifi_get_ant*(config: ptr wifi_ant_config_t): EspErrorCode {.
     importc: "esp_wifi_get_ant", header: "esp_wifi.h".}

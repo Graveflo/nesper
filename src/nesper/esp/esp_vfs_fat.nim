@@ -51,7 +51,7 @@ const
 ##
 
 proc esp_vfs_fat_register*(base_path : cstring, fat_drive : cstring,
-        max_files : uint32, out_fs : ptr ptr FATFS ) : esp_err_t {.cdecl, importc: "esp_vfs_fat_register", header: theader.}
+        max_files : uint32, out_fs : ptr ptr FATFS ) : EspErrorCode {.cdecl, importc: "esp_vfs_fat_register", header: theader.}
 
 
 ##
@@ -71,7 +71,7 @@ proc esp_vfs_fat_register*(base_path : cstring, fat_drive : cstring,
 ##      - ESP_ERR_INVALID_STATE if FATFS is not registered in VFS
 ##
 
-proc esp_vfs_fat_unregister_path*(base_path : cstring) : esp_err_t {.cdecl, importc: "esp_vfs_fat_unregister_path", header: theader.}
+proc esp_vfs_fat_unregister_path*(base_path : cstring) : EspErrorCode {.cdecl, importc: "esp_vfs_fat_unregister_path", header: theader.}
 
 
 ##
@@ -156,7 +156,7 @@ proc esp_vfs_fat_sdmmc_mount*(base_path : cstring,
 ##      - ESP_ERR_INVALID_STATE if esp_vfs_fat_sdmmc_mount hasn't been called
 ##
 
-proc esp_vfs_fat_sdmmc_unmount*() : esp_err_t {.cdecl, importc: "esp_vfs_fat_sdmmc_unmount", header: theader.}
+proc esp_vfs_fat_sdmmc_unmount*() : EspErrorCode {.cdecl, importc: "esp_vfs_fat_sdmmc_unmount", header: theader.}
 
 
 ##
@@ -204,7 +204,7 @@ proc esp_vfs_fat_spiflash_mount*(base_path : cstring,
 ##      - ESP_ERR_INVALID_STATE if esp_vfs_fat_spiflash_mount hasn't been called
 ##
 
-proc esp_vfs_fat_spiflash_unmount*(base_path : cstring, wl_handle: ptr wl_handle_t) : esp_err_t {.cdecl, importc: "esp_vfs_fat_spiflash_unmount", header: theader.}
+proc esp_vfs_fat_spiflash_unmount*(base_path : cstring, wl_handle: ptr wl_handle_t) : EspErrorCode {.cdecl, importc: "esp_vfs_fat_spiflash_unmount", header: theader.}
 
 
 ##
@@ -248,5 +248,5 @@ proc esp_vfs_fat_rawflash_mount*(base_path : cstring,
 ##      - ESP_ERR_INVALID_STATE if esp_vfs_fat_spiflash_mount hasn't been called
 ##
 
-proc esp_vfs_fat_rawflash_unmount*(base_path : cstring, cpartition_label : cstring) : esp_err_t {.cdecl, importc: "esp_vfs_fat_rawflash_unmount", header: theader.}
+proc esp_vfs_fat_rawflash_unmount*(base_path : cstring, cpartition_label : cstring) : EspErrorCode {.cdecl, importc: "esp_vfs_fat_rawflash_unmount", header: theader.}
 

@@ -14,16 +14,16 @@ const TAG = "NVS"
 
 type
   NvsError* = object of OSError
-    code*: esp_err_t
+    code*: EspErrorCode
 
   NvsObject* = object
     mode*: nvs_open_mode_t 
     handle*: nvs_handle_t 
 
-proc eraseNvs*(part_name = "nvs"): esp_err_t =
+proc eraseNvs*(part_name = "nvs"): EspErrorCode =
   nvs_flash_erase_partition(part_name)
 
-proc deInitNvs*(part_name = "nvs"): esp_err_t =
+proc deInitNvs*(part_name = "nvs"): EspErrorCode =
   nvs_flash_deinit_partition(part_name)
 
 proc initNvs*(part_name = "nvs") =
@@ -68,7 +68,7 @@ proc getInt*(nvs: NvsObject, key: string): Option[int32] =
   ##  value will default to 0, if not set yet in NVS
   ## 
   # echo("nvsGetInt: ", repr(nvs.handle) )
-  let nvs_error: esp_err_t = nvs_get_i32(nvs.handle, key.cstring, addr(value))
+  let nvs_error: EspErrorCode = nvs_get_i32(nvs.handle, key.cstring, addr(value))
 
   case nvs_error
   of ESP_OK:
@@ -92,14 +92,14 @@ proc setInt*(nvs: NvsObject, key: string; value: int32) =
     raise newEspError[NvsError]("Error opening nvs (" & $esp_err_to_name(nvs_error) & ")", nvs_error)
   
 proc setStr*(nvs: NvsObject, key: string, data: string) =
-  var nvs_error: esp_err_t
+  var nvs_error: EspErrorCode
   nvs_error = nvs_set_str(nvs.handle, key.cstring, data.cstring)
   if (nvs_error != ESP_OK):
     raise newEspError[NvsError]("Error writing string (" & $esp_err_to_name(nvs_error) & ")", nvs_error)
 
 proc getStr*(nvs: NvsObject, key: string): Option[string] =
   var required_size: csize_t
-  var nvs_error: esp_err_t = nvs_get_str(nvs.handle, "DataCollected", nil, addr(required_size))
+  var nvs_error: EspErrorCode = nvs_get_str(nvs.handle, "DataCollected", nil, addr(required_size))
 
   case nvs_error
   of ESP_OK:

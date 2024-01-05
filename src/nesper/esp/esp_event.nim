@@ -46,7 +46,7 @@ type
 ##
 
 proc esp_event_loop_create*(event_loop_args: ptr esp_event_loop_args_t;
-                           event_loop: ptr esp_event_loop_handle_t): esp_err_t {.
+                           event_loop: ptr esp_event_loop_handle_t): EspErrorCode {.
     importc: "esp_event_loop_create", header: "esp_event.h".}
 ## *
 ##  @brief Delete an existing event loop.
@@ -58,7 +58,7 @@ proc esp_event_loop_create*(event_loop_args: ptr esp_event_loop_args_t;
 ##   - Others: Fail
 ##
 
-proc esp_event_loop_delete*(event_loop: esp_event_loop_handle_t): esp_err_t {.
+proc esp_event_loop_delete*(event_loop: esp_event_loop_handle_t): EspErrorCode {.
     importc: "esp_event_loop_delete", header: "esp_event.h".}
 ## *
 ##  @brief Create default event loop
@@ -70,7 +70,7 @@ proc esp_event_loop_delete*(event_loop: esp_event_loop_handle_t): esp_err_t {.
 ##   - Others: Fail
 ##
 
-proc esp_event_loop_create_default*(): esp_err_t {.
+proc esp_event_loop_create_default*(): EspErrorCode {.
     importc: "esp_event_loop_create_default", header: "esp_event.h".}
 ## *
 ##  @brief Delete the default event loop
@@ -80,7 +80,7 @@ proc esp_event_loop_create_default*(): esp_err_t {.
 ##   - Others: Fail
 ##
 
-proc esp_event_loop_delete_default*(): esp_err_t {.
+proc esp_event_loop_delete_default*(): EspErrorCode {.
     importc: "esp_event_loop_delete_default", header: "esp_event.h".}
 ## *
 ##  @brief Dispatch events posted to an event loop.
@@ -110,7 +110,7 @@ proc esp_event_loop_delete_default*(): esp_err_t {.
 ##
 
 proc esp_event_loop_run*(event_loop: esp_event_loop_handle_t;
-                        ticks_to_run: TickType_t): esp_err_t {.
+                        ticks_to_run: TickType_t): EspErrorCode {.
     importc: "esp_event_loop_run", header: "esp_event.h".}
 ## *
 ##  @brief Register an event handler to the system event loop (legacy).
@@ -146,14 +146,14 @@ proc esp_event_loop_run*(event_loop: esp_event_loop_handle_t;
 
 # proc esp_event_handler_register*(event_base: esp_event_base_t; event_id: int32;
 #                                 event_handler: esp_event_handler_t;
-#                                 event_handler_arg: pointer): esp_err_t {.
+#                                 event_handler_arg: pointer): EspErrorCode {.
 #     importc: "esp_event_handler_register", header: "esp_event.h".}
 proc esp_event_handler_register*(
         event_base: esp_event_base_t;
         event_id: cint;
         event_handler: esp_event_handler_t;
         event_handler_arg: pointer
-    ): esp_err_t {.importc: "esp_event_handler_register", header: "esp_event.h".}
+    ): EspErrorCode {.importc: "esp_event_handler_register", header: "esp_event.h".}
 
 ## *
 ##  @brief Register an event handler to a specific loop (legacy).
@@ -184,7 +184,7 @@ proc esp_event_handler_register_with*(event_loop: esp_event_loop_handle_t;
                                      event_base: esp_event_base_t;
                                      event_id: int32;
                                      event_handler: esp_event_handler_t;
-                                     event_handler_arg: pointer): esp_err_t {.
+                                     event_handler_arg: pointer): EspErrorCode {.
     importc: "esp_event_handler_register_with", header: "esp_event.h".}
 ## *
 ##  @brief Register an instance of event handler to a specific loop.
@@ -232,7 +232,7 @@ type
 proc esp_event_handler_instance_register_with*(
     event_loop: esp_event_loop_handle_t; event_base: esp_event_base_t;
     event_id: int32; event_handler: esp_event_handler_t;
-    event_handler_arg: pointer; instance: ptr esp_event_handler_instance_t): esp_err_t {.
+    event_handler_arg: pointer; instance: ptr esp_event_handler_instance_t): EspErrorCode {.
     importc: "esp_event_handler_instance_register_with", header: "esp_event.h".}
 ## *
 ##  @brief Register an instance of event handler to the default loop.
@@ -263,7 +263,7 @@ proc esp_event_handler_instance_register_with*(
 
 proc esp_event_handler_instance_register*(event_base: esp_event_base_t;
     event_id: int32; event_handler: esp_event_handler_t;
-    event_handler_arg: pointer; instance: ptr esp_event_handler_instance_t): esp_err_t {.
+    event_handler_arg: pointer; instance: ptr esp_event_handler_instance_t): EspErrorCode {.
     importc: "esp_event_handler_instance_register", header: "esp_event.h".}
 ## *
 ##  @brief Unregister a handler with the system event loop (legacy).
@@ -294,7 +294,7 @@ proc esp_event_handler_unregister*(
             event_base: esp_event_base_t;
             event_id: int32;
             event_handler: esp_event_handler_t
-    ): esp_err_t {.importc: "esp_event_handler_unregister", header: "esp_event.h".}
+    ): EspErrorCode {.importc: "esp_event_handler_unregister", header: "esp_event.h".}
 
 ## *
 ##  @brief Unregister a handler from a specific event loop (legacy).
@@ -319,7 +319,7 @@ proc esp_event_handler_unregister*(
 proc esp_event_handler_unregister_with*(event_loop: esp_event_loop_handle_t;
                                        event_base: esp_event_base_t;
                                        event_id: int32;
-                                       event_handler: esp_event_handler_t): esp_err_t {.
+                                       event_handler: esp_event_handler_t): EspErrorCode {.
     importc: "esp_event_handler_unregister_with", header: "esp_event.h".}
 ## *
 ##  @brief Unregister a handler instance from a specific event loop.
@@ -347,7 +347,7 @@ proc esp_event_handler_unregister_with*(event_loop: esp_event_loop_handle_t;
 
 proc esp_event_handler_instance_unregister_with*(
     event_loop: esp_event_loop_handle_t; event_base: esp_event_base_t;
-    event_id: int32; instance: esp_event_handler_instance_t): esp_err_t {.
+    event_id: int32; instance: esp_event_handler_instance_t): EspErrorCode {.
     importc: "esp_event_handler_instance_unregister_with", header: "esp_event.h".}
 ## *
 ##  @brief Unregister a handler from the system event loop.
@@ -366,7 +366,7 @@ proc esp_event_handler_instance_unregister_with*(
 ##
 
 proc esp_event_handler_instance_unregister*(event_base: esp_event_base_t;
-    event_id: int32; instance: esp_event_handler_instance_t): esp_err_t {.
+    event_id: int32; instance: esp_event_handler_instance_t): EspErrorCode {.
     importc: "esp_event_handler_instance_unregister", header: "esp_event.h".}
 
 
@@ -391,7 +391,7 @@ proc esp_event_handler_instance_unregister*(event_base: esp_event_base_t;
 
 proc esp_event_post*(event_base: esp_event_base_t; event_id: int32;
                     event_data: pointer; event_data_size: csize;
-                    ticks_to_wait: TickType_t): esp_err_t {.
+                    ticks_to_wait: TickType_t): EspErrorCode {.
     importc: "esp_event_post", header: "esp_event.h".}
 
 
@@ -421,7 +421,7 @@ proc esp_event_post*(event_base: esp_event_base_t; event_id: int32;
 proc esp_event_post_to*(event_loop: esp_event_loop_handle_t;
                        event_base: esp_event_base_t; event_id: int32;
                        event_data: pointer; event_data_size: csize_t;
-                       ticks_to_wait: TickType_t): esp_err_t {.
+                       ticks_to_wait: TickType_t): EspErrorCode {.
     importc: "esp_event_post_to", header: "esp_event.h".}
 
 # when CONFIG_ESP_EVENT_POST_FROM_ISR:
@@ -449,7 +449,7 @@ proc esp_event_post_to*(event_loop: esp_event_loop_handle_t;
 ##
 proc esp_event_isr_post*(event_base: esp_event_base_t; event_id: int32;
                         event_data: pointer; event_data_size: csize;
-                        task_unblocked: ptr BaseType_t): esp_err_t {.
+                        task_unblocked: ptr BaseType_t): EspErrorCode {.
     importc: "esp_event_isr_post", header: "esp_event.h".}
 ## *
 ##  @brief Special variant of esp_event_post_to for posting events from interrupt handlers
@@ -477,7 +477,7 @@ proc esp_event_isr_post*(event_base: esp_event_base_t; event_id: int32;
 proc esp_event_isr_post_to*(event_loop: esp_event_loop_handle_t;
                             event_base: esp_event_base_t; event_id: int32;
                             event_data: pointer; event_data_size: csize;
-                            task_unblocked: ptr BaseType_t): esp_err_t {.
+                            task_unblocked: ptr BaseType_t): EspErrorCode {.
     importc: "esp_event_isr_post_to", header: "esp_event.h".}
 ## *
 ##  @brief Dumps statistics of all event loops.
@@ -524,5 +524,5 @@ proc esp_event_isr_post_to*(event_loop: esp_event_loop_handle_t;
 ##   - Others: Fail
 ##
 
-proc esp_event_dump*(file: ptr FILE): esp_err_t {.importc: "esp_event_dump",
+proc esp_event_dump*(file: ptr FILE): EspErrorCode {.importc: "esp_event_dump",
     header: "esp_event.h".}

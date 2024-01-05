@@ -45,3 +45,11 @@ type
 proc heap_caps_print_heap_info*(cap: MallocCapacity) {.importc: "$1", header: "esp_heap_caps.h".}
 proc heap_caps_get_free_size*(cap: MallocCapacity): csize_t {.importc: "$1", header: "esp_heap_caps.h".}
 proc multi_heap_free_size*(cap: MallocCapacity): csize_t {.importc: "$1", header: "esp_heap_caps.h".}
+
+proc esp_log_set_level_master*(l: esp_log_level_t) {. importc .}
+proc esp_log_get_level_master*(): esp_log_level_t {. importc .}
+proc esp_log_level_set*(l: esp_log_level_t) {. importc .}
+proc esp_log_level_get*(): esp_log_level_t {. importc .}
+
+proc esp_log_system_timestamp*(): cstring {. importc .}
+proc esp_log_early_timestamp*(): uint32 {. importc .}

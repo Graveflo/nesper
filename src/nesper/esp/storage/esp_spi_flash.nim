@@ -64,7 +64,7 @@ proc spi_flash_get_chip_size*(): csize_t {.importc: "spi_flash_get_chip_size",
 ##  @return esp_err_t
 ##
 
-proc spi_flash_erase_sector*(sector: csize_t): esp_err_t {.
+proc spi_flash_erase_sector*(sector: csize_t): EspErrorCode {.
     importc: "spi_flash_erase_sector", header: "esp_spi_flash.h".}
 
 
@@ -78,7 +78,7 @@ proc spi_flash_erase_sector*(sector: csize_t): esp_err_t {.
 ##  @return esp_err_t
 ##
 
-proc spi_flash_erase_range*(start_address: csize_t; size: csize_t): esp_err_t {.
+proc spi_flash_erase_range*(start_address: csize_t; size: csize_t): EspErrorCode {.
     importc: "spi_flash_erase_range", header: "esp_spi_flash.h".}
 
 
@@ -99,7 +99,7 @@ proc spi_flash_erase_range*(start_address: csize_t; size: csize_t): esp_err_t {.
 ##  @return esp_err_t
 ##
 
-proc spi_flash_write*(dest_addr: csize_t; src: pointer; size: csize_t): esp_err_t {.
+proc spi_flash_write*(dest_addr: csize_t; src: pointer; size: csize_t): EspErrorCode {.
     importc: "spi_flash_write", header: "esp_spi_flash.h".}
 
 
@@ -124,7 +124,7 @@ proc spi_flash_write*(dest_addr: csize_t; src: pointer; size: csize_t): esp_err_
 ##  @return esp_err_t
 ##
 
-proc spi_flash_write_encrypted*(dest_addr: csize_t; src: pointer; size: csize_t): esp_err_t {.
+proc spi_flash_write_encrypted*(dest_addr: csize_t; src: pointer; size: csize_t): EspErrorCode {.
     importc: "spi_flash_write_encrypted", header: "esp_spi_flash.h".}
 
 
@@ -150,7 +150,7 @@ proc spi_flash_write_encrypted*(dest_addr: csize_t; src: pointer; size: csize_t)
 ##  @return esp_err_t
 ##
 
-proc spi_flash_read*(src_addr: csize_t; dest: pointer; size: csize_t): esp_err_t {.
+proc spi_flash_read*(src_addr: csize_t; dest: pointer; size: csize_t): EspErrorCode {.
     importc: "spi_flash_read", header: "esp_spi_flash.h".}
 
 
@@ -169,7 +169,7 @@ proc spi_flash_read*(src_addr: csize_t; dest: pointer; size: csize_t): esp_err_t
 ##  @return esp_err_t
 ##
 
-proc spi_flash_read_encrypted*(src: csize_t; dest: pointer; size: csize_t): esp_err_t {.
+proc spi_flash_read_encrypted*(src: csize_t; dest: pointer; size: csize_t): EspErrorCode {.
     importc: "spi_flash_read_encrypted", header: "esp_spi_flash.h".}
 
 
@@ -223,7 +223,7 @@ type
 
 proc spi_flash_mmap*(src_addr: csize_t; size: csize_t;
                     memory: spi_flash_mmap_memory_t; out_ptr: ptr pointer;
-                    out_handle: ptr spi_flash_mmap_handle_t): esp_err_t {.
+                    out_handle: ptr spi_flash_mmap_handle_t): EspErrorCode {.
     importc: "spi_flash_mmap", header: "esp_spi_flash.h".}
 
 
@@ -253,7 +253,7 @@ proc spi_flash_mmap*(src_addr: csize_t; size: csize_t;
 
 proc spi_flash_mmap_pages*(pages: ptr cint; page_count: csize_t;
                           memory: spi_flash_mmap_memory_t; out_ptr: ptr pointer;
-                          out_handle: ptr spi_flash_mmap_handle_t): esp_err_t {.
+                          out_handle: ptr spi_flash_mmap_handle_t): EspErrorCode {.
     importc: "spi_flash_mmap_pages", header: "esp_spi_flash.h".}
 
 

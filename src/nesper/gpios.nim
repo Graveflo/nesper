@@ -8,7 +8,7 @@ export gpio
 
 type
   GpioError* = object of OSError
-    code*: esp_err_t
+    code*: EspErrorCode
 
   GPIO_PIN* = gpio_num_t
 
@@ -29,14 +29,14 @@ proc configure*(pins: set[gpio_num_t],
   io_conf.pull_down_en  = if pull_down: GPIO_PULLDOWN_ENABLE else: GPIO_PULLDOWN_DISABLE
   io_conf.intr_type = interrupt
   
-  var ret: esp_err_t
+  var ret: EspErrorCode
   
   ret = gpio_config(addr(io_conf))
   if ret != ESP_OK:
     raise newEspError[GpioError]("gpio config:" & $esp_err_to_name(ret), ret )
 
 proc setLevel*(pin: gpio_num_t, value: uint32) =
-  var ret: esp_err_t
+  var ret: EspErrorCode
 
   ret = gpio_setLevel(pin, value.uint32())
   if ret != ESP_OK:

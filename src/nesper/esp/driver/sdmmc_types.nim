@@ -72,7 +72,7 @@ type
     datalen* : uint32  # length of data buffer
     blklen* : uint32 # block length
     flags* : int # see below
-    error* : esp_err_t # error returned from transfer
+    error* : EspErrorCode # error returned from transfer
     timeout_ms* : int  # response timeout, in milliseconds
 
 template SCF_CMD*(flags): untyped = ((flags) & 0x00f0)
@@ -123,17 +123,17 @@ type
     max_freq_khz* : int  # max frequency supported by the host
     io_voltage* : float  # I/O voltage used by the controller (voltage switching is not supported)
     
-    init* : proc() : esp_err_t {.cdecl.} # Host function to initialize the driver
+    init* : proc() : EspErrorCode {.cdecl.} # Host function to initialize the driver
     
-    set_bus_width* : proc(slot : int, width : uint32) : esp_err_t {.cdecl.} # Host function to set bus width
+    set_bus_width* : proc(slot : int, width : uint32) : EspErrorCode {.cdecl.} # Host function to set bus width
     get_bus_width* : proc(slot : int) : uint32 {.cdecl.}  # host function to get bus width
 
-    set_bus_ddr_mode* : proc(slot : int , ddr_enable : bool) : esp_err_t {.cdecl.} # host function to set DDR mode
-    set_card_clk*     : proc(slot : int, freq_khz : uint32) : esp_err_t {.cdecl.} # Host function to set card clock frequency 
-    do_transaction*   : proc(slot : int, cmdinfo : ptr sdmmc_command_t) : esp_err_t {.cdecl.} # Host function to do a transaction
-    deinit*           : proc() : esp_err_t {.cdecl.} # Host function to deinitialize the driver
-    io_int_enable*    : proc(slot : int) : esp_err_t {.cdecl.} # Host function to enable SDIO interrupt line
-    io_int_wait*      : proc(slot : int, timeout_ticks : TickType_t) : esp_err_t {.cdecl.} # Host function to wait for SDIO interrupt line to be active
+    set_bus_ddr_mode* : proc(slot : int , ddr_enable : bool) : EspErrorCode {.cdecl.} # host function to set DDR mode
+    set_card_clk*     : proc(slot : int, freq_khz : uint32) : EspErrorCode {.cdecl.} # Host function to set card clock frequency 
+    do_transaction*   : proc(slot : int, cmdinfo : ptr sdmmc_command_t) : EspErrorCode {.cdecl.} # Host function to do a transaction
+    deinit*           : proc() : EspErrorCode {.cdecl.} # Host function to deinitialize the driver
+    io_int_enable*    : proc(slot : int) : EspErrorCode {.cdecl.} # Host function to enable SDIO interrupt line
+    io_int_wait*      : proc(slot : int, timeout_ticks : TickType_t) : EspErrorCode {.cdecl.} # Host function to wait for SDIO interrupt line to be active
     
     command_timeout_ms* : int  # Timeout, in milliseconds, of a single command. Set to 0 to use the default value.
     

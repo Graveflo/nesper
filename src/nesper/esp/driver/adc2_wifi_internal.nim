@@ -24,7 +24,7 @@ import ../../consts
 ##       - ESP_ERR_TIMEOUT reserved for future use. Currently the function will wait until success.
 ##
 
-proc adc2_wifi_acquire*(): esp_err_t {.importc: "adc2_wifi_acquire",
+proc adc2_wifi_acquire*(): EspErrorCode {.importc: "adc2_wifi_acquire",
                                     header: "adc2_wifi_internal.h".}
 ## *
 ##  @brief For WIFI module to let other tasks use the ADC2 when WIFI is not work.
@@ -35,5 +35,5 @@ proc adc2_wifi_acquire*(): esp_err_t {.importc: "adc2_wifi_acquire",
 ##  @return always return ESP_OK.
 ##
 
-proc adc2_wifi_release*(): esp_err_t {.importc: "adc2_wifi_release",
+proc adc2_wifi_release*(): EspErrorCode {.importc: "adc2_wifi_release",
                                     header: "adc2_wifi_internal.h".}

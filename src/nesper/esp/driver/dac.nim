@@ -35,7 +35,7 @@ type
 ##    - ESP_ERR_INVALID_ARG if channal not valid
 ##
 
-proc dac_pad_get_io_num*(channel: dac_channel_t; gpio_num: ptr gpio_num_t): esp_err_t {.
+proc dac_pad_get_io_num*(channel: dac_channel_t; gpio_num: ptr gpio_num_t): EspErrorCode {.
     importc: "dac_pad_get_io_num", header: hdr.}
 ## *
 ##  @brief Set DAC output voltage.
@@ -53,7 +53,7 @@ proc dac_pad_get_io_num*(channel: dac_channel_t; gpio_num: ptr gpio_num_t): esp_
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc dac_output_voltage*(channel: dac_channel_t; dac_value: uint8): esp_err_t {.
+proc dac_output_voltage*(channel: dac_channel_t; dac_value: uint8): EspErrorCode {.
     importc: "dac_output_voltage", header: hdr.}
 ## *
 ##  @brief DAC pad output enable
@@ -64,7 +64,7 @@ proc dac_output_voltage*(channel: dac_channel_t; dac_value: uint8): esp_err_t {.
 ##        I2S right channel will be mapped to DAC channel 1
 ##
 
-proc dac_output_enable*(channel: dac_channel_t): esp_err_t {.
+proc dac_output_enable*(channel: dac_channel_t): EspErrorCode {.
     importc: "dac_output_enable", header: hdr.}
 ## *
 ##  @brief DAC pad output disable
@@ -73,15 +73,15 @@ proc dac_output_enable*(channel: dac_channel_t): esp_err_t {.
 ##  @note DAC channel 1 is attached to GPIO25, DAC channel 2 is attached to GPIO26
 ##
 
-proc dac_output_disable*(channel: dac_channel_t): esp_err_t {.
+proc dac_output_disable*(channel: dac_channel_t): EspErrorCode {.
     importc: "dac_output_disable", header: hdr.}
 ## *
 ##  @brief Enable DAC output data from I2S
 ##
 
-proc dac_i2s_enable*(): esp_err_t {.importc: "dac_i2s_enable", header: hdr.}
+proc dac_i2s_enable*(): EspErrorCode {.importc: "dac_i2s_enable", header: hdr.}
 ## *
 ##  @brief Disable DAC output data from I2S
 ##
 
-proc dac_i2s_disable*(): esp_err_t {.importc: "dac_i2s_disable", header: hdr.}
+proc dac_i2s_disable*(): EspErrorCode {.importc: "dac_i2s_disable", header: hdr.}

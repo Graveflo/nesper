@@ -24,7 +24,7 @@ type
     total_written*: int
 
   OtaError* = object of OSError
-    code*: esp_err_t
+    code*: EspErrorCode
 
   OtaUpdateStatus* = enum
     VersionNewer,

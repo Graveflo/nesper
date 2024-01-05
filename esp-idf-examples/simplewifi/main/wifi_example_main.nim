@@ -71,7 +71,7 @@ proc wifiStop*() =
   check: esp_wifiStop()
   check: esp_wifi_deinit()
 
-proc exampleConnect*(): esp_err_t =
+proc exampleConnect*(): EspErrorCode =
   if sConnectEventGroup != nil:
     return ESP_ERR_INVALID_STATE
 
@@ -88,7 +88,7 @@ proc exampleConnect*(): esp_err_t =
 
   return ESP_OK
 
-proc exampleDisconnect*(): esp_err_t =
+proc exampleDisconnect*(): EspErrorCode =
   if sConnectEventGroup == nil:
     return ESP_ERR_INVALID_STATE
 

@@ -9,7 +9,7 @@ export consts, esp_timer
 
 type
   TimerError* = object of OSError
-    code*: esp_err_t
+    code*: EspErrorCode
   
   BasicTimer* = object 
     ts*: Micros

@@ -223,7 +223,7 @@ type
 ##      - ESP_FAIL            IO error
 ##
 
-proc i2s_set_pin*(i2s_num: i2s_port_t; pin: ptr i2s_pin_config_t): esp_err_t {.
+proc i2s_set_pin*(i2s_num: i2s_port_t; pin: ptr i2s_pin_config_t): EspErrorCode {.
     importc: "i2s_set_pin", header: i2s_header.}
 ## *
 ##  @brief Set PDM mode down-sample rate
@@ -243,7 +243,7 @@ proc i2s_set_pin*(i2s_num: i2s_port_t; pin: ptr i2s_pin_config_t): esp_err_t {.
 ##      - ESP_ERR_NO_MEM      Out of memory
 ##
 
-proc i2s_set_pdm_rx_down_sample*(i2s_num: i2s_port_t; dsr: i2s_pdm_dsr_t): esp_err_t {.
+proc i2s_set_pdm_rx_down_sample*(i2s_num: i2s_port_t; dsr: i2s_pdm_dsr_t): EspErrorCode {.
     importc: "i2s_set_pdm_rx_down_sample", header: i2s_header.}
 ## *
 ##  @brief Set I2S dac mode, I2S built-in DAC is disabled by default
@@ -259,7 +259,7 @@ proc i2s_set_pdm_rx_down_sample*(i2s_num: i2s_port_t; dsr: i2s_pdm_dsr_t): esp_e
 ##      - ESP_ERR_INVALID_ARG  Parameter error
 ##
 
-proc i2s_set_dac_mode*(dac_mode: i2s_dac_mode_t): esp_err_t {.
+proc i2s_set_dac_mode*(dac_mode: i2s_dac_mode_t): EspErrorCode {.
     importc: "i2s_set_dac_mode", header: i2s_header.}
 ## *
 ##  @brief Install and start I2S driver.
@@ -281,7 +281,7 @@ proc i2s_set_dac_mode*(dac_mode: i2s_dac_mode_t): esp_err_t {.
 ##
 
 proc i2s_driver_install*(i2s_num: i2s_port_t; i2s_config: ptr i2s_config_t;
-                        queue_size: cint; i2s_queue: pointer): esp_err_t {.
+                        queue_size: cint; i2s_queue: pointer): EspErrorCode {.
     importc: "i2s_driver_install", header: i2s_header.}
 ## *
 ##  @brief Uninstall I2S driver.
@@ -293,7 +293,7 @@ proc i2s_driver_install*(i2s_num: i2s_port_t; i2s_config: ptr i2s_config_t;
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc i2s_driver_uninstall*(i2s_num: i2s_port_t): esp_err_t {.
+proc i2s_driver_uninstall*(i2s_num: i2s_port_t): EspErrorCode {.
     importc: "i2s_driver_uninstall", header: i2s_header.}
 ## *
 ##  @brief Write data to I2S DMA transmit buffer.
@@ -319,7 +319,7 @@ proc i2s_driver_uninstall*(i2s_num: i2s_port_t): esp_err_t {.
 ##
 
 proc i2s_write*(i2s_num: i2s_port_t; src: pointer; size: csize_t;
-               bytes_written: ptr csize_t; ticks_to_wait: TickType_t): esp_err_t {.
+               bytes_written: ptr csize_t; ticks_to_wait: TickType_t): EspErrorCode {.
     importc: "i2s_write", header: i2s_header.}
 ## *
 ##  @brief Write data to I2S DMA transmit buffer while expanding the number of bits per sample. For example, expanding 16-bit PCM to 32-bit PCM.
@@ -353,7 +353,7 @@ proc i2s_write*(i2s_num: i2s_port_t; src: pointer; size: csize_t;
 
 proc i2s_write_expand*(i2s_num: i2s_port_t; src: pointer; size: csize_t;
                       src_bits: csize_t; aim_bits: csize_t;
-                      bytes_written: ptr csize_t; ticks_to_wait: TickType_t): esp_err_t {.
+                      bytes_written: ptr csize_t; ticks_to_wait: TickType_t): EspErrorCode {.
     importc: "i2s_write_expand", header: i2s_header.}
 ## *
 ##  @brief Read data from I2S DMA receive buffer
@@ -377,7 +377,7 @@ proc i2s_write_expand*(i2s_num: i2s_port_t; src: pointer; size: csize_t;
 ##
 
 proc i2s_read*(i2s_num: i2s_port_t; dest: pointer; size: csize_t;
-              bytes_read: ptr csize_t; ticks_to_wait: TickType_t): esp_err_t {.
+              bytes_read: ptr csize_t; ticks_to_wait: TickType_t): EspErrorCode {.
     importc: "i2s_read", header: i2s_header.}
 ## *
 ##  @brief Set sample rate used for I2S RX and TX.
@@ -396,7 +396,7 @@ proc i2s_read*(i2s_num: i2s_port_t; dest: pointer; size: csize_t;
 ##      - ESP_ERR_NO_MEM      Out of memory
 ##
 
-proc i2s_set_sample_rates*(i2s_num: i2s_port_t; rate: uint32): esp_err_t {.
+proc i2s_set_sample_rates*(i2s_num: i2s_port_t; rate: uint32): EspErrorCode {.
     importc: "i2s_set_sample_rates", header: i2s_header.}
 ## *
 ##  @brief Stop I2S driver
@@ -410,7 +410,7 @@ proc i2s_set_sample_rates*(i2s_num: i2s_port_t; rate: uint32): esp_err_t {.
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc i2s_stop*(i2s_num: i2s_port_t): esp_err_t {.importc: "i2s_stop", header: i2s_header.}
+proc i2s_stop*(i2s_num: i2s_port_t): EspErrorCode {.importc: "i2s_stop", header: i2s_header.}
 ## *
 ##  @brief Start I2S driver
 ##
@@ -424,7 +424,7 @@ proc i2s_stop*(i2s_num: i2s_port_t): esp_err_t {.importc: "i2s_stop", header: i2
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc i2s_start*(i2s_num: i2s_port_t): esp_err_t {.importc: "i2s_start",
+proc i2s_start*(i2s_num: i2s_port_t): EspErrorCode {.importc: "i2s_start",
     header: i2s_header.}
 ## *
 ##  @brief Zero the contents of the TX DMA buffer.
@@ -438,7 +438,7 @@ proc i2s_start*(i2s_num: i2s_port_t): esp_err_t {.importc: "i2s_start",
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc i2s_zero_dma_buffer*(i2s_num: i2s_port_t): esp_err_t {.
+proc i2s_zero_dma_buffer*(i2s_num: i2s_port_t): EspErrorCode {.
     importc: "i2s_zero_dma_buffer", header: i2s_header.}
 ## *
 ##  @brief Set clock & bit width used for I2S RX and TX.
@@ -460,7 +460,7 @@ proc i2s_zero_dma_buffer*(i2s_num: i2s_port_t): esp_err_t {.
 ##
 
 proc i2s_set_clk*(i2s_num: i2s_port_t; rate: uint32; bits: i2s_bits_per_sample_t;
-                 ch: i2s_channel_t): esp_err_t {.importc: "i2s_set_clk",
+                 ch: i2s_channel_t): EspErrorCode {.importc: "i2s_set_clk",
     header: i2s_header.}
 ## *
 ##  @brief get clock set on particular port number.
@@ -483,7 +483,7 @@ proc i2s_get_clk*(i2s_num: i2s_port_t): cfloat {.importc: "i2s_get_clk",
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc i2s_set_adc_mode*(adc_unit: adc_unit_t; adc_channel: adc1_channel_t): esp_err_t {.
+proc i2s_set_adc_mode*(adc_unit: adc_unit_t; adc_channel: adc1_channel_t): EspErrorCode {.
     importc: "i2s_set_adc_mode", header: i2s_header.}
 ## *
 ##  @brief Start to use I2S built-in ADC mode
@@ -497,7 +497,7 @@ proc i2s_set_adc_mode*(adc_unit: adc_unit_t; adc_channel: adc1_channel_t): esp_e
 ##      - ESP_ERR_INVALID_STATE Driver state error
 ##
 
-proc i2s_adc_enable*(i2s_num: i2s_port_t): esp_err_t {.importc: "i2s_adc_enable",
+proc i2s_adc_enable*(i2s_num: i2s_port_t): EspErrorCode {.importc: "i2s_adc_enable",
     header: i2s_header.}
 ## *
 ##  @brief Stop to use I2S built-in ADC mode
@@ -509,5 +509,5 @@ proc i2s_adc_enable*(i2s_num: i2s_port_t): esp_err_t {.importc: "i2s_adc_enable"
 ##      - ESP_ERR_INVALID_STATE  Driver state error
 ##
 
-proc i2s_adc_disable*(i2s_num: i2s_port_t): esp_err_t {.importc: "i2s_adc_disable",
+proc i2s_adc_disable*(i2s_num: i2s_port_t): EspErrorCode {.importc: "i2s_adc_disable",
     header: i2s_header.}

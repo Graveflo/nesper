@@ -169,7 +169,7 @@ type
 ##      - ESP_OK Success
 ##
 
-proc rmt_set_clk_div*(channel: rmt_channel_t; div_cnt: uint8): esp_err_t {.
+proc rmt_set_clk_div*(channel: rmt_channel_t; div_cnt: uint8): EspErrorCode {.
     importc: "rmt_set_clk_div", header: "rmt.h".}
 ## *
 ##  @brief Get RMT clock divider, channel clock is divided from source clock.
@@ -182,7 +182,7 @@ proc rmt_set_clk_div*(channel: rmt_channel_t; div_cnt: uint8): esp_err_t {.
 ##      - ESP_OK Success
 ##
 
-proc rmt_get_clk_div*(channel: rmt_channel_t; div_cnt: ptr uint8): esp_err_t {.
+proc rmt_get_clk_div*(channel: rmt_channel_t; div_cnt: ptr uint8): EspErrorCode {.
     importc: "rmt_get_clk_div", header: "rmt.h".}
 ## *
 ##  @brief Set RMT RX idle threshold value
@@ -199,7 +199,7 @@ proc rmt_get_clk_div*(channel: rmt_channel_t; div_cnt: ptr uint8): esp_err_t {.
 ##      - ESP_OK Success
 ##
 
-proc rmt_set_rx_idle_thresh*(channel: rmt_channel_t; thresh: uint16): esp_err_t {.
+proc rmt_set_rx_idle_thresh*(channel: rmt_channel_t; thresh: uint16): EspErrorCode {.
     importc: "rmt_set_rx_idle_thresh", header: "rmt.h".}
 ## *
 ##  @brief Get RMT idle threshold value.
@@ -216,7 +216,7 @@ proc rmt_set_rx_idle_thresh*(channel: rmt_channel_t; thresh: uint16): esp_err_t 
 ##      - ESP_OK Success
 ##
 
-proc rmt_get_rx_idle_thresh*(channel: rmt_channel_t; thresh: ptr uint16): esp_err_t {.
+proc rmt_get_rx_idle_thresh*(channel: rmt_channel_t; thresh: ptr uint16): EspErrorCode {.
     importc: "rmt_get_rx_idle_thresh", header: "rmt.h".}
 ## *
 ##  @brief Set RMT memory block number for RMT channel
@@ -244,7 +244,7 @@ proc rmt_get_rx_idle_thresh*(channel: rmt_channel_t; thresh: ptr uint16): esp_er
 ##      - ESP_OK Success
 ##
 
-proc rmt_set_mem_block_num*(channel: rmt_channel_t; rmt_mem_num: uint8): esp_err_t {.
+proc rmt_set_mem_block_num*(channel: rmt_channel_t; rmt_mem_num: uint8): EspErrorCode {.
     importc: "rmt_set_mem_block_num", header: "rmt.h".}
 ## *
 ##  @brief Get RMT memory block number
@@ -257,7 +257,7 @@ proc rmt_set_mem_block_num*(channel: rmt_channel_t; rmt_mem_num: uint8): esp_err
 ##      - ESP_OK Success
 ##
 
-proc rmt_get_mem_block_num*(channel: rmt_channel_t; rmt_mem_num: ptr uint8): esp_err_t {.
+proc rmt_get_mem_block_num*(channel: rmt_channel_t; rmt_mem_num: ptr uint8): EspErrorCode {.
     importc: "rmt_get_mem_block_num", header: "rmt.h".}
 ## *
 ##  @brief Configure RMT carrier for TX signal.
@@ -280,7 +280,7 @@ proc rmt_get_mem_block_num*(channel: rmt_channel_t; rmt_mem_num: ptr uint8): esp
 
 proc rmt_set_tx_carrier*(channel: rmt_channel_t; carrier_en: bool;
                         high_level: uint16; low_level: uint16;
-                        carrier_level: rmt_carrier_level_t): esp_err_t {.
+                        carrier_level: rmt_carrier_level_t): EspErrorCode {.
     importc: "rmt_set_tx_carrier", header: "rmt.h".}
 ## *
 ##  @brief Set RMT memory in low power mode.
@@ -295,7 +295,7 @@ proc rmt_set_tx_carrier*(channel: rmt_channel_t; carrier_en: bool;
 ##      - ESP_OK Success
 ##
 
-proc rmt_set_mem_pd*(channel: rmt_channel_t; pd_en: bool): esp_err_t {.
+proc rmt_set_mem_pd*(channel: rmt_channel_t; pd_en: bool): EspErrorCode {.
     importc: "rmt_set_mem_pd", header: "rmt.h".}
 ## *
 ##  @brief Get RMT memory low power mode.
@@ -308,7 +308,7 @@ proc rmt_set_mem_pd*(channel: rmt_channel_t; pd_en: bool): esp_err_t {.
 ##      - ESP_OK Success
 ##
 
-proc rmt_get_mem_pd*(channel: rmt_channel_t; pd_en: ptr bool): esp_err_t {.
+proc rmt_get_mem_pd*(channel: rmt_channel_t; pd_en: ptr bool): EspErrorCode {.
     importc: "rmt_get_mem_pd", header: "rmt.h".}
 ## *
 ##  @brief Set RMT start sending data from memory.
@@ -322,7 +322,7 @@ proc rmt_get_mem_pd*(channel: rmt_channel_t; pd_en: ptr bool): esp_err_t {.
 ##      - ESP_OK Success
 ##
 
-proc rmt_tx_start*(channel: rmt_channel_t; tx_idx_rst: bool): esp_err_t {.
+proc rmt_tx_start*(channel: rmt_channel_t; tx_idx_rst: bool): EspErrorCode {.
     importc: "rmt_tx_start", header: "rmt.h".}
 ## *
 ##  @brief Set RMT stop sending.
@@ -334,7 +334,7 @@ proc rmt_tx_start*(channel: rmt_channel_t; tx_idx_rst: bool): esp_err_t {.
 ##      - ESP_OK Success
 ##
 
-proc rmt_tx_stop*(channel: rmt_channel_t): esp_err_t {.importc: "rmt_tx_stop",
+proc rmt_tx_stop*(channel: rmt_channel_t): EspErrorCode {.importc: "rmt_tx_stop",
     header: "rmt.h".}
 ## *
 ##  @brief Set RMT start receiving data.
@@ -348,7 +348,7 @@ proc rmt_tx_stop*(channel: rmt_channel_t): esp_err_t {.importc: "rmt_tx_stop",
 ##      - ESP_OK Success
 ##
 
-proc rmt_rx_start*(channel: rmt_channel_t; rx_idx_rst: bool): esp_err_t {.
+proc rmt_rx_start*(channel: rmt_channel_t; rx_idx_rst: bool): EspErrorCode {.
     importc: "rmt_rx_start", header: "rmt.h".}
 ## *
 ##  @brief Set RMT stop receiving data.
@@ -360,7 +360,7 @@ proc rmt_rx_start*(channel: rmt_channel_t; rx_idx_rst: bool): esp_err_t {.
 ##      - ESP_OK Success
 ##
 
-proc rmt_rx_stop*(channel: rmt_channel_t): esp_err_t {.importc: "rmt_rx_stop",
+proc rmt_rx_stop*(channel: rmt_channel_t): EspErrorCode {.importc: "rmt_rx_stop",
     header: "rmt.h".}
 ## *
 ##  @brief Reset RMT TX/RX memory index.
@@ -372,7 +372,7 @@ proc rmt_rx_stop*(channel: rmt_channel_t): esp_err_t {.importc: "rmt_rx_stop",
 ##      - ESP_OK Success
 ##
 
-proc rmt_memory_rw_rst*(channel: rmt_channel_t): esp_err_t {.
+proc rmt_memory_rw_rst*(channel: rmt_channel_t): EspErrorCode {.
     importc: "rmt_memory_rw_rst", header: "rmt.h".}
 ## *
 ##  @brief Set RMT memory owner.
@@ -385,7 +385,7 @@ proc rmt_memory_rw_rst*(channel: rmt_channel_t): esp_err_t {.
 ##      - ESP_OK Success
 ##
 
-proc rmt_set_memory_owner*(channel: rmt_channel_t; owner: rmt_mem_owner_t): esp_err_t {.
+proc rmt_set_memory_owner*(channel: rmt_channel_t; owner: rmt_mem_owner_t): EspErrorCode {.
     importc: "rmt_set_memory_owner", header: "rmt.h".}
 ## *
 ##  @brief Get RMT memory owner.
@@ -398,7 +398,7 @@ proc rmt_set_memory_owner*(channel: rmt_channel_t; owner: rmt_mem_owner_t): esp_
 ##      - ESP_OK Success
 ##
 
-proc rmt_get_memory_owner*(channel: rmt_channel_t; owner: ptr rmt_mem_owner_t): esp_err_t {.
+proc rmt_get_memory_owner*(channel: rmt_channel_t; owner: ptr rmt_mem_owner_t): EspErrorCode {.
     importc: "rmt_get_memory_owner", header: "rmt.h".}
 ## *
 ##  @brief Set RMT tx loop mode.
@@ -413,7 +413,7 @@ proc rmt_get_memory_owner*(channel: rmt_channel_t; owner: ptr rmt_mem_owner_t): 
 ##      - ESP_OK Success
 ##
 
-proc rmt_set_tx_loop_mode*(channel: rmt_channel_t; loop_en: bool): esp_err_t {.
+proc rmt_set_tx_loop_mode*(channel: rmt_channel_t; loop_en: bool): EspErrorCode {.
     importc: "rmt_set_tx_loop_mode", header: "rmt.h".}
 ## *
 ##  @brief Get RMT tx loop mode.
@@ -426,7 +426,7 @@ proc rmt_set_tx_loop_mode*(channel: rmt_channel_t; loop_en: bool): esp_err_t {.
 ##      - ESP_OK Success
 ##
 
-proc rmt_get_tx_loop_mode*(channel: rmt_channel_t; loop_en: ptr bool): esp_err_t {.
+proc rmt_get_tx_loop_mode*(channel: rmt_channel_t; loop_en: ptr bool): EspErrorCode {.
     importc: "rmt_get_tx_loop_mode", header: "rmt.h".}
 ## *
 ##  @brief Set RMT RX filter.
@@ -443,7 +443,7 @@ proc rmt_get_tx_loop_mode*(channel: rmt_channel_t; loop_en: ptr bool): esp_err_t
 ##      - ESP_OK Success
 ##
 
-proc rmt_set_rx_filter*(channel: rmt_channel_t; rx_filter_en: bool; thresh: uint8): esp_err_t {.
+proc rmt_set_rx_filter*(channel: rmt_channel_t; rx_filter_en: bool; thresh: uint8): EspErrorCode {.
     importc: "rmt_set_rx_filter", header: "rmt.h".}
 ## *
 ##  @brief Set RMT source clock
@@ -460,7 +460,7 @@ proc rmt_set_rx_filter*(channel: rmt_channel_t; rx_filter_en: bool; thresh: uint
 ##      - ESP_OK Success
 ##
 
-proc rmt_set_source_clk*(channel: rmt_channel_t; base_clk: rmt_source_clk_t): esp_err_t {.
+proc rmt_set_source_clk*(channel: rmt_channel_t; base_clk: rmt_source_clk_t): EspErrorCode {.
     importc: "rmt_set_source_clk", header: "rmt.h".}
 ## *
 ##  @brief Get RMT source clock
@@ -477,7 +477,7 @@ proc rmt_set_source_clk*(channel: rmt_channel_t; base_clk: rmt_source_clk_t): es
 ##      - ESP_OK Success
 ##
 
-proc rmt_get_source_clk*(channel: rmt_channel_t; src_clk: ptr rmt_source_clk_t): esp_err_t {.
+proc rmt_get_source_clk*(channel: rmt_channel_t; src_clk: ptr rmt_source_clk_t): EspErrorCode {.
     importc: "rmt_get_source_clk", header: "rmt.h".}
 ## *
 ##  @brief Set RMT idle output level for transmitter
@@ -492,7 +492,7 @@ proc rmt_get_source_clk*(channel: rmt_channel_t; src_clk: ptr rmt_source_clk_t):
 ##
 
 proc rmt_set_idle_level*(channel: rmt_channel_t; idle_out_en: bool;
-                        level: rmt_idle_level_t): esp_err_t {.
+                        level: rmt_idle_level_t): EspErrorCode {.
     importc: "rmt_set_idle_level", header: "rmt.h".}
 ## *
 ##  @brief Get RMT idle output level for transmitter
@@ -507,7 +507,7 @@ proc rmt_set_idle_level*(channel: rmt_channel_t; idle_out_en: bool;
 ##
 
 proc rmt_get_idle_level*(channel: rmt_channel_t; idle_out_en: ptr bool;
-                        level: ptr rmt_idle_level_t): esp_err_t {.
+                        level: ptr rmt_idle_level_t): EspErrorCode {.
     importc: "rmt_get_idle_level", header: "rmt.h".}
 ## *
 ##  @brief Get RMT status
@@ -521,7 +521,7 @@ proc rmt_get_idle_level*(channel: rmt_channel_t; idle_out_en: ptr bool;
 ##      - ESP_OK Success
 ##
 
-proc rmt_get_status*(channel: rmt_channel_t; status: ptr uint32): esp_err_t {.
+proc rmt_get_status*(channel: rmt_channel_t; status: ptr uint32): EspErrorCode {.
     importc: "rmt_get_status", header: "rmt.h".}
 ## *
 ##  @brief Set mask value to RMT interrupt enable register.
@@ -552,7 +552,7 @@ proc rmt_clr_intr_enable_mask*(mask: uint32) {.
 ##      - ESP_OK Success
 ##
 
-proc rmt_set_rx_intr_en*(channel: rmt_channel_t; en: bool): esp_err_t {.
+proc rmt_set_rx_intr_en*(channel: rmt_channel_t; en: bool): EspErrorCode {.
     importc: "rmt_set_rx_intr_en", header: "rmt.h".}
 ## *
 ##  @brief Set RMT RX error interrupt enable
@@ -565,7 +565,7 @@ proc rmt_set_rx_intr_en*(channel: rmt_channel_t; en: bool): esp_err_t {.
 ##      - ESP_OK Success
 ##
 
-proc rmt_set_err_intr_en*(channel: rmt_channel_t; en: bool): esp_err_t {.
+proc rmt_set_err_intr_en*(channel: rmt_channel_t; en: bool): EspErrorCode {.
     importc: "rmt_set_err_intr_en", header: "rmt.h".}
 ## *
 ##  @brief Set RMT TX interrupt enable
@@ -578,7 +578,7 @@ proc rmt_set_err_intr_en*(channel: rmt_channel_t; en: bool): esp_err_t {.
 ##      - ESP_OK Success
 ##
 
-proc rmt_set_tx_intr_en*(channel: rmt_channel_t; en: bool): esp_err_t {.
+proc rmt_set_tx_intr_en*(channel: rmt_channel_t; en: bool): EspErrorCode {.
     importc: "rmt_set_tx_intr_en", header: "rmt.h".}
 ## *
 ##  @brief Set RMT TX threshold event interrupt enable
@@ -594,7 +594,7 @@ proc rmt_set_tx_intr_en*(channel: rmt_channel_t; en: bool): esp_err_t {.
 ##      - ESP_OK Success
 ##
 
-proc rmt_set_tx_thr_intr_en*(channel: rmt_channel_t; en: bool; evt_thresh: uint16): esp_err_t {.
+proc rmt_set_tx_thr_intr_en*(channel: rmt_channel_t; en: bool; evt_thresh: uint16): EspErrorCode {.
     importc: "rmt_set_tx_thr_intr_en", header: "rmt.h".}
 ## *
 ##  @brief Set RMT pin
@@ -608,7 +608,7 @@ proc rmt_set_tx_thr_intr_en*(channel: rmt_channel_t; en: bool; evt_thresh: uint1
 ##      - ESP_OK Success
 ##
 
-proc rmt_set_pin*(channel: rmt_channel_t; mode: rmt_mode_t; gpio_num: gpio_num_t): esp_err_t {.
+proc rmt_set_pin*(channel: rmt_channel_t; mode: rmt_mode_t; gpio_num: gpio_num_t): EspErrorCode {.
     importc: "rmt_set_pin", header: "rmt.h".}
 ## *
 ##  @brief Configure RMT parameters
@@ -620,7 +620,7 @@ proc rmt_set_pin*(channel: rmt_channel_t; mode: rmt_mode_t; gpio_num: gpio_num_t
 ##      - ESP_OK Success
 ##
 
-proc rmt_config*(rmt_param: ptr rmt_config_t): esp_err_t {.importc: "rmt_config",
+proc rmt_config*(rmt_param: ptr rmt_config_t): EspErrorCode {.importc: "rmt_config",
     header: "rmt.h".}
 ## *
 ##  @brief Register RMT interrupt handler, the handler is an ISR.
@@ -643,7 +643,7 @@ proc rmt_config*(rmt_param: ptr rmt_config_t): esp_err_t {.importc: "rmt_config"
 ##
 
 proc rmt_isr_register*(fn: proc (a1: pointer) {.cdecl.}; arg: pointer; intr_alloc_flags: esp_intr_flags;
-                      handle: ptr rmt_isr_handle_t): esp_err_t {.
+                      handle: ptr rmt_isr_handle_t): EspErrorCode {.
     importc: "rmt_isr_register", header: "rmt.h".}
 ## *
 ##  @brief   Deregister previously registered RMT interrupt handler
@@ -655,7 +655,7 @@ proc rmt_isr_register*(fn: proc (a1: pointer) {.cdecl.}; arg: pointer; intr_allo
 ##      - ESP_ERR_INVALID_ARG Handle invalid
 ##
 
-proc rmt_isr_deregister*(handle: rmt_isr_handle_t): esp_err_t {.
+proc rmt_isr_deregister*(handle: rmt_isr_handle_t): EspErrorCode {.
     importc: "rmt_isr_deregister", header: "rmt.h".}
 ## *
 ##  @brief Fill memory data of channel with given RMT items.
@@ -671,7 +671,7 @@ proc rmt_isr_deregister*(handle: rmt_isr_handle_t): esp_err_t {.
 ##
 
 proc rmt_fill_tx_items*(channel: rmt_channel_t; item: ptr rmt_item32_t;
-                       item_num: uint16; mem_offset: uint16): esp_err_t {.
+                       item_num: uint16; mem_offset: uint16): EspErrorCode {.
     importc: "rmt_fill_tx_items", header: "rmt.h".}
 ## *
 ##  @brief Initialize RMT driver
@@ -689,7 +689,7 @@ proc rmt_fill_tx_items*(channel: rmt_channel_t; item: ptr rmt_item32_t;
 ##
 
 proc rmt_driver_install*(channel: rmt_channel_t; rx_buf_size: csize_t;
-                        intr_alloc_flags: esp_intr_flags): esp_err_t {.
+                        intr_alloc_flags: esp_intr_flags): EspErrorCode {.
     importc: "rmt_driver_install", header: "rmt.h".}
 ## *
 ##  @brief Uninstall RMT driver.
@@ -701,7 +701,7 @@ proc rmt_driver_install*(channel: rmt_channel_t; rx_buf_size: csize_t;
 ##      - ESP_OK Success
 ##
 
-proc rmt_driver_uninstall*(channel: rmt_channel_t): esp_err_t {.
+proc rmt_driver_uninstall*(channel: rmt_channel_t): EspErrorCode {.
     importc: "rmt_driver_uninstall", header: "rmt.h".}
 ## *
 ##  @brief Get the current status of eight channels.
@@ -715,7 +715,7 @@ proc rmt_driver_uninstall*(channel: rmt_channel_t): esp_err_t {.
 ##      - ESP_OK Success
 ##
 
-proc rmt_get_channel_status*(channel_status: ptr rmt_channel_status_result_t): esp_err_t {.
+proc rmt_get_channel_status*(channel_status: ptr rmt_channel_status_result_t): EspErrorCode {.
     importc: "rmt_get_channel_status", header: "rmt.h".}
 ## *
 ##  @brief RMT send waveform from rmt_item array.
@@ -745,7 +745,7 @@ proc rmt_get_channel_status*(channel_status: ptr rmt_channel_status_result_t): e
 ##
 
 proc rmt_write_items*(channel: rmt_channel_t; rmt_item: ptr rmt_item32_t;
-                     item_num: cint; wait_tx_done: bool): esp_err_t {.
+                     item_num: cint; wait_tx_done: bool): EspErrorCode {.
     importc: "rmt_write_items", header: "rmt.h".}
 ## *
 ##  @brief Wait RMT TX finished.
@@ -760,7 +760,7 @@ proc rmt_write_items*(channel: rmt_channel_t; rmt_item: ptr rmt_item32_t;
 ##      - ESP_FAIL Driver not installed
 ##
 
-proc rmt_wait_tx_done*(channel: rmt_channel_t; wait_time: TickType_t): esp_err_t {.
+proc rmt_wait_tx_done*(channel: rmt_channel_t; wait_time: TickType_t): EspErrorCode {.
     importc: "rmt_wait_tx_done", header: "rmt.h".}
 ## *
 ##  @brief Get ringbuffer from RMT.
@@ -776,7 +776,7 @@ proc rmt_wait_tx_done*(channel: rmt_channel_t; wait_time: TickType_t): esp_err_t
 ##
 
 proc rmt_get_ringbuf_handle*(channel: rmt_channel_t;
-                            buf_handle: ptr RingbufHandle_t): esp_err_t {.
+                            buf_handle: ptr RingbufHandle_t): EspErrorCode {.
     importc: "rmt_get_ringbuf_handle", header: "rmt.h".}
 ## *
 ##  @brief Init rmt translator and register user callback.
@@ -791,7 +791,7 @@ proc rmt_get_ringbuf_handle*(channel: rmt_channel_t;
 ##      - ESP_OK Init success.
 ##
 
-proc rmt_translator_init*(channel: rmt_channel_t; fn: sample_to_rmt_t): esp_err_t {.
+proc rmt_translator_init*(channel: rmt_channel_t; fn: sample_to_rmt_t): EspErrorCode {.
     importc: "rmt_translator_init", header: "rmt.h".}
 ## *
 ##  @brief Translate uint8 type of data into rmt format and send it out.
@@ -808,7 +808,7 @@ proc rmt_translator_init*(channel: rmt_channel_t; fn: sample_to_rmt_t): esp_err_
 ##
 
 proc rmt_write_sample*(channel: rmt_channel_t; src: ptr uint8; src_size: csize_t;
-                      wait_tx_done: bool): esp_err_t {.importc: "rmt_write_sample",
+                      wait_tx_done: bool): EspErrorCode {.importc: "rmt_write_sample",
     header: "rmt.h".}
 ## *
 ##  @brief Registers a callback that will be called when transmission ends.

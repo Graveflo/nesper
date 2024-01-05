@@ -65,7 +65,7 @@ type
 ##  @return ESP_OK on success
 ##
 
-proc i2cdev_init*(): esp_err_t {.importc: "i2cdev_init", header: hdr.}
+proc i2cdev_init*(): EspErrorCode {.importc: "i2cdev_init", header: hdr.}
 ## *
 ##  @brief Finish work with library
 ##
@@ -74,7 +74,7 @@ proc i2cdev_init*(): esp_err_t {.importc: "i2cdev_init", header: hdr.}
 ##  @return ESP_OK on success
 ##
 
-proc i2cdev_done*(): esp_err_t {.importc: "i2cdev_done", header: hdr.}
+proc i2cdev_done*(): EspErrorCode {.importc: "i2cdev_done", header: hdr.}
 ## *
 ##  @brief Create mutex for device descriptor
 ##
@@ -84,7 +84,7 @@ proc i2cdev_done*(): esp_err_t {.importc: "i2cdev_done", header: hdr.}
 ##  @return ESP_OK on success
 ##
 
-proc i2c_dev_create_mutex*(dev: ptr i2c_dev_t): esp_err_t {.
+proc i2c_dev_create_mutex*(dev: ptr i2c_dev_t): EspErrorCode {.
     importc: "i2c_dev_create_mutex", header: hdr.}
 ## *
 ##  @brief Delete mutex for device descriptor
@@ -95,7 +95,7 @@ proc i2c_dev_create_mutex*(dev: ptr i2c_dev_t): esp_err_t {.
 ##  @return ESP_OK on success
 ##
 
-proc i2c_dev_delete_mutex*(dev: ptr i2c_dev_t): esp_err_t {.
+proc i2c_dev_delete_mutex*(dev: ptr i2c_dev_t): EspErrorCode {.
     importc: "i2c_dev_delete_mutex", header: hdr.}
 ## *
 ##  @brief Take device mutex
@@ -106,7 +106,7 @@ proc i2c_dev_delete_mutex*(dev: ptr i2c_dev_t): esp_err_t {.
 ##  @return ESP_OK on success
 ##
 
-proc i2c_dev_take_mutex*(dev: ptr i2c_dev_t): esp_err_t {.
+proc i2c_dev_take_mutex*(dev: ptr i2c_dev_t): EspErrorCode {.
     importc: "i2c_dev_take_mutex", header: hdr.}
 ## *
 ##  @brief Give device mutex
@@ -117,7 +117,7 @@ proc i2c_dev_take_mutex*(dev: ptr i2c_dev_t): esp_err_t {.
 ##  @return ESP_OK on success
 ##
 
-proc i2c_dev_give_mutex*(dev: ptr i2c_dev_t): esp_err_t {.
+proc i2c_dev_give_mutex*(dev: ptr i2c_dev_t): EspErrorCode {.
     importc: "i2c_dev_give_mutex", header: hdr.}
 ## *
 ##  @brief Read from slave device
@@ -135,7 +135,7 @@ proc i2c_dev_give_mutex*(dev: ptr i2c_dev_t): esp_err_t {.
 ##
 
 proc i2c_dev_read*(dev: ptr i2c_dev_t; out_data: pointer; out_size: csize_t;
-                  in_data: pointer; in_size: csize_t): esp_err_t {.
+                  in_data: pointer; in_size: csize_t): EspErrorCode {.
     importc: "i2c_dev_read", header: hdr.}
 ## *
 ##  @brief Write to slave device
@@ -152,7 +152,7 @@ proc i2c_dev_read*(dev: ptr i2c_dev_t; out_data: pointer; out_size: csize_t;
 ##
 
 proc i2c_dev_write*(dev: ptr i2c_dev_t; out_reg: pointer; out_reg_size: csize_t;
-                   out_data: pointer; out_size: csize_t): esp_err_t {.
+                   out_data: pointer; out_size: csize_t): EspErrorCode {.
     importc: "i2c_dev_write", header: hdr.}
 ## *
 ##  @brief Read from register with an 8-bit address
@@ -167,7 +167,7 @@ proc i2c_dev_write*(dev: ptr i2c_dev_t; out_reg: pointer; out_reg_size: csize_t;
 ##
 
 proc i2c_dev_read_reg*(dev: ptr i2c_dev_t; reg: uint8; in_data: pointer;
-                      in_size: csize_t): esp_err_t {.importc: "i2c_dev_read_reg",
+                      in_size: csize_t): EspErrorCode {.importc: "i2c_dev_read_reg",
     header: hdr.}
 ## *
 ##  @brief Write to register with an 8-bit address
@@ -182,11 +182,11 @@ proc i2c_dev_read_reg*(dev: ptr i2c_dev_t; reg: uint8; in_data: pointer;
 ##
 
 proc i2c_dev_write_reg*(dev: ptr i2c_dev_t; reg: uint8; out_data: pointer;
-                       out_size: csize_t): esp_err_t {.
+                       out_size: csize_t): EspErrorCode {.
     importc: "i2c_dev_write_reg", header: hdr.}
 ## *@}
 
-proc I2C_DEV_TAKE_MUTEX*(dev: ptr i2c_dev_t): esp_err_t {.importc: "$1", header: hdr.}
-proc I2C_DEV_GIVE_MUTEX*(dev: ptr i2c_dev_t): esp_err_t {.importc: "$1", header: hdr.}
-proc I2C_DEV_CHECK*(dev: ptr i2c_dev_t, x: esp_err_t): esp_err_t {.importc: "$1", header: hdr.}
-# proc I2C_DEV_CHECK_LOGE*(dev: ptr i2c_dev_t): esp_err_t {.importc: "$1", header: hdr.}
+proc I2C_DEV_TAKE_MUTEX*(dev: ptr i2c_dev_t): EspErrorCode {.importc: "$1", header: hdr.}
+proc I2C_DEV_GIVE_MUTEX*(dev: ptr i2c_dev_t): EspErrorCode {.importc: "$1", header: hdr.}
+proc I2C_DEV_CHECK*(dev: ptr i2c_dev_t, x: esp_err_t): EspErrorCode {.importc: "$1", header: hdr.}
+# proc I2C_DEV_CHECK_LOGE*(dev: ptr i2c_dev_t): EspErrorCode {.importc: "$1", header: hdr.}

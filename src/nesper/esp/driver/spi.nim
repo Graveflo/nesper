@@ -238,7 +238,7 @@ type
 ##
 
 proc spi_bus_initialize*(host_id: spi_host_device_t;
-                        bus_config: ptr spi_bus_config_t; dma_chan: cint): esp_err_t {.
+                        bus_config: ptr spi_bus_config_t; dma_chan: cint): EspErrorCode {.
     importc: "spi_bus_initialize", header: "driver/spi_master.h".}
 
 
@@ -255,7 +255,7 @@ proc spi_bus_initialize*(host_id: spi_host_device_t;
 ##          - ESP_OK                on success
 ##
 
-proc spi_bus_free*(host_id: spi_host_device_t): esp_err_t {.importc: "spi_bus_free",
+proc spi_bus_free*(host_id: spi_host_device_t): EspErrorCode {.importc: "spi_bus_free",
     header: "driver/spi_master.h".}
 
 
@@ -370,7 +370,7 @@ type
 ##
 proc spi_bus_add_device*(host_id: spi_host_device_t;
                         dev_config: ptr spi_device_interface_config_t;
-                        handle: ptr spi_device_handle_t): esp_err_t {.
+                        handle: ptr spi_device_handle_t): EspErrorCode {.
     importc: "spi_bus_add_device", header: "driver/spi_master.h".}
 
 
@@ -385,7 +385,7 @@ proc spi_bus_add_device*(host_id: spi_host_device_t;
 ##          - ESP_OK                on success
 ##
 
-proc spi_bus_remove_device*(handle: spi_device_handle_t): esp_err_t {.
+proc spi_bus_remove_device*(handle: spi_device_handle_t): EspErrorCode {.
     importc: "spi_bus_remove_device", header: "driver/spi_master.h".}
 
 
@@ -410,7 +410,7 @@ proc spi_bus_remove_device*(handle: spi_device_handle_t): esp_err_t {.
 
 proc spi_device_queue_trans*(handle: spi_device_handle_t;
                             trans_desc: ptr spi_transaction_t;
-                            ticks_to_wait: TickType_t): esp_err_t {.
+                            ticks_to_wait: TickType_t): EspErrorCode {.
     importc: "spi_device_queue_trans", header: "driver/spi_master.h".}
 
 
@@ -437,7 +437,7 @@ proc spi_device_queue_trans*(handle: spi_device_handle_t;
 
 proc spi_device_get_trans_result*(handle: spi_device_handle_t;
                                  trans_desc: ptr ptr spi_transaction_t;
-                                 ticks_to_wait: TickType_t): esp_err_t {.
+                                 ticks_to_wait: TickType_t): EspErrorCode {.
     importc: "spi_device_get_trans_result", header: "driver/spi_master.h".}
 
 
@@ -460,7 +460,7 @@ proc spi_device_get_trans_result*(handle: spi_device_handle_t;
 ##
 
 proc spi_device_transmit*(handle: spi_device_handle_t;
-                         trans_desc: ptr spi_transaction_t): esp_err_t {.
+                         trans_desc: ptr spi_transaction_t): EspErrorCode {.
     importc: "spi_device_transmit", header: "driver/spi_master.h".}
 
 
@@ -487,7 +487,7 @@ proc spi_device_transmit*(handle: spi_device_handle_t;
 
 proc spi_device_polling_start*(handle: spi_device_handle_t;
                               trans_desc: ptr spi_transaction_t;
-                              ticks_to_wait: TickType_t): esp_err_t {.
+                              ticks_to_wait: TickType_t): EspErrorCode {.
     importc: "spi_device_polling_start", header: "driver/spi_master.h".}
 
 
@@ -508,7 +508,7 @@ proc spi_device_polling_start*(handle: spi_device_handle_t;
 ##          - ESP_OK                on success
 ##
 
-proc spi_device_polling_end*(handle: spi_device_handle_t; ticks_to_wait: TickType_t): esp_err_t {.
+proc spi_device_polling_end*(handle: spi_device_handle_t; ticks_to_wait: TickType_t): EspErrorCode {.
     importc: "spi_device_polling_end", header: "driver/spi_master.h".}
 
 
@@ -531,7 +531,7 @@ proc spi_device_polling_end*(handle: spi_device_handle_t; ticks_to_wait: TickTyp
 ##
 
 proc spi_device_polling_transmit*(handle: spi_device_handle_t;
-                                 trans_desc: ptr spi_transaction_t): esp_err_t {.
+                                 trans_desc: ptr spi_transaction_t): EspErrorCode {.
     importc: "spi_device_polling_transmit", header: "driver/spi_master.h".}
 
 
@@ -551,7 +551,7 @@ proc spi_device_polling_transmit*(handle: spi_device_handle_t;
 ##       - ESP_OK : Success.
 ##
 
-proc spi_device_acquire_bus*(device: spi_device_handle_t; wait: TickType_t): esp_err_t {.
+proc spi_device_acquire_bus*(device: spi_device_handle_t; wait: TickType_t): EspErrorCode {.
     importc: "spi_device_acquire_bus", header: "driver/spi_master.h".}
 
 

@@ -39,7 +39,7 @@ type
 ##        - ESP_ERR_INVALID_ARG: set mediator for Ethernet PHY instance failed because of some invalid arguments
 
 type
-  set_mediator_cb_t* = proc (phy: ptr esp_eth_phy_t; mediator: ptr esp_eth_mediator_t): esp_err_t {.cdecl.}
+  set_mediator_cb_t* = proc (phy: ptr esp_eth_phy_t; mediator: ptr esp_eth_mediator_t): EspErrorCode {.cdecl.}
 
   ## *
   ##  @brief Software Reset Ethernet PHY
@@ -49,7 +49,7 @@ type
   ##       - ESP_FAIL: reset Ethernet PHY failed because some error occurred
   ##
   ##
-  reset_cb_t* = proc (phy: ptr esp_eth_phy_t): esp_err_t {.cdecl.}
+  reset_cb_t* = proc (phy: ptr esp_eth_phy_t): EspErrorCode {.cdecl.}
 
   ##   @brief Hardware Reset Ethernet PHY
   ##   @note Hardware reset is mostly done by pull down and up PHY's nRST pin
@@ -57,58 +57,58 @@ type
   ##   @return
   ##        - ESP_OK: reset Ethernet PHY successfully
   ##        - ESP_FAIL: reset Ethernet PHY failed because some error occurred
-  reset_hw_cb_t* = proc (phy: ptr esp_eth_phy_t): esp_err_t {.cdecl.}
+  reset_hw_cb_t* = proc (phy: ptr esp_eth_phy_t): EspErrorCode {.cdecl.}
   ##   @brief Initialize Ethernet PHY
   ##   @param[in] phy: Ethernet PHY instance
   ##   @return
   ##        - ESP_OK: initialize Ethernet PHY successfully
   ##        - ESP_FAIL: initialize Ethernet PHY failed because some error occurred
-  init_cb_t* = proc (phy: ptr esp_eth_phy_t): esp_err_t {.cdecl.}
+  init_cb_t* = proc (phy: ptr esp_eth_phy_t): EspErrorCode {.cdecl.}
   ##   @brief Deinitialize Ethernet PHY
   ##   @param[in] phyL Ethernet PHY instance
   ##   @return
   ##        - ESP_OK: deinitialize Ethernet PHY successfully
   ##        - ESP_FAIL: deinitialize Ethernet PHY failed because some error occurred
-  deinit_cb_t* = proc (phy: ptr esp_eth_phy_t): esp_err_t {.cdecl.}
+  deinit_cb_t* = proc (phy: ptr esp_eth_phy_t): EspErrorCode {.cdecl.}
   ##   @brief Start auto negotiation
   ##   @param[in] phy: Ethernet PHY instance
   ##   @return
   ##        - ESP_OK: restart auto negotiation successfully
   ##        - ESP_FAIL: restart auto negotiation failed because some error occurred
-  negotiate_cb_t* = proc (phy: ptr esp_eth_phy_t): esp_err_t {.cdecl.}
+  negotiate_cb_t* = proc (phy: ptr esp_eth_phy_t): EspErrorCode {.cdecl.}
   ##   @brief Get Ethernet PHY link status
   ##   @param[in] phy: Ethernet PHY instance
   ##   @return
   ##        - ESP_OK: get Ethernet PHY link status successfully
   ##        - ESP_FAIL: get Ethernet PHY link status failed because some error occurred
-  get_link_cb_t* = proc (phy: ptr esp_eth_phy_t): esp_err_t {.cdecl.}
+  get_link_cb_t* = proc (phy: ptr esp_eth_phy_t): EspErrorCode {.cdecl.}
   ##   @brief Power control of Ethernet PHY
   ##   @param[in] phy: Ethernet PHY instance
   ##   @param[in] enable: set true to power on Ethernet PHY; ser false to power off Ethernet PHY
   ##   @return
   ##        - ESP_OK: control Ethernet PHY power successfully
   ##        - ESP_FAIL: control Ethernet PHY power failed because some error occurred
-  pwrctl_cb_t* = proc (phy: ptr esp_eth_phy_t; enable: bool): esp_err_t {.cdecl.}
+  pwrctl_cb_t* = proc (phy: ptr esp_eth_phy_t; enable: bool): EspErrorCode {.cdecl.}
   ##   @brief Set PHY chip address
   ##   @param[in] phy: Ethernet PHY instance
   ##   @param[in] addr: PHY chip address
   ##   @return
   ##        - ESP_OK: set Ethernet PHY address successfully
   ##        - ESP_FAIL: set Ethernet PHY address failed because some error occurred
-  set_addr_cb_t* = proc (phy: ptr esp_eth_phy_t; `addr`: uint32): esp_err_t {.cdecl.}
+  set_addr_cb_t* = proc (phy: ptr esp_eth_phy_t; `addr`: uint32): EspErrorCode {.cdecl.}
   ##   @brief Get PHY chip address
   ##   @param[in] phy: Ethernet PHY instance
   ##   @param[out] addr: PHY chip address
   ##   @return
   ##        - ESP_OK: get Ethernet PHY address successfully
   ##        - ESP_ERR_INVALID_ARG: get Ethernet PHY address failed because of invalid argument
-  get_addr_cb_t* = proc (phy: ptr esp_eth_phy_t; `addr`: ptr uint32): esp_err_t {.cdecl.}
+  get_addr_cb_t* = proc (phy: ptr esp_eth_phy_t; `addr`: ptr uint32): EspErrorCode {.cdecl.}
   ##   @brief Free memory of Ethernet PHY instance
   ##   @param[in] phy: Ethernet PHY instance
   ##   @return
   ##        - ESP_OK: free PHY instance successfully
   ##        - ESP_FAIL: free PHY instance failed because some error occurred
-  del_cb_t* = proc (phy: ptr esp_eth_phy_t): esp_err_t {.cdecl.}
+  del_cb_t* = proc (phy: ptr esp_eth_phy_t): EspErrorCode {.cdecl.}
 
   ##  @brief Ethernet PHY
   esp_eth_phy_t* {.importc: "esp_eth_phy_t", header: "esp_eth_phy.h", bycopy.} = object

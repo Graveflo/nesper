@@ -93,7 +93,7 @@ type
 proc spi_slave_initialize*(host: spi_host_device_t;
                           bus_config: ptr spi_bus_config_t;
                           slave_config: ptr spi_slave_interface_config_t;
-                          dma_chan: cint): esp_err_t {.
+                          dma_chan: cint): EspErrorCode {.
     importc: "spi_slave_initialize", header: "spi_slave.h".}
 ## *
 ##  @brief Free a SPI bus claimed as a SPI slave interface
@@ -105,7 +105,7 @@ proc spi_slave_initialize*(host: spi_host_device_t;
 ##          - ESP_OK                on success
 ##
 
-proc spi_slave_free*(host: spi_host_device_t): esp_err_t {.
+proc spi_slave_free*(host: spi_host_device_t): EspErrorCode {.
     importc: "spi_slave_free", header: "spi_slave.h".}
 ## *
 ##  @brief Queue a SPI transaction for execution
@@ -130,7 +130,7 @@ proc spi_slave_free*(host: spi_host_device_t): esp_err_t {.
 
 proc spi_slave_queue_trans*(host: spi_host_device_t;
                            trans_desc: ptr spi_slave_transaction_t;
-                           ticks_to_wait: TickType_t): esp_err_t {.
+                           ticks_to_wait: TickType_t): EspErrorCode {.
     importc: "spi_slave_queue_trans", header: "spi_slave.h".}
 ## *
 ##  @brief Get the result of a SPI transaction queued earlier
@@ -154,7 +154,7 @@ proc spi_slave_queue_trans*(host: spi_host_device_t;
 
 proc spi_slave_get_trans_result*(host: spi_host_device_t;
                                 trans_desc: ptr ptr spi_slave_transaction_t;
-                                ticks_to_wait: TickType_t): esp_err_t {.
+                                ticks_to_wait: TickType_t): EspErrorCode {.
     importc: "spi_slave_get_trans_result", header: "spi_slave.h".}
 ## *
 ##  @brief Do a SPI transaction
@@ -176,5 +176,5 @@ proc spi_slave_get_trans_result*(host: spi_host_device_t;
 
 proc spi_slave_transmit*(host: spi_host_device_t;
                         trans_desc: ptr spi_slave_transaction_t;
-                        ticks_to_wait: TickType_t): esp_err_t {.
+                        ticks_to_wait: TickType_t): EspErrorCode {.
     importc: "spi_slave_transmit", header: "spi_slave.h".}

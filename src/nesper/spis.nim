@@ -19,7 +19,7 @@ const TAG = "spis"
 type
 
   SpiError* = object of OSError
-    code*: esp_err_t
+    code*: EspErrorCode
 
   SpiBus* = ref object
     host*: spi_host_device_t
@@ -287,12 +287,12 @@ proc pollingEnd*(dev: SpiDev, ticks_to_wait: TickType_t = portMAX_DELAY) {.inlin
     raise newEspError[SpiError]("end polling (" & $esp_err_to_name(ret) & ")", ret)
 
 proc poll*(trn: SpiTrans, ticks_to_wait: TickType_t = portMAX_DELAY) {.inline.} = 
-  let ret: esp_err_t = spi_device_polling_transmit(trn.dev.handle, addr(trn.trn))
+  let ret: EspErrorCode = spi_device_polling_transmit(trn.dev.handle, addr(trn.trn))
   if (ret != ESP_OK):
     raise newEspError[SpiError]("spi polling (" & $esp_err_to_name(ret) & ")", ret)
 
 proc acquireBus*(trn: SpiDev, wait: TickType_t = portMAX_DELAY) {.inline.} = 
-  let ret: esp_err_t = spi_device_acquire_bus(trn.handle, wait)
+  let ret: EspErrorCode = spi_device_acquire_bus(trn.handle, wait)
   if (ret != ESP_OK):
     raise newEspError[SpiError]("spi aquire bus (" & $esp_err_to_name(ret) & ")", ret)
 
@@ -314,7 +314,7 @@ template withSpiBus*(dev: SpiDev, wait: TickType_t, blk: untyped): untyped =
     dev.releaseBus()
 
 proc queue*(trn: var SpiTrans, ticks_to_wait: TickType_t = portMAX_DELAY) = 
-  let ret: esp_err_t =
+  let ret: EspErrorCode =
     spi_device_queue_trans(trn.dev.handle, addr(trn.trn), ticks_to_wait)
 
   if (ret != ESP_OK):
@@ -327,7 +327,7 @@ proc queue*(trn: var SpiTrans, ticks_to_wait: TickType_t = portMAX_DELAY) =
 proc retrieve*(dev: SpiDev, ticks_to_wait: TickType_t = portMAX_DELAY): SpiTrans = 
   var trn: ptr spi_transaction_t
 
-  let ret: esp_err_t =
+  let ret: EspErrorCode =
     spi_device_get_trans_result(dev.handle, addr(trn), ticks_to_wait)
 
   let tptr = cast[ptr SpiTrans](trn.user)
@@ -341,7 +341,7 @@ proc retrieve*(dev: SpiDev, ticks_to_wait: TickType_t = portMAX_DELAY): SpiTrans
 
 proc transmit*(trn: SpiTrans) {.inline.} = 
   # result = new(SpiTrans)
-  let ret: esp_err_t =
+  let ret: EspErrorCode =
     spi_device_transmit(trn.dev.handle, addr(trn.trn))
 
   if (ret != ESP_OK):

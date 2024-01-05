@@ -19,7 +19,7 @@ export event_groups
 
 type
   EventError* = object of OSError
-    code*: esp_err_t
+    code*: EspErrorCode
 
 template eventRegister*[EVT](
             evt_id: EVT;

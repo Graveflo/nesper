@@ -49,10 +49,10 @@ type
 ##
 when defined(ESP_IDF_V4_0):
   type
-    stack_input_cb_t* =  proc (eth_handle: esp_eth_handle_t; buffer: ptr uint8; length: uint32): esp_err_t {.cdecl.}
+    stack_input_cb_t* =  proc (eth_handle: esp_eth_handle_t; buffer: ptr uint8; length: uint32): EspErrorCode {.cdecl.}
 else:
   type
-    stack_input_cb_t* =  proc (eth_handle: esp_eth_handle_t; buffer: ptr uint8; length: uint32, priv: pointer): esp_err_t {.cdecl.}
+    stack_input_cb_t* =  proc (eth_handle: esp_eth_handle_t; buffer: ptr uint8; length: uint32, priv: pointer): EspErrorCode {.cdecl.}
 
 
 type
@@ -65,7 +65,7 @@ type
   ##        - ESP_OK: process extra lowlevel initialization successfully
   ##        - ESP_FAIL: error occurred when processing extra lowlevel initialization
   ##
-  on_lowlevel_init_done_cb_t* = proc ( eth_handle: esp_eth_handle_t): esp_err_t {.cdecl.} ## *
+  on_lowlevel_init_done_cb_t* = proc ( eth_handle: esp_eth_handle_t): EspErrorCode {.cdecl.} ## *
 
   ##  @brief Callback function invoked when lowlevel deinitialization is finished
   ##
@@ -75,7 +75,7 @@ type
   ##        - ESP_OK: process extra lowlevel deinitialization successfully
   ##        - ESP_FAIL: error occurred when processing extra lowlevel deinitialization
   ##
-  on_lowlevel_deinit_done_cb_t* = proc ( eth_handle: esp_eth_handle_t): esp_err_t {.cdecl.}
+  on_lowlevel_deinit_done_cb_t* = proc ( eth_handle: esp_eth_handle_t): EspErrorCode {.cdecl.}
 
   esp_eth_config_t* {.importc: "esp_eth_config_t", header: "esp_eth.h", bycopy.} = object
     mac* {.importc: "mac".}: ptr esp_eth_mac_t ##  @brief Ethernet MAC object
@@ -129,7 +129,7 @@ proc eth_default_config*(
 ##
 
 proc esp_eth_driver_install*(config: ptr esp_eth_config_t;
-                            out_hdl: ptr esp_eth_handle_t): esp_err_t {.
+                            out_hdl: ptr esp_eth_handle_t): EspErrorCode {.
     importc: "esp_eth_driver_install", header: "esp_eth.h".}
 ## *
 ##  @brief Uninstall Ethernet driver
@@ -146,7 +146,7 @@ proc esp_eth_driver_install*(config: ptr esp_eth_config_t;
 ##        - ESP_FAIL: uninstall esp_eth driver failed because some other error occurred
 ##
 
-proc esp_eth_driver_uninstall*(hdl: esp_eth_handle_t): esp_err_t {.
+proc esp_eth_driver_uninstall*(hdl: esp_eth_handle_t): EspErrorCode {.
     importc: "esp_eth_driver_uninstall", header: "esp_eth.h".}
 ## *
 ##  @brief Start Ethernet driver
@@ -162,7 +162,7 @@ proc esp_eth_driver_uninstall*(hdl: esp_eth_handle_t): esp_err_t {.
 ##        - ESP_FAIL: start esp_eth driver failed because some other error occurred
 ##
 
-proc esp_eth_start*(hdl: esp_eth_handle_t): esp_err_t {.importc: "esp_eth_start",
+proc esp_eth_start*(hdl: esp_eth_handle_t): EspErrorCode {.importc: "esp_eth_start",
     header: "esp_eth.h".}
 ## *
 ##  @brief Stop Ethernet driver
@@ -177,7 +177,7 @@ proc esp_eth_start*(hdl: esp_eth_handle_t): esp_err_t {.importc: "esp_eth_start"
 ##        - ESP_FAIL: stop esp_eth driver failed because some other error occurred
 ##
 
-proc esp_eth_stop*(hdl: esp_eth_handle_t): esp_err_t {.importc: "esp_eth_stop",
+proc esp_eth_stop*(hdl: esp_eth_handle_t): EspErrorCode {.importc: "esp_eth_stop",
     header: "esp_eth.h".}
 ## *
 ##  @brief General Transmit
@@ -192,7 +192,7 @@ proc esp_eth_stop*(hdl: esp_eth_handle_t): esp_err_t {.importc: "esp_eth_stop",
 ##        - ESP_FAIL: transmit frame buffer failed because some other error occurred
 ##
 
-proc esp_eth_transmit*(hdl: esp_eth_handle_t; buf: ptr uint8; length: uint32): esp_err_t {.
+proc esp_eth_transmit*(hdl: esp_eth_handle_t; buf: ptr uint8; length: uint32): EspErrorCode {.
     importc: "esp_eth_transmit", header: "esp_eth.h".}
 ## *
 ##  @brief General Receive
@@ -207,7 +207,7 @@ proc esp_eth_transmit*(hdl: esp_eth_handle_t; buf: ptr uint8; length: uint32): e
 ##        - ESP_FAIL: receive frame buffer failed because some other error occurred
 ##
 
-proc esp_eth_receive*(hdl: esp_eth_handle_t; buf: ptr uint8; length: ptr uint32): esp_err_t {.
+proc esp_eth_receive*(hdl: esp_eth_handle_t; buf: ptr uint8; length: ptr uint32): EspErrorCode {.
     importc: "esp_eth_receive", header: "esp_eth.h".}
 ## *
 ##  @brief Misc IO function of Etherent driver
@@ -222,7 +222,7 @@ proc esp_eth_receive*(hdl: esp_eth_handle_t; buf: ptr uint8; length: ptr uint32)
 ##        - ESP_FAIL: process io command failed because some other error occurred
 ##
 
-proc esp_eth_ioctl*(hdl: esp_eth_handle_t; cmd: esp_eth_io_cmd_t; data: pointer): esp_err_t {.
+proc esp_eth_ioctl*(hdl: esp_eth_handle_t; cmd: esp_eth_io_cmd_t; data: pointer): EspErrorCode {.
     importc: "esp_eth_ioctl", header: "esp_eth.h".}
 ## *
 ##  @brief Increase Ethernet driver reference
@@ -238,7 +238,7 @@ proc esp_eth_ioctl*(hdl: esp_eth_handle_t; cmd: esp_eth_io_cmd_t; data: pointer)
 ##        - ESP_ERR_INVALID_ARG: increase reference failed because of some invalid argument
 ##
 
-proc esp_eth_increase_reference*(hdl: esp_eth_handle_t): esp_err_t {.
+proc esp_eth_increase_reference*(hdl: esp_eth_handle_t): EspErrorCode {.
     importc: "esp_eth_increase_reference", header: "esp_eth.h".}
 ## *
 ##  @brief Decrease Ethernet driver reference
@@ -249,5 +249,5 @@ proc esp_eth_increase_reference*(hdl: esp_eth_handle_t): esp_err_t {.
 ##        - ESP_ERR_INVALID_ARG: increase reference failed because of some invalid argument
 ##
 
-proc esp_eth_decrease_reference*(hdl: esp_eth_handle_t): esp_err_t {.
+proc esp_eth_decrease_reference*(hdl: esp_eth_handle_t): EspErrorCode {.
     importc: "esp_eth_decrease_reference", header: "esp_eth.h".}

@@ -116,7 +116,7 @@ type
 ##    - ESP_ERR_INVALID_ARG if channal not valid
 ##
 
-proc adc1_pad_get_io_num*(channel: adc1_channel_t; gpio_num: ptr gpio_num_t): esp_err_t {.
+proc adc1_pad_get_io_num*(channel: adc1_channel_t; gpio_num: ptr gpio_num_t): EspErrorCode {.
     importc: "adc1_pad_get_io_num", header: hdr.}
 ## *
 ##  @brief Configure ADC1 capture width, meanwhile enable output invert for ADC1.
@@ -128,7 +128,7 @@ proc adc1_pad_get_io_num*(channel: adc1_channel_t; gpio_num: ptr gpio_num_t): es
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc adc1_config_width*(width_bit: adc_bits_width_t): esp_err_t {.
+proc adc1_config_width*(width_bit: adc_bits_width_t): EspErrorCode {.
     importc: "adc1_config_width", header: hdr.}
 ## *
 ##  @brief Configure ADC capture width.
@@ -139,7 +139,7 @@ proc adc1_config_width*(width_bit: adc_bits_width_t): esp_err_t {.
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc adc_set_data_width*(adc_unit: adc_unit_t; width_bit: adc_bits_width_t): esp_err_t {.
+proc adc_set_data_width*(adc_unit: adc_unit_t; width_bit: adc_bits_width_t): EspErrorCode {.
     importc: "adc_set_data_width", header: hdr.}
 ## *
 ##  @brief Set the attenuation of a particular channel on ADC1, and configure its
@@ -184,7 +184,7 @@ proc adc_set_data_width*(adc_unit: adc_unit_t; width_bit: adc_bits_width_t): esp
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc adc1_config_channel_atten*(channel: adc1_channel_t; atten: adc_atten_t): esp_err_t {.
+proc adc1_config_channel_atten*(channel: adc1_channel_t; atten: adc_atten_t): EspErrorCode {.
     importc: "adc1_config_channel_atten", header: hdr.}
 ## *
 ##  @brief Take an ADC1 reading from a single channel.
@@ -229,7 +229,7 @@ proc adc_power_off*() {.importc: "adc_power_off", header: hdr.}
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc adc_gpio_init*(adc_unit: adc_unit_t; channel: adc_channel_t): esp_err_t {.
+proc adc_gpio_init*(adc_unit: adc_unit_t; channel: adc_channel_t): EspErrorCode {.
     importc: "adc_gpio_init", header: hdr.}
 ## *
 ##  @brief Set ADC data invert
@@ -240,7 +240,7 @@ proc adc_gpio_init*(adc_unit: adc_unit_t; channel: adc_channel_t): esp_err_t {.
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc adc_set_data_inv*(adc_unit: adc_unit_t; inv_en: bool): esp_err_t {.
+proc adc_set_data_inv*(adc_unit: adc_unit_t; inv_en: bool): EspErrorCode {.
     importc: "adc_set_data_inv", header: hdr.}
 ## *
 ##  @brief Set ADC source clock
@@ -249,7 +249,7 @@ proc adc_set_data_inv*(adc_unit: adc_unit_t; inv_en: bool): esp_err_t {.
 ##      - ESP_OK success
 ##
 
-proc adc_set_clk_div*(clk_div: uint8): esp_err_t {.importc: "adc_set_clk_div",
+proc adc_set_clk_div*(clk_div: uint8): EspErrorCode {.importc: "adc_set_clk_div",
     header: hdr.}
 ## *
 ##  @brief Set I2S data source
@@ -258,7 +258,7 @@ proc adc_set_clk_div*(clk_div: uint8): esp_err_t {.importc: "adc_set_clk_div",
 ##      - ESP_OK success
 ##
 
-proc adc_set_i2s_data_source*(src: adc_i2s_source_t): esp_err_t {.
+proc adc_set_i2s_data_source*(src: adc_i2s_source_t): EspErrorCode {.
     importc: "adc_set_i2s_data_source", header: hdr.}
 ## *
 ##  @brief Initialize I2S ADC mode
@@ -269,7 +269,7 @@ proc adc_set_i2s_data_source*(src: adc_i2s_source_t): esp_err_t {.
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc adc_i2s_mode_init*(adc_unit: adc_unit_t; channel: adc_channel_t): esp_err_t {.
+proc adc_i2s_mode_init*(adc_unit: adc_unit_t; channel: adc_channel_t): EspErrorCode {.
     importc: "adc_i2s_mode_init", header: hdr.}
 ## *
 ##  @brief Configure ADC1 to be usable by the ULP
@@ -315,7 +315,7 @@ proc hall_sensor_read*(): cint {.importc: "hall_sensor_read", header: hdr.}
 ##    - ESP_ERR_INVALID_ARG if channal not valid
 ##
 
-proc adc2_pad_get_io_num*(channel: adc2_channel_t; gpio_num: ptr gpio_num_t): esp_err_t {.
+proc adc2_pad_get_io_num*(channel: adc2_channel_t; gpio_num: ptr gpio_num_t): EspErrorCode {.
     importc: "adc2_pad_get_io_num", header: hdr.}
 ## *
 ##  @brief Configure the ADC2 channel, including setting attenuation.
@@ -348,7 +348,7 @@ proc adc2_pad_get_io_num*(channel: adc2_channel_t; gpio_num: ptr gpio_num_t): es
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc adc2_config_channel_atten*(channel: adc2_channel_t; atten: adc_atten_t): esp_err_t {.
+proc adc2_config_channel_atten*(channel: adc2_channel_t; atten: adc_atten_t): EspErrorCode {.
     importc: "adc2_config_channel_atten", header: hdr.}
 ## *
 ##  @brief Take an ADC2 reading on a single channel
@@ -374,7 +374,7 @@ proc adc2_config_channel_atten*(channel: adc2_channel_t; atten: adc_atten_t): es
 ##
 
 proc adc2_get_raw*(channel: adc2_channel_t; width_bit: adc_bits_width_t;
-                  raw_out: ptr cint): esp_err_t {.importc: "adc2_get_raw",
+                  raw_out: ptr cint): EspErrorCode {.importc: "adc2_get_raw",
     header: hdr.}
 ## *
 ##   @brief Output ADC2 reference voltage to gpio 25 or 26 or 27
@@ -391,5 +391,5 @@ proc adc2_get_raw*(channel: adc2_channel_t; width_bit: adc_bits_width_t;
 ##                   - ESP_ERR_INVALID_ARG: Unsupported gpio
 ##
 
-proc adc2_vref_to_gpio*(gpio: gpio_num_t): esp_err_t {.importc: "adc2_vref_to_gpio",
+proc adc2_vref_to_gpio*(gpio: gpio_num_t): EspErrorCode {.importc: "adc2_vref_to_gpio",
     header: hdr.}

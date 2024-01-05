@@ -124,7 +124,7 @@ type
 ##      - ESP_OK if success
 ##
 
-proc sdio_slave_initialize*(config: ptr sdio_slave_config_t): esp_err_t {.
+proc sdio_slave_initialize*(config: ptr sdio_slave_config_t): EspErrorCode {.
     importc: "sdio_slave_initialize", header: "sdio_slave.h".}
 ## * De-initialize the sdio slave driver to release the resources.
 ##
@@ -140,7 +140,7 @@ proc sdio_slave_deinit*() {.importc: "sdio_slave_deinit", header: "sdio_slave.h"
 ##   - ESP_OK otherwise.
 ##
 
-proc sdio_slave_start*(): esp_err_t {.importc: "sdio_slave_start",
+proc sdio_slave_start*(): EspErrorCode {.importc: "sdio_slave_start",
                                    header: "sdio_slave.h".}
 ## * Stop hardware from sending and receiving, also set IOREADY1 to 0.
 ##
@@ -153,7 +153,7 @@ proc sdio_slave_stop*() {.importc: "sdio_slave_stop", header: "sdio_slave.h".}
 ##  @return always return ESP_OK.
 ##
 
-proc sdio_slave_reset*(): esp_err_t {.importc: "sdio_slave_reset",
+proc sdio_slave_reset*(): EspErrorCode {.importc: "sdio_slave_reset",
                                    header: "sdio_slave.h".}
 ## ---------------------------------------------------------------------------
 ##                   Receive
@@ -177,7 +177,7 @@ proc sdio_slave_recv_register_buf*(start: ptr uint8): sdio_slave_buf_handle_t {.
 ##  @return ESP_OK if success, ESP_ERR_INVALID_ARG if the handle is NULL or the buffer is being used.
 ##
 
-proc sdio_slave_recv_unregister_buf*(handle: sdio_slave_buf_handle_t): esp_err_t {.
+proc sdio_slave_recv_unregister_buf*(handle: sdio_slave_buf_handle_t): EspErrorCode {.
     importc: "sdio_slave_recv_unregister_buf", header: "sdio_slave.h".}
 ## * Load buffer to the queue waiting to receive data. The driver takes ownership of the buffer until the buffer is returned by
 ##   ``sdio_slave_send_get_finished`` after the transaction is finished.
@@ -190,7 +190,7 @@ proc sdio_slave_recv_unregister_buf*(handle: sdio_slave_buf_handle_t): esp_err_t
 ##      - ESP_OK if success
 ##
 
-proc sdio_slave_recv_load_buf*(handle: sdio_slave_buf_handle_t): esp_err_t {.
+proc sdio_slave_recv_load_buf*(handle: sdio_slave_buf_handle_t): EspErrorCode {.
     importc: "sdio_slave_recv_load_buf", header: "sdio_slave.h".}
 ## * Get received data if exist. The driver returns the ownership of the buffer to the app.
 ##
@@ -209,7 +209,7 @@ proc sdio_slave_recv_load_buf*(handle: sdio_slave_buf_handle_t): esp_err_t {.
 ##
 
 proc sdio_slave_recv*(handle_ret: ptr sdio_slave_buf_handle_t;
-                     out_addr: ptr ptr uint8; out_len: ptr csize_t; wait: TickType_t): esp_err_t {.
+                     out_addr: ptr ptr uint8; out_len: ptr csize_t; wait: TickType_t): EspErrorCode {.
     importc: "sdio_slave_recv", header: "sdio_slave.h".}
 ## * Retrieve the buffer corresponding to a handle.
 ##
@@ -240,7 +240,7 @@ proc sdio_slave_recv_get_buf*(handle: sdio_slave_buf_handle_t; len_o: ptr csize_
 ##
 
 proc sdio_slave_send_queue*(`addr`: ptr uint8; len: csize_t; arg: pointer;
-                           wait: TickType_t): esp_err_t {.
+                           wait: TickType_t): EspErrorCode {.
     importc: "sdio_slave_send_queue", header: "sdio_slave.h".}
 ## * Return the ownership of a finished transaction.
 ##  @param out_arg Argument of the finished transaction. Set to NULL if unused.
@@ -249,7 +249,7 @@ proc sdio_slave_send_queue*(`addr`: ptr uint8; len: csize_t; arg: pointer;
 ##  @return ESP_ERR_TIMEOUT if no transaction finished, or ESP_OK if succeed.
 ##
 
-proc sdio_slave_send_get_finished*(out_arg: ptr pointer; wait: TickType_t): esp_err_t {.
+proc sdio_slave_send_get_finished*(out_arg: ptr pointer; wait: TickType_t): EspErrorCode {.
     importc: "sdio_slave_send_get_finished", header: "sdio_slave.h".}
 ## * Start a new sending transfer, and wait for it (blocked) to be finished.
 ##
@@ -262,7 +262,7 @@ proc sdio_slave_send_get_finished*(out_arg: ptr pointer; wait: TickType_t): esp_
 ##      - ESP_OK if success.
 ##
 
-proc sdio_slave_transmit*(`addr`: ptr uint8; len: csize_t): esp_err_t {.
+proc sdio_slave_transmit*(`addr`: ptr uint8; len: csize_t): EspErrorCode {.
     importc: "sdio_slave_transmit", header: "sdio_slave.h".}
 ## ---------------------------------------------------------------------------
 ##                   Host
@@ -288,7 +288,7 @@ proc sdio_slave_read_reg*(pos: cint): uint8 {.importc: "sdio_slave_read_reg",
 ##  @return ESP_ERR_INVALID_ARG if address wrong, otherwise ESP_OK.
 ##
 
-proc sdio_slave_write_reg*(pos: cint; reg: uint8): esp_err_t {.
+proc sdio_slave_write_reg*(pos: cint; reg: uint8): EspErrorCode {.
     importc: "sdio_slave_write_reg", header: "sdio_slave.h".}
 ## * Get the interrupt enable for host.
 ##
@@ -313,7 +313,7 @@ proc sdio_slave_set_host_intena*(ena: sdio_slave_hostint_t) {.
 ##      - ESP_OK otherwise
 ##
 
-proc sdio_slave_send_host_int*(pos: uint8): esp_err_t {.
+proc sdio_slave_send_host_int*(pos: uint8): EspErrorCode {.
     importc: "sdio_slave_send_host_int", header: "sdio_slave.h".}
 ## * Clear general purpose interrupt to host.
 ##
@@ -333,5 +333,5 @@ proc sdio_slave_clear_host_int*(mask: uint8) {.
 ##  @return ESP_OK if success, ESP_ERR_TIMEOUT if timeout.
 ##
 
-proc sdio_slave_wait_int*(pos: cint; wait: TickType_t): esp_err_t {.
+proc sdio_slave_wait_int*(pos: cint; wait: TickType_t): EspErrorCode {.
     importc: "sdio_slave_wait_int", header: "sdio_slave.h".}

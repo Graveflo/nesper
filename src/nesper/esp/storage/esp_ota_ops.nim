@@ -109,7 +109,7 @@ proc esp_ota_get_app_elf_sha256*(dst: cstring; size: csize_t): cint {.
 ##
 
 proc esp_ota_begin*(partition: ptr esp_partition_t; image_size: csize_t;
-                   out_handle: ptr esp_ota_handle_t): esp_err_t {.
+                   out_handle: ptr esp_ota_handle_t): EspErrorCode {.
     importc: "esp_ota_begin", header: "esp_ota_ops.h".}
 
 
@@ -132,7 +132,7 @@ proc esp_ota_begin*(partition: ptr esp_partition_t; image_size: csize_t;
 ##     - ESP_ERR_OTA_SELECT_INFO_INVALID: OTA data partition has invalid contents
 ##
 
-proc esp_ota_write*(handle: esp_ota_handle_t; data: pointer; size: csize_t): esp_err_t {.
+proc esp_ota_write*(handle: esp_ota_handle_t; data: pointer; size: csize_t): EspErrorCode {.
     importc: "esp_ota_write", header: "esp_ota_ops.h".}
 
 
@@ -151,7 +151,7 @@ proc esp_ota_write*(handle: esp_ota_handle_t; data: pointer; size: csize_t): esp
 ##     - ESP_ERR_INVALID_STATE: If flash encryption is enabled, this result indicates an internal error writing the final encrypted bytes to flash.
 ##
 
-proc esp_ota_end*(handle: esp_ota_handle_t): esp_err_t {.importc: "esp_ota_end",
+proc esp_ota_end*(handle: esp_ota_handle_t): EspErrorCode {.importc: "esp_ota_end",
     header: "esp_ota_ops.h".}
 
 
@@ -170,7 +170,7 @@ proc esp_ota_end*(handle: esp_ota_handle_t): esp_err_t {.importc: "esp_ota_end",
 ##     - ESP_ERR_FLASH_OP_TIMEOUT or ESP_ERR_FLASH_OP_FAIL: Flash erase or write failed.
 ##
 
-proc esp_ota_set_boot_partition*(partition: ptr esp_partition_t): esp_err_t {.
+proc esp_ota_set_boot_partition*(partition: ptr esp_partition_t): EspErrorCode {.
     importc: "esp_ota_set_boot_partition", header: "esp_ota_ops.h".}
 
 
@@ -247,7 +247,7 @@ proc esp_ota_get_next_update_partition*(start_from: ptr esp_partition_t): ptr es
 ##
 
 proc esp_ota_get_partition_description*(partition: ptr esp_partition_t;
-                                       app_desc: ptr esp_app_desc_t): esp_err_t {.
+                                       app_desc: ptr esp_app_desc_t): EspErrorCode {.
     importc: "esp_ota_get_partition_description", header: "esp_ota_ops.h".}
 
 
@@ -258,7 +258,7 @@ proc esp_ota_get_partition_description*(partition: ptr esp_partition_t;
 ##   - ESP_OK: if successful.
 ##
 
-proc esp_ota_mark_app_valid_cancel_rollback*(): esp_err_t {.
+proc esp_ota_mark_app_valid_cancel_rollback*(): EspErrorCode {.
     importc: "esp_ota_mark_app_valid_cancel_rollback", header: "esp_ota_ops.h".}
 
 
@@ -273,7 +273,7 @@ proc esp_ota_mark_app_valid_cancel_rollback*(): esp_err_t {.
 ##   - ESP_ERR_OTA_ROLLBACK_FAILED: The rollback is not possible due to flash does not have any apps.
 ##
 
-proc esp_ota_mark_app_invalid_rollback_and_reboot*(): esp_err_t {.
+proc esp_ota_mark_app_invalid_rollback_and_reboot*(): EspErrorCode {.
     importc: "esp_ota_mark_app_invalid_rollback_and_reboot",
     header: "esp_ota_ops.h".}
 
@@ -301,7 +301,7 @@ proc esp_ota_get_last_invalid_partition*(): ptr esp_partition_t {.
 ##
 
 proc esp_ota_get_state_partition*(partition: ptr esp_partition_t;
-                                 ota_state: ptr esp_ota_img_states_t): esp_err_t {.
+                                 ota_state: ptr esp_ota_img_states_t): EspErrorCode {.
     importc: "esp_ota_get_state_partition", header: "esp_ota_ops.h".}
 
 
@@ -313,7 +313,7 @@ proc esp_ota_get_state_partition*(partition: ptr esp_partition_t;
 ##         - ESP_OK:   Successful, otherwise ESP_ERR.
 ##
 
-proc esp_ota_erase_last_boot_app_partition*(): esp_err_t {.
+proc esp_ota_erase_last_boot_app_partition*(): EspErrorCode {.
     importc: "esp_ota_erase_last_boot_app_partition", header: "esp_ota_ops.h".}
 
 

@@ -131,7 +131,7 @@ type
 ##
 
 proc timer_get_counter_value*(group_num: timer_group_t; timer_num: timer_idx_t;
-                             timer_val: ptr uint64): esp_err_t {.
+                             timer_val: ptr uint64): EspErrorCode {.
     importc: "timer_get_counter_value", header: "timer.h".}
 ## *
 ##  @brief Read the counter value of hardware timer, in unit of a given scale.
@@ -146,7 +146,7 @@ proc timer_get_counter_value*(group_num: timer_group_t; timer_num: timer_idx_t;
 ##
 
 proc timer_get_counter_time_sec*(group_num: timer_group_t; timer_num: timer_idx_t;
-                                time: ptr cdouble): esp_err_t {.
+                                time: ptr cdouble): EspErrorCode {.
     importc: "timer_get_counter_time_sec", header: "timer.h".}
 ## *
 ##  @brief Set counter value to hardware timer.
@@ -161,7 +161,7 @@ proc timer_get_counter_time_sec*(group_num: timer_group_t; timer_num: timer_idx_
 ##
 
 proc timer_set_counter_value*(group_num: timer_group_t; timer_num: timer_idx_t;
-                             load_val: uint64): esp_err_t {.
+                             load_val: uint64): EspErrorCode {.
     importc: "timer_set_counter_value", header: "timer.h".}
 ## *
 ##  @brief Start the counter of hardware timer.
@@ -174,7 +174,7 @@ proc timer_set_counter_value*(group_num: timer_group_t; timer_num: timer_idx_t;
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc timer_start*(group_num: timer_group_t; timer_num: timer_idx_t): esp_err_t {.
+proc timer_start*(group_num: timer_group_t; timer_num: timer_idx_t): EspErrorCode {.
     importc: "timer_start", header: "timer.h".}
 ## *
 ##  @brief Pause the counter of hardware timer.
@@ -187,7 +187,7 @@ proc timer_start*(group_num: timer_group_t; timer_num: timer_idx_t): esp_err_t {
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc timer_pause*(group_num: timer_group_t; timer_num: timer_idx_t): esp_err_t {.
+proc timer_pause*(group_num: timer_group_t; timer_num: timer_idx_t): EspErrorCode {.
     importc: "timer_pause", header: "timer.h".}
 ## *
 ##  @brief Set counting mode for hardware timer.
@@ -202,7 +202,7 @@ proc timer_pause*(group_num: timer_group_t; timer_num: timer_idx_t): esp_err_t {
 ##
 
 proc timer_set_counter_mode*(group_num: timer_group_t; timer_num: timer_idx_t;
-                            counter_dir: timer_count_dir_t): esp_err_t {.
+                            counter_dir: timer_count_dir_t): EspErrorCode {.
     importc: "timer_set_counter_mode", header: "timer.h".}
 ## *
 ##  @brief Enable or disable counter reload function when alarm event occurs.
@@ -217,7 +217,7 @@ proc timer_set_counter_mode*(group_num: timer_group_t; timer_num: timer_idx_t;
 ##
 
 proc timer_set_auto_reload*(group_num: timer_group_t; timer_num: timer_idx_t;
-                           reload: timer_autoreload_t): esp_err_t {.
+                           reload: timer_autoreload_t): EspErrorCode {.
     importc: "timer_set_auto_reload", header: "timer.h".}
 ## *
 ##  @brief Set hardware timer source clock divider. Timer groups clock are divider from APB clock.
@@ -232,7 +232,7 @@ proc timer_set_auto_reload*(group_num: timer_group_t; timer_num: timer_idx_t;
 ##
 
 proc timer_set_divider*(group_num: timer_group_t; timer_num: timer_idx_t;
-                       divider: uint32): esp_err_t {.
+                       divider: uint32): EspErrorCode {.
     importc: "timer_set_divider", header: "timer.h".}
 ## *
 ##  @brief Set timer alarm value.
@@ -247,7 +247,7 @@ proc timer_set_divider*(group_num: timer_group_t; timer_num: timer_idx_t;
 ##
 
 proc timer_set_alarm_value*(group_num: timer_group_t; timer_num: timer_idx_t;
-                           alarm_value: uint64): esp_err_t {.
+                           alarm_value: uint64): EspErrorCode {.
     importc: "timer_set_alarm_value", header: "timer.h".}
 ## *
 ##  @brief Get timer alarm value.
@@ -262,7 +262,7 @@ proc timer_set_alarm_value*(group_num: timer_group_t; timer_num: timer_idx_t;
 ##
 
 proc timer_get_alarm_value*(group_num: timer_group_t; timer_num: timer_idx_t;
-                           alarm_value: ptr uint64): esp_err_t {.
+                           alarm_value: ptr uint64): EspErrorCode {.
     importc: "timer_get_alarm_value", header: "timer.h".}
 ## *
 ##  @brief Enable or disable generation of timer alarm events.
@@ -277,7 +277,7 @@ proc timer_get_alarm_value*(group_num: timer_group_t; timer_num: timer_idx_t;
 ##
 
 proc timer_set_alarm*(group_num: timer_group_t; timer_num: timer_idx_t;
-                     alarm_en: timer_alarm_t): esp_err_t {.
+                     alarm_en: timer_alarm_t): EspErrorCode {.
     importc: "timer_set_alarm", header: "timer.h".}
 ## *
 ##  @brief Register Timer interrupt handler, the handler is an ISR.
@@ -304,7 +304,7 @@ proc timer_set_alarm*(group_num: timer_group_t; timer_num: timer_idx_t;
 
 proc timer_isr_register*(group_num: timer_group_t; timer_num: timer_idx_t;
                         fn: proc (a1: pointer) {.cdecl.}; arg: pointer; intr_alloc_flags: esp_intr_flags;
-                        handle: ptr timer_isr_handle_t): esp_err_t {.
+                        handle: ptr timer_isr_handle_t): EspErrorCode {.
     importc: "timer_isr_register", header: "timer.h".}
 ## * @brief Initializes and configure the timer.
 ##
@@ -318,7 +318,7 @@ proc timer_isr_register*(group_num: timer_group_t; timer_num: timer_idx_t;
 ##
 
 proc timer_init*(group_num: timer_group_t; timer_num: timer_idx_t;
-                config: ptr timer_config_t): esp_err_t {.importc: "timer_init",
+                config: ptr timer_config_t): EspErrorCode {.importc: "timer_init",
     header: "timer.h".}
 ## * @brief Get timer configure value.
 ##
@@ -332,7 +332,7 @@ proc timer_init*(group_num: timer_group_t; timer_num: timer_idx_t;
 ##
 
 proc timer_get_config*(group_num: timer_group_t; timer_num: timer_idx_t;
-                      config: ptr timer_config_t): esp_err_t {.
+                      config: ptr timer_config_t): EspErrorCode {.
     importc: "timer_get_config", header: "timer.h".}
 ## * @brief Enable timer group interrupt, by enable mask
 ##
@@ -346,7 +346,7 @@ proc timer_get_config*(group_num: timer_group_t; timer_num: timer_idx_t;
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc timer_group_intr_enable*(group_num: timer_group_t; en_mask: uint32): esp_err_t {.
+proc timer_group_intr_enable*(group_num: timer_group_t; en_mask: uint32): EspErrorCode {.
     importc: "timer_group_intr_enable", header: "timer.h".}
 ## * @brief Disable timer group interrupt, by disable mask
 ##
@@ -360,7 +360,7 @@ proc timer_group_intr_enable*(group_num: timer_group_t; en_mask: uint32): esp_er
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc timer_group_intr_disable*(group_num: timer_group_t; disable_mask: uint32): esp_err_t {.
+proc timer_group_intr_disable*(group_num: timer_group_t; disable_mask: uint32): EspErrorCode {.
     importc: "timer_group_intr_disable", header: "timer.h".}
 ## * @brief Enable timer interrupt
 ##
@@ -372,7 +372,7 @@ proc timer_group_intr_disable*(group_num: timer_group_t; disable_mask: uint32): 
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc timer_enable_intr*(group_num: timer_group_t; timer_num: timer_idx_t): esp_err_t {.
+proc timer_enable_intr*(group_num: timer_group_t; timer_num: timer_idx_t): EspErrorCode {.
     importc: "timer_enable_intr", header: "timer.h".}
 ## * @brief Disable timer interrupt
 ##
@@ -384,5 +384,5 @@ proc timer_enable_intr*(group_num: timer_group_t; timer_num: timer_idx_t): esp_e
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc timer_disable_intr*(group_num: timer_group_t; timer_num: timer_idx_t): esp_err_t {.
+proc timer_disable_intr*(group_num: timer_group_t; timer_num: timer_idx_t): EspErrorCode {.
     importc: "timer_disable_intr", header: "timer.h".}

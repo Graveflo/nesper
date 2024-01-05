@@ -65,7 +65,7 @@ type
 ##    - ESP_ERR_NO_MEM if no more shutdown handler slots are available
 ##
 
-proc esp_register_shutdown_handler*(handle: shutdown_handler_t): esp_err_t {.
+proc esp_register_shutdown_handler*(handle: shutdown_handler_t): EspErrorCode {.
     importc: "esp_register_shutdown_handler", header: "esp_system.h".}
 
 
@@ -78,7 +78,7 @@ proc esp_register_shutdown_handler*(handle: shutdown_handler_t): esp_err_t {.
 ##    - ESP_ERR_INVALID_STATE if the given handler hasn't been registered before
 ##
 
-proc esp_unregister_shutdown_handler*(handle: shutdown_handler_t): esp_err_t {.
+proc esp_unregister_shutdown_handler*(handle: shutdown_handler_t): EspErrorCode {.
     importc: "esp_unregister_shutdown_handler", header: "esp_system.h".}
 
 
@@ -172,7 +172,7 @@ proc esp_fill_random*(buf: pointer; len: csize_t) {.importc: "esp_fill_random",
 ##
 ##  @return ESP_OK on success
 ##
-proc esp_base_mac_addr_set*(mac: ptr uint8): esp_err_t {.
+proc esp_base_mac_addr_set*(mac: ptr uint8): EspErrorCode {.
     importc: "esp_base_mac_addr_set", header: "esp_system.h".}
 
 
@@ -184,7 +184,7 @@ proc esp_base_mac_addr_set*(mac: ptr uint8): esp_err_t {.
 ##  @return ESP_OK on success
 ##          ESP_ERR_INVALID_MAC base MAC address has not been set
 ##
-proc esp_base_mac_addr_get*(mac: ptr uint8): esp_err_t {.
+proc esp_base_mac_addr_get*(mac: ptr uint8): EspErrorCode {.
     importc: "esp_base_mac_addr_get", header: "esp_system.h".}
 
 
@@ -202,7 +202,7 @@ proc esp_base_mac_addr_get*(mac: ptr uint8): esp_err_t {.
 ##          ESP_ERR_INVALID_VERSION An invalid MAC version field was read from BLK3 of EFUSE
 ##          ESP_ERR_INVALID_CRC An invalid MAC CRC was read from BLK3 of EFUSE
 ##
-proc esp_efuse_mac_get_custom*(mac: ptr uint8): esp_err_t {.
+proc esp_efuse_mac_get_custom*(mac: ptr uint8): EspErrorCode {.
     importc: "esp_efuse_mac_get_custom", header: "esp_system.h".}
 
 
@@ -213,7 +213,7 @@ proc esp_efuse_mac_get_custom*(mac: ptr uint8): esp_err_t {.
 ##
 ##  @return ESP_OK on success
 ##
-proc esp_efuse_mac_get_default*(mac: ptr uint8): esp_err_t {.
+proc esp_efuse_mac_get_default*(mac: ptr uint8): EspErrorCode {.
     importc: "esp_efuse_mac_get_default", header: "esp_system.h".}
 
 
@@ -229,7 +229,7 @@ proc esp_efuse_mac_get_default*(mac: ptr uint8): esp_err_t {.
 ##
 ##  @return ESP_OK on success
 ##
-proc esp_read_mac*(mac: ptr uint8; `type`: esp_mac_type_t): esp_err_t {.
+proc esp_read_mac*(mac: ptr uint8; `type`: esp_mac_type_t): EspErrorCode {.
     importc: "esp_read_mac", header: "esp_system.h".}
 
 
@@ -247,7 +247,7 @@ proc esp_read_mac*(mac: ptr uint8; `type`: esp_mac_type_t): esp_err_t {.
 ##
 ##  @return ESP_OK on success
 ##
-proc esp_derive_local_mac*(local_mac: ptr uint8; universal_mac: ptr uint8): esp_err_t {.
+proc esp_derive_local_mac*(local_mac: ptr uint8; universal_mac: ptr uint8): EspErrorCode {.
     importc: "esp_derive_local_mac", header: "esp_system.h".}
 
 

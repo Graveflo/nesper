@@ -180,7 +180,7 @@ proc uart_is_driver_installed*(uart_num: uart_port_t): bool {.cdecl,
 ##      - ESP_FAIL Parameter error
 ##
 
-proc uart_set_word_length*(uart_num: uart_port_t; data_bit: uart_word_length_t): esp_err_t {.
+proc uart_set_word_length*(uart_num: uart_port_t; data_bit: uart_word_length_t): EspErrorCode {.
     cdecl, importc: "uart_set_word_length", header: "<driver/uart.h>".}
 ## *
 ##  @brief Get UART data bits.
@@ -193,7 +193,7 @@ proc uart_set_word_length*(uart_num: uart_port_t; data_bit: uart_word_length_t):
 ##      - ESP_OK    Success, result will be put in (*data_bit)
 ##
 
-proc uart_get_word_length*(uart_num: uart_port_t; data_bit: ptr uart_word_length_t): esp_err_t {.
+proc uart_get_word_length*(uart_num: uart_port_t; data_bit: ptr uart_word_length_t): EspErrorCode {.
     cdecl, importc: "uart_get_word_length", header: "<driver/uart.h>".}
 ## *
 ##  @brief Set UART stop bits.
@@ -206,7 +206,7 @@ proc uart_get_word_length*(uart_num: uart_port_t; data_bit: ptr uart_word_length
 ##      - ESP_FAIL Fail
 ##
 
-proc uart_set_stop_bits*(uart_num: uart_port_t; stop_bits: uart_stop_bits_t): esp_err_t {.
+proc uart_set_stop_bits*(uart_num: uart_port_t; stop_bits: uart_stop_bits_t): EspErrorCode {.
     cdecl, importc: "uart_set_stop_bits", header: "<driver/uart.h>".}
 ## *
 ##  @brief Get UART stop bits.
@@ -219,7 +219,7 @@ proc uart_set_stop_bits*(uart_num: uart_port_t; stop_bits: uart_stop_bits_t): es
 ##      - ESP_OK   Success, result will be put in (*stop_bit)
 ##
 
-proc uart_get_stop_bits*(uart_num: uart_port_t; stop_bits: ptr uart_stop_bits_t): esp_err_t {.
+proc uart_get_stop_bits*(uart_num: uart_port_t; stop_bits: ptr uart_stop_bits_t): EspErrorCode {.
     cdecl, importc: "uart_get_stop_bits", header: "<driver/uart.h>".}
 ## *
 ##  @brief Set UART parity mode.
@@ -232,7 +232,7 @@ proc uart_get_stop_bits*(uart_num: uart_port_t; stop_bits: ptr uart_stop_bits_t)
 ##      - ESP_OK    Success
 ##
 
-proc uart_set_parity*(uart_num: uart_port_t; parity_mode: uart_parity_t): esp_err_t {.
+proc uart_set_parity*(uart_num: uart_port_t; parity_mode: uart_parity_t): EspErrorCode {.
     cdecl, importc: "uart_set_parity", header: "<driver/uart.h>".}
 ## *
 ##  @brief Get UART parity mode.
@@ -246,7 +246,7 @@ proc uart_set_parity*(uart_num: uart_port_t; parity_mode: uart_parity_t): esp_er
 ##
 ##
 
-proc uart_get_parity*(uart_num: uart_port_t; parity_mode: ptr uart_parity_t): esp_err_t {.
+proc uart_get_parity*(uart_num: uart_port_t; parity_mode: ptr uart_parity_t): EspErrorCode {.
     cdecl, importc: "uart_get_parity", header: "<driver/uart.h>".}
 ## *
 ##  @brief Set UART baud rate.
@@ -259,7 +259,7 @@ proc uart_get_parity*(uart_num: uart_port_t; parity_mode: ptr uart_parity_t): es
 ##      - ESP_OK   Success
 ##
 
-proc uart_set_baudrate*(uart_num: uart_port_t; baudrate: uint32): esp_err_t {.cdecl,
+proc uart_set_baudrate*(uart_num: uart_port_t; baudrate: uint32): EspErrorCode {.cdecl,
     importc: "uart_set_baudrate", header: "<driver/uart.h>".}
 ## *
 ##  @brief Get UART baud rate.
@@ -273,7 +273,7 @@ proc uart_set_baudrate*(uart_num: uart_port_t; baudrate: uint32): esp_err_t {.cd
 ##
 ##
 
-proc uart_get_baudrate*(uart_num: uart_port_t; baudrate: ptr uint32): esp_err_t {.
+proc uart_get_baudrate*(uart_num: uart_port_t; baudrate: ptr uint32): EspErrorCode {.
     cdecl, importc: "uart_get_baudrate", header: "<driver/uart.h>".}
 ## *
 ##  @brief Set UART line inverse mode
@@ -289,7 +289,7 @@ proc uart_get_baudrate*(uart_num: uart_port_t; baudrate: ptr uint32): esp_err_t 
 ##      - ESP_FAIL Parameter error
 ##
 
-proc uart_set_line_inverse*(uart_num: uart_port_t; inverse_mask: uint32): esp_err_t {.
+proc uart_set_line_inverse*(uart_num: uart_port_t; inverse_mask: uint32): EspErrorCode {.
     cdecl, importc: "uart_set_line_inverse", header: "<driver/uart.h>".}
 ## *
 ##  @brief Set hardware flow control.
@@ -305,7 +305,7 @@ proc uart_set_line_inverse*(uart_num: uart_port_t; inverse_mask: uint32): esp_er
 ##
 
 proc uart_set_hw_flow_ctrl*(uart_num: uart_port_t;
-                           flow_ctrl: uart_hw_flowcontrol_t; rx_thresh: uint8): esp_err_t {.
+                           flow_ctrl: uart_hw_flowcontrol_t; rx_thresh: uint8): EspErrorCode {.
     cdecl, importc: "uart_set_hw_flow_ctrl", header: "<driver/uart.h>".}
 ## *
 ##  @brief Set software flow control.
@@ -321,7 +321,7 @@ proc uart_set_hw_flow_ctrl*(uart_num: uart_port_t;
 ##
 
 proc uart_set_sw_flow_ctrl*(uart_num: uart_port_t; enable: bool;
-                           rx_thresh_xon: uint8; rx_thresh_xoff: uint8): esp_err_t {.
+                           rx_thresh_xon: uint8; rx_thresh_xoff: uint8): EspErrorCode {.
     cdecl, importc: "uart_set_sw_flow_ctrl", header: "<driver/uart.h>".}
 ## *
 ##  @brief Get hardware flow control mode
@@ -335,7 +335,7 @@ proc uart_set_sw_flow_ctrl*(uart_num: uart_port_t; enable: bool;
 ##
 
 proc uart_get_hw_flow_ctrl*(uart_num: uart_port_t;
-                           flow_ctrl: ptr uart_hw_flowcontrol_t): esp_err_t {.cdecl,
+                           flow_ctrl: ptr uart_hw_flowcontrol_t): EspErrorCode {.cdecl,
     importc: "uart_get_hw_flow_ctrl", header: "<driver/uart.h>".}
 ## *
 ##  @brief Clear UART interrupt status
@@ -349,7 +349,7 @@ proc uart_get_hw_flow_ctrl*(uart_num: uart_port_t;
 ##      - ESP_FAIL Parameter error
 ##
 
-proc uart_clear_intr_status*(uart_num: uart_port_t; clr_mask: uint32): esp_err_t {.
+proc uart_clear_intr_status*(uart_num: uart_port_t; clr_mask: uint32): EspErrorCode {.
     cdecl, importc: "uart_clear_intr_status", header: "<driver/uart.h>".}
 ## *
 ##  @brief Set UART interrupt enable
@@ -363,7 +363,7 @@ proc uart_clear_intr_status*(uart_num: uart_port_t; clr_mask: uint32): esp_err_t
 ##      - ESP_FAIL Parameter error
 ##
 
-proc uart_enable_intr_mask*(uart_num: uart_port_t; enable_mask: uint32): esp_err_t {.
+proc uart_enable_intr_mask*(uart_num: uart_port_t; enable_mask: uint32): EspErrorCode {.
     cdecl, importc: "uart_enable_intr_mask", header: "<driver/uart.h>".}
 ## *
 ##  @brief Clear UART interrupt enable bits
@@ -377,7 +377,7 @@ proc uart_enable_intr_mask*(uart_num: uart_port_t; enable_mask: uint32): esp_err
 ##      - ESP_FAIL Parameter error
 ##
 
-proc uart_disable_intr_mask*(uart_num: uart_port_t; disable_mask: uint32): esp_err_t {.
+proc uart_disable_intr_mask*(uart_num: uart_port_t; disable_mask: uint32): EspErrorCode {.
     cdecl, importc: "uart_disable_intr_mask", header: "<driver/uart.h>".}
 ## *
 ##  @brief Enable UART RX interrupt (RX_FULL & RX_TIMEOUT INTERRUPT)
@@ -389,7 +389,7 @@ proc uart_disable_intr_mask*(uart_num: uart_port_t; disable_mask: uint32): esp_e
 ##      - ESP_FAIL Parameter error
 ##
 
-proc uart_enable_rx_intr*(uart_num: uart_port_t): esp_err_t {.cdecl,
+proc uart_enable_rx_intr*(uart_num: uart_port_t): EspErrorCode {.cdecl,
     importc: "uart_enable_rx_intr", header: "<driver/uart.h>".}
 ## *
 ##  @brief Disable UART RX interrupt (RX_FULL & RX_TIMEOUT INTERRUPT)
@@ -401,7 +401,7 @@ proc uart_enable_rx_intr*(uart_num: uart_port_t): esp_err_t {.cdecl,
 ##      - ESP_FAIL Parameter error
 ##
 
-proc uart_disable_rx_intr*(uart_num: uart_port_t): esp_err_t {.cdecl,
+proc uart_disable_rx_intr*(uart_num: uart_port_t): EspErrorCode {.cdecl,
     importc: "uart_disable_rx_intr", header: "<driver/uart.h>".}
 ## *
 ##  @brief Disable UART TX interrupt (TX_FULL & TX_TIMEOUT INTERRUPT)
@@ -413,7 +413,7 @@ proc uart_disable_rx_intr*(uart_num: uart_port_t): esp_err_t {.cdecl,
 ##      - ESP_FAIL Parameter error
 ##
 
-proc uart_disable_tx_intr*(uart_num: uart_port_t): esp_err_t {.cdecl,
+proc uart_disable_tx_intr*(uart_num: uart_port_t): EspErrorCode {.cdecl,
     importc: "uart_disable_tx_intr", header: "<driver/uart.h>".}
 ## *
 ##  @brief Enable UART TX interrupt (TX_FULL & TX_TIMEOUT INTERRUPT)
@@ -427,7 +427,7 @@ proc uart_disable_tx_intr*(uart_num: uart_port_t): esp_err_t {.cdecl,
 ##      - ESP_FAIL Parameter error
 ##
 
-proc uart_enable_tx_intr*(uart_num: uart_port_t; enable: cint; thresh: cint): esp_err_t {.
+proc uart_enable_tx_intr*(uart_num: uart_port_t; enable: cint; thresh: cint): EspErrorCode {.
     cdecl, importc: "uart_enable_tx_intr", header: "<driver/uart.h>".}
 ## *
 ##  @brief Register UART interrupt handler (ISR).
@@ -449,7 +449,7 @@ proc uart_enable_tx_intr*(uart_num: uart_port_t; enable: cint; thresh: cint): es
 
 proc uart_isr_register*(uart_num: uart_port_t; fn: proc (a1: pointer) {.cdecl.};
                        arg: pointer; intr_alloc_flags: esp_intr_flags;
-                       handle: ptr uart_isr_handle_t): esp_err_t {.cdecl,
+                       handle: ptr uart_isr_handle_t): EspErrorCode {.cdecl,
     importc: "uart_isr_register", header: "<driver/uart.h>".}
 ## *
 ##  @brief Free UART interrupt handler registered by uart_isr_register. Must be called on the same core as
@@ -462,7 +462,7 @@ proc uart_isr_register*(uart_num: uart_port_t; fn: proc (a1: pointer) {.cdecl.};
 ##      - ESP_FAIL Parameter error
 ##
 
-proc uart_isr_free*(uart_num: uart_port_t): esp_err_t {.cdecl,
+proc uart_isr_free*(uart_num: uart_port_t): EspErrorCode {.cdecl,
     importc: "uart_isr_free", header: "<driver/uart.h>".}
 ## *
 ##  @brief Set UART pin number
@@ -485,7 +485,7 @@ proc uart_isr_free*(uart_num: uart_port_t): esp_err_t {.cdecl,
 ##
 
 proc uart_set_pin*(uart_num: uart_port_t; tx_io_num: cint; rx_io_num: cint;
-                  rts_io_num: cint; cts_io_num: cint): esp_err_t {.cdecl,
+                  rts_io_num: cint; cts_io_num: cint): EspErrorCode {.cdecl,
     importc: "uart_set_pin", header: "<driver/uart.h>".}
 ## *
 ##  @brief Manually set the UART RTS pin level.
@@ -499,7 +499,7 @@ proc uart_set_pin*(uart_num: uart_port_t; tx_io_num: cint; rx_io_num: cint;
 ##      - ESP_FAIL Parameter error
 ##
 
-proc uart_set_rts*(uart_num: uart_port_t; level: cint): esp_err_t {.cdecl,
+proc uart_set_rts*(uart_num: uart_port_t; level: cint): EspErrorCode {.cdecl,
     importc: "uart_set_rts", header: "<driver/uart.h>".}
 ## *
 ##  @brief Manually set the UART DTR pin level.
@@ -512,7 +512,7 @@ proc uart_set_rts*(uart_num: uart_port_t; level: cint): esp_err_t {.cdecl,
 ##      - ESP_FAIL Parameter error
 ##
 
-proc uart_set_dtr*(uart_num: uart_port_t; level: cint): esp_err_t {.cdecl,
+proc uart_set_dtr*(uart_num: uart_port_t; level: cint): EspErrorCode {.cdecl,
     importc: "uart_set_dtr", header: "<driver/uart.h>".}
 ## *
 ##  @brief Set UART idle interval after tx FIFO is empty
@@ -526,7 +526,7 @@ proc uart_set_dtr*(uart_num: uart_port_t; level: cint): esp_err_t {.cdecl,
 ##      - ESP_FAIL Parameter error
 ##
 
-proc uart_set_tx_idle_num*(uart_num: uart_port_t; idle_num: uint16): esp_err_t {.
+proc uart_set_tx_idle_num*(uart_num: uart_port_t; idle_num: uint16): EspErrorCode {.
     cdecl, importc: "uart_set_tx_idle_num", header: "<driver/uart.h>".}
 ## *
 ##  @brief Set UART configuration parameters.
@@ -539,7 +539,7 @@ proc uart_set_tx_idle_num*(uart_num: uart_port_t; idle_num: uint16): esp_err_t {
 ##      - ESP_FAIL Parameter error
 ##
 
-proc uart_param_config*(uart_num: uart_port_t; uart_config: ptr uart_config_t): esp_err_t {.
+proc uart_param_config*(uart_num: uart_port_t; uart_config: ptr uart_config_t): EspErrorCode {.
     cdecl, importc: "uart_param_config", header: "<driver/uart.h>".}
 ## *
 ##  @brief Configure UART interrupts.
@@ -552,7 +552,7 @@ proc uart_param_config*(uart_num: uart_port_t; uart_config: ptr uart_config_t): 
 ##      - ESP_FAIL Parameter error
 ##
 
-proc uart_intr_config*(uart_num: uart_port_t; intr_conf: ptr uart_intr_config_t): esp_err_t {.
+proc uart_intr_config*(uart_num: uart_port_t; intr_conf: ptr uart_intr_config_t): EspErrorCode {.
     cdecl, importc: "uart_intr_config", header: "<driver/uart.h>".}
 ## *
 ##  @brief Install UART driver.
@@ -579,7 +579,7 @@ proc uart_intr_config*(uart_num: uart_port_t; intr_conf: ptr uart_intr_config_t)
 
 proc uart_driver_install*(uart_num: uart_port_t; rx_buffer_size: cint;
                          tx_buffer_size: cint; queue_size: cint;
-                         uart_queue: ptr QueueHandle_t; intr_alloc_flags: esp_intr_flags): esp_err_t {.
+                         uart_queue: ptr QueueHandle_t; intr_alloc_flags: esp_intr_flags): EspErrorCode {.
     cdecl, importc: "uart_driver_install", header: "<driver/uart.h>".}
 ## *
 ##  @brief Uninstall UART driver.
@@ -591,7 +591,7 @@ proc uart_driver_install*(uart_num: uart_port_t; rx_buffer_size: cint;
 ##      - ESP_FAIL Parameter error
 ##
 
-proc uart_driver_delete*(uart_num: uart_port_t): esp_err_t {.cdecl,
+proc uart_driver_delete*(uart_num: uart_port_t): EspErrorCode {.cdecl,
     importc: "uart_driver_delete", header: "<driver/uart.h>".}
 ## *
 ##  @brief Wait until UART TX FIFO is empty.
@@ -605,7 +605,7 @@ proc uart_driver_delete*(uart_num: uart_port_t): esp_err_t {.cdecl,
 ##      - ESP_ERR_TIMEOUT  Timeout
 ##
 
-proc uart_wait_tx_done*(uart_num: uart_port_t; ticks_to_wait: TickType_t): esp_err_t {.
+proc uart_wait_tx_done*(uart_num: uart_port_t; ticks_to_wait: TickType_t): EspErrorCode {.
     cdecl, importc: "uart_wait_tx_done", header: "<driver/uart.h>".}
 ## *
 ##  @brief Send data to the UART port from a given buffer and length.
@@ -696,7 +696,7 @@ proc uart_read_bytes*(uart_num: uart_port_t; buf: ptr uint8; length: uint32;
 ##      - ESP_FAIL Parameter error
 ##
 
-proc uart_flush*(uart_num: uart_port_t): esp_err_t {.cdecl, importc: "uart_flush",
+proc uart_flush*(uart_num: uart_port_t): EspErrorCode {.cdecl, importc: "uart_flush",
     header: "<driver/uart.h>".}
 ## *
 ##  @brief Clear input buffer, discard all the data is in the ring-buffer.
@@ -708,7 +708,7 @@ proc uart_flush*(uart_num: uart_port_t): esp_err_t {.cdecl, importc: "uart_flush
 ##      - ESP_FAIL Parameter error
 ##
 
-proc uart_flush_input*(uart_num: uart_port_t): esp_err_t {.cdecl,
+proc uart_flush_input*(uart_num: uart_port_t): EspErrorCode {.cdecl,
     importc: "uart_flush_input", header: "<driver/uart.h>".}
 ## *
 ##  @brief   UART get RX ring buffer cached data length
@@ -721,7 +721,7 @@ proc uart_flush_input*(uart_num: uart_port_t): esp_err_t {.cdecl,
 ##      - ESP_FAIL Parameter error
 ##
 
-proc uart_get_buffered_data_len*(uart_num: uart_port_t; size: ptr csize_t): esp_err_t {.
+proc uart_get_buffered_data_len*(uart_num: uart_port_t; size: ptr csize_t): EspErrorCode {.
     cdecl, importc: "uart_get_buffered_data_len", header: "<driver/uart.h>".}
 ## *
 ##  @brief   UART disable pattern detect function.
@@ -735,7 +735,7 @@ proc uart_get_buffered_data_len*(uart_num: uart_port_t; size: ptr csize_t): esp_
 ##      - ESP_FAIL Parameter error
 ##
 
-proc uart_disable_pattern_det_intr*(uart_num: uart_port_t): esp_err_t {.cdecl,
+proc uart_disable_pattern_det_intr*(uart_num: uart_port_t): EspErrorCode {.cdecl,
     importc: "uart_disable_pattern_det_intr", header: "<driver/uart.h>".}
 ## *
 ##  @brief UART enable pattern detect function.
@@ -759,7 +759,7 @@ proc uart_disable_pattern_det_intr*(uart_num: uart_port_t): esp_err_t {.cdecl,
 
 proc uart_enable_pattern_det_intr*(uart_num: uart_port_t; pattern_chr: char;
                                   chr_num: uint8; chr_tout: cint; post_idle: cint;
-                                  pre_idle: cint): esp_err_t {.cdecl,
+                                  pre_idle: cint): EspErrorCode {.cdecl,
     importc: "uart_enable_pattern_det_intr", header: "<driver/uart.h>".}
 ## *
 ##  @brief Return the nearest detected pattern position in buffer.
@@ -814,7 +814,7 @@ proc uart_pattern_get_pos*(uart_num: uart_port_t): cint {.cdecl,
 ##      - ESP_OK Success
 ##
 
-proc uart_pattern_queue_reset*(uart_num: uart_port_t; queue_length: cint): esp_err_t {.
+proc uart_pattern_queue_reset*(uart_num: uart_port_t; queue_length: cint): EspErrorCode {.
     cdecl, importc: "uart_pattern_queue_reset", header: "<driver/uart.h>".}
 ## *
 ##  @brief UART set communication mode
@@ -827,7 +827,7 @@ proc uart_pattern_queue_reset*(uart_num: uart_port_t; queue_length: cint): esp_e
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc uart_set_mode*(uart_num: uart_port_t; mode: uart_mode_t): esp_err_t {.cdecl,
+proc uart_set_mode*(uart_num: uart_port_t; mode: uart_mode_t): EspErrorCode {.cdecl,
     importc: "uart_set_mode", header: "<driver/uart.h>".}
 ## *
 ##  @brief UART set threshold timeout for TOUT feature
@@ -844,7 +844,7 @@ proc uart_set_mode*(uart_num: uart_port_t; mode: uart_mode_t): esp_err_t {.cdecl
 ##      - ESP_ERR_INVALID_STATE Driver is not installed
 ##
 
-proc uart_set_rx_timeout*(uart_num: uart_port_t; tout_thresh: uint8): esp_err_t {.
+proc uart_set_rx_timeout*(uart_num: uart_port_t; tout_thresh: uint8): EspErrorCode {.
     cdecl, importc: "uart_set_rx_timeout", header: "<driver/uart.h>".}
 ## *
 ##  @brief Returns collision detection flag for RS485 mode
@@ -860,7 +860,7 @@ proc uart_set_rx_timeout*(uart_num: uart_port_t; tout_thresh: uint8): esp_err_t 
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc uart_get_collision_flag*(uart_num: uart_port_t; collision_flag: ptr bool): esp_err_t {.
+proc uart_get_collision_flag*(uart_num: uart_port_t; collision_flag: ptr bool): EspErrorCode {.
     cdecl, importc: "uart_get_collision_flag", header: "<driver/uart.h>".}
 ## *
 ##  @brief Set the number of RX pin signal edges for light sleep wakeup
@@ -896,7 +896,7 @@ proc uart_get_collision_flag*(uart_num: uart_port_t; collision_flag: ptr bool): 
 ##         outside of [3, 0x3ff] range.
 ##
 
-proc uart_set_wakeup_threshold*(uart_num: uart_port_t; wakeup_threshold: cint): esp_err_t {.
+proc uart_set_wakeup_threshold*(uart_num: uart_port_t; wakeup_threshold: cint): EspErrorCode {.
     cdecl, importc: "uart_set_wakeup_threshold", header: "<driver/uart.h>".}
 ## *
 ##  @brief Get the number of RX pin signal edges for light sleep wakeup.
@@ -913,5 +913,5 @@ proc uart_set_wakeup_threshold*(uart_num: uart_port_t; wakeup_threshold: cint): 
 ##
 
 proc uart_get_wakeup_threshold*(uart_num: uart_port_t;
-                               out_wakeup_threshold: ptr cint): esp_err_t {.cdecl,
+                               out_wakeup_threshold: ptr cint): EspErrorCode {.cdecl,
     importc: "uart_get_wakeup_threshold", header: "<driver/uart.h>".}

@@ -83,7 +83,7 @@ proc esp_flash_encryption_enabled*(): bool {.
 ##  if a fatal error occured during encryption of all partitions.
 ##
 
-proc esp_flash_encrypt_check_and_update*(): esp_err_t {.
+proc esp_flash_encrypt_check_and_update*(): EspErrorCode {.
     importc: "esp_flash_encrypt_check_and_update", header: "esp_flash_encrypt.h".}
 
 
@@ -97,7 +97,7 @@ proc esp_flash_encrypt_check_and_update*(): esp_err_t {.
 ##  if SPI flash fails, ESP_ERR_FLASH_OP_TIMEOUT if flash times out.
 ##
 
-proc esp_flash_encrypt_region*(src_addr: uint32; data_length: csize_t): esp_err_t {.
+proc esp_flash_encrypt_region*(src_addr: uint32; data_length: csize_t): EspErrorCode {.
     importc: "esp_flash_encrypt_region", header: "esp_flash_encrypt.h".}
 
 

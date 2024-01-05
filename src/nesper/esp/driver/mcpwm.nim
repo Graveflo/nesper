@@ -279,7 +279,7 @@ type
 ##
 
 proc mcpwm_gpio_init*(mcpwm_num: mcpwm_unit_t; io_signal: mcpwm_io_signals_t;
-                     gpio_num: cint): esp_err_t {.importc: "mcpwm_gpio_init",
+                     gpio_num: cint): EspErrorCode {.importc: "mcpwm_gpio_init",
     header: "mcpwm.h".}
 ## *
 ##  @brief Initialize MCPWM gpio structure
@@ -294,7 +294,7 @@ proc mcpwm_gpio_init*(mcpwm_num: mcpwm_unit_t; io_signal: mcpwm_io_signals_t;
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc mcpwm_set_pin*(mcpwm_num: mcpwm_unit_t; mcpwm_pin: ptr mcpwm_pin_config_t): esp_err_t {.
+proc mcpwm_set_pin*(mcpwm_num: mcpwm_unit_t; mcpwm_pin: ptr mcpwm_pin_config_t): EspErrorCode {.
     importc: "mcpwm_set_pin", header: "mcpwm.h".}
 ## *
 ##  @brief Initialize MCPWM parameters
@@ -309,7 +309,7 @@ proc mcpwm_set_pin*(mcpwm_num: mcpwm_unit_t; mcpwm_pin: ptr mcpwm_pin_config_t):
 ##
 
 proc mcpwm_init*(mcpwm_num: mcpwm_unit_t; timer_num: mcpwm_timer_t;
-                mcpwm_conf: ptr mcpwm_config_t): esp_err_t {.importc: "mcpwm_init",
+                mcpwm_conf: ptr mcpwm_config_t): EspErrorCode {.importc: "mcpwm_init",
     header: "mcpwm.h".}
 ## *
 ##  @brief Set frequency(in Hz) of MCPWM timer
@@ -324,7 +324,7 @@ proc mcpwm_init*(mcpwm_num: mcpwm_unit_t; timer_num: mcpwm_timer_t;
 ##
 
 proc mcpwm_set_frequency*(mcpwm_num: mcpwm_unit_t; timer_num: mcpwm_timer_t;
-                         frequency: uint32): esp_err_t {.
+                         frequency: uint32): EspErrorCode {.
     importc: "mcpwm_set_frequency", header: "mcpwm.h".}
 ## *
 ##  @brief Set duty cycle of each operator(MCPWMXA/MCPWMXB)
@@ -340,7 +340,7 @@ proc mcpwm_set_frequency*(mcpwm_num: mcpwm_unit_t; timer_num: mcpwm_timer_t;
 ##
 
 proc mcpwm_set_duty*(mcpwm_num: mcpwm_unit_t; timer_num: mcpwm_timer_t;
-                    op_num: mcpwm_operator_t; duty: cfloat): esp_err_t {.
+                    op_num: mcpwm_operator_t; duty: cfloat): EspErrorCode {.
     importc: "mcpwm_set_duty", header: "mcpwm.h".}
 ## *
 ##  @brief Set duty cycle of each operator(MCPWMXA/MCPWMXB) in us
@@ -356,7 +356,7 @@ proc mcpwm_set_duty*(mcpwm_num: mcpwm_unit_t; timer_num: mcpwm_timer_t;
 ##
 
 proc mcpwm_set_duty_in_us*(mcpwm_num: mcpwm_unit_t; timer_num: mcpwm_timer_t;
-                          op_num: mcpwm_operator_t; duty: uint32): esp_err_t {.
+                          op_num: mcpwm_operator_t; duty: uint32): EspErrorCode {.
     importc: "mcpwm_set_duty_in_us", header: "mcpwm.h".}
 ## *
 ##  @brief Set duty either active high or active low(out of phase/inverted)
@@ -374,7 +374,7 @@ proc mcpwm_set_duty_in_us*(mcpwm_num: mcpwm_unit_t; timer_num: mcpwm_timer_t;
 ##
 
 proc mcpwm_set_duty_type*(mcpwm_num: mcpwm_unit_t; timer_num: mcpwm_timer_t;
-                         op_num: mcpwm_operator_t; duty_num: mcpwm_duty_type_t): esp_err_t {.
+                         op_num: mcpwm_operator_t; duty_num: mcpwm_duty_type_t): EspErrorCode {.
     importc: "mcpwm_set_duty_type", header: "mcpwm.h".}
 ## *
 ##  @brief Get frequency of timer
@@ -416,7 +416,7 @@ proc mcpwm_get_duty*(mcpwm_num: mcpwm_unit_t; timer_num: mcpwm_timer_t;
 ##
 
 proc mcpwm_set_signal_high*(mcpwm_num: mcpwm_unit_t; timer_num: mcpwm_timer_t;
-                           op_num: mcpwm_operator_t): esp_err_t {.
+                           op_num: mcpwm_operator_t): EspErrorCode {.
     importc: "mcpwm_set_signal_high", header: "mcpwm.h".}
 ## *
 ##  @brief Use this function to set MCPWM signal low
@@ -432,7 +432,7 @@ proc mcpwm_set_signal_high*(mcpwm_num: mcpwm_unit_t; timer_num: mcpwm_timer_t;
 ##
 
 proc mcpwm_set_signal_low*(mcpwm_num: mcpwm_unit_t; timer_num: mcpwm_timer_t;
-                          op_num: mcpwm_operator_t): esp_err_t {.
+                          op_num: mcpwm_operator_t): EspErrorCode {.
     importc: "mcpwm_set_signal_low", header: "mcpwm.h".}
 ## *
 ##  @brief Start MCPWM signal on timer 'x'
@@ -445,7 +445,7 @@ proc mcpwm_set_signal_low*(mcpwm_num: mcpwm_unit_t; timer_num: mcpwm_timer_t;
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc mcpwm_start*(mcpwm_num: mcpwm_unit_t; timer_num: mcpwm_timer_t): esp_err_t {.
+proc mcpwm_start*(mcpwm_num: mcpwm_unit_t; timer_num: mcpwm_timer_t): EspErrorCode {.
     importc: "mcpwm_start", header: "mcpwm.h".}
 ## *
 ##  @brief Start MCPWM signal on timer 'x'
@@ -458,7 +458,7 @@ proc mcpwm_start*(mcpwm_num: mcpwm_unit_t; timer_num: mcpwm_timer_t): esp_err_t 
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc mcpwm_stop*(mcpwm_num: mcpwm_unit_t; timer_num: mcpwm_timer_t): esp_err_t {.
+proc mcpwm_stop*(mcpwm_num: mcpwm_unit_t; timer_num: mcpwm_timer_t): EspErrorCode {.
     importc: "mcpwm_stop", header: "mcpwm.h".}
 ## *
 ##  @brief  Initialize carrier configuration
@@ -473,7 +473,7 @@ proc mcpwm_stop*(mcpwm_num: mcpwm_unit_t; timer_num: mcpwm_timer_t): esp_err_t {
 ##
 
 proc mcpwm_carrier_init*(mcpwm_num: mcpwm_unit_t; timer_num: mcpwm_timer_t;
-                        carrier_conf: ptr mcpwm_carrier_config_t): esp_err_t {.
+                        carrier_conf: ptr mcpwm_carrier_config_t): EspErrorCode {.
     importc: "mcpwm_carrier_init", header: "mcpwm.h".}
 ## *
 ##  @brief Enable MCPWM carrier submodule, for respective timer
@@ -486,7 +486,7 @@ proc mcpwm_carrier_init*(mcpwm_num: mcpwm_unit_t; timer_num: mcpwm_timer_t;
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc mcpwm_carrier_enable*(mcpwm_num: mcpwm_unit_t; timer_num: mcpwm_timer_t): esp_err_t {.
+proc mcpwm_carrier_enable*(mcpwm_num: mcpwm_unit_t; timer_num: mcpwm_timer_t): EspErrorCode {.
     importc: "mcpwm_carrier_enable", header: "mcpwm.h".}
 ## *
 ##  @brief Disable MCPWM carrier submodule, for respective timer
@@ -499,7 +499,7 @@ proc mcpwm_carrier_enable*(mcpwm_num: mcpwm_unit_t; timer_num: mcpwm_timer_t): e
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc mcpwm_carrier_disable*(mcpwm_num: mcpwm_unit_t; timer_num: mcpwm_timer_t): esp_err_t {.
+proc mcpwm_carrier_disable*(mcpwm_num: mcpwm_unit_t; timer_num: mcpwm_timer_t): EspErrorCode {.
     importc: "mcpwm_carrier_disable", header: "mcpwm.h".}
 ## *
 ##  @brief Set period of carrier
@@ -515,7 +515,7 @@ proc mcpwm_carrier_disable*(mcpwm_num: mcpwm_unit_t; timer_num: mcpwm_timer_t): 
 ##
 
 proc mcpwm_carrier_set_period*(mcpwm_num: mcpwm_unit_t; timer_num: mcpwm_timer_t;
-                              carrier_period: uint8): esp_err_t {.
+                              carrier_period: uint8): EspErrorCode {.
     importc: "mcpwm_carrier_set_period", header: "mcpwm.h".}
 ## *
 ##  @brief Set duty_cycle of carrier
@@ -531,7 +531,7 @@ proc mcpwm_carrier_set_period*(mcpwm_num: mcpwm_unit_t; timer_num: mcpwm_timer_t
 ##
 
 proc mcpwm_carrier_set_duty_cycle*(mcpwm_num: mcpwm_unit_t;
-                                  timer_num: mcpwm_timer_t; carrier_duty: uint8): esp_err_t {.
+                                  timer_num: mcpwm_timer_t; carrier_duty: uint8): EspErrorCode {.
     importc: "mcpwm_carrier_set_duty_cycle", header: "mcpwm.h".}
 ## *
 ##  @brief Enable and set width of first pulse in carrier oneshot mode
@@ -548,7 +548,7 @@ proc mcpwm_carrier_set_duty_cycle*(mcpwm_num: mcpwm_unit_t;
 
 proc mcpwm_carrier_oneshot_mode_enable*(mcpwm_num: mcpwm_unit_t;
                                        timer_num: mcpwm_timer_t;
-                                       pulse_width: uint8): esp_err_t {.
+                                       pulse_width: uint8): EspErrorCode {.
     importc: "mcpwm_carrier_oneshot_mode_enable", header: "mcpwm.h".}
 ## *
 ##  @brief Disable oneshot mode, width of first pulse = carrier period
@@ -562,7 +562,7 @@ proc mcpwm_carrier_oneshot_mode_enable*(mcpwm_num: mcpwm_unit_t;
 ##
 
 proc mcpwm_carrier_oneshot_mode_disable*(mcpwm_num: mcpwm_unit_t;
-                                        timer_num: mcpwm_timer_t): esp_err_t {.
+                                        timer_num: mcpwm_timer_t): EspErrorCode {.
     importc: "mcpwm_carrier_oneshot_mode_disable", header: "mcpwm.h".}
 ## *
 ##  @brief Enable or disable carrier output inversion
@@ -578,7 +578,7 @@ proc mcpwm_carrier_oneshot_mode_disable*(mcpwm_num: mcpwm_unit_t;
 
 proc mcpwm_carrier_output_invert*(mcpwm_num: mcpwm_unit_t;
                                  timer_num: mcpwm_timer_t;
-                                 carrier_ivt_mode: mcpwm_carrier_out_ivt_t): esp_err_t {.
+                                 carrier_ivt_mode: mcpwm_carrier_out_ivt_t): EspErrorCode {.
     importc: "mcpwm_carrier_output_invert", header: "mcpwm.h".}
 ## *
 ##  @brief Enable and initialize deadtime for each MCPWM timer
@@ -596,7 +596,7 @@ proc mcpwm_carrier_output_invert*(mcpwm_num: mcpwm_unit_t;
 
 proc mcpwm_deadtime_enable*(mcpwm_num: mcpwm_unit_t; timer_num: mcpwm_timer_t;
                            dt_mode: mcpwm_deadtime_type_t; red: uint32;
-                           fed: uint32): esp_err_t {.
+                           fed: uint32): EspErrorCode {.
     importc: "mcpwm_deadtime_enable", header: "mcpwm.h".}
 ## *
 ##  @brief Disable deadtime on MCPWM timer
@@ -609,7 +609,7 @@ proc mcpwm_deadtime_enable*(mcpwm_num: mcpwm_unit_t; timer_num: mcpwm_timer_t;
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc mcpwm_deadtime_disable*(mcpwm_num: mcpwm_unit_t; timer_num: mcpwm_timer_t): esp_err_t {.
+proc mcpwm_deadtime_disable*(mcpwm_num: mcpwm_unit_t; timer_num: mcpwm_timer_t): EspErrorCode {.
     importc: "mcpwm_deadtime_disable", header: "mcpwm.h".}
 ## *
 ##  @brief Initialize fault submodule, currently low level triggering is not supported
@@ -625,7 +625,7 @@ proc mcpwm_deadtime_disable*(mcpwm_num: mcpwm_unit_t; timer_num: mcpwm_timer_t):
 
 proc mcpwm_fault_init*(mcpwm_num: mcpwm_unit_t;
                       intput_level: mcpwm_fault_input_level_t;
-                      fault_sig: mcpwm_fault_signal_t): esp_err_t {.
+                      fault_sig: mcpwm_fault_signal_t): EspErrorCode {.
     importc: "mcpwm_fault_init", header: "mcpwm.h".}
 ## *
 ##  @brief Set oneshot mode on fault detection, once fault occur in oneshot mode reset is required to resume MCPWM signals
@@ -647,7 +647,7 @@ proc mcpwm_fault_set_oneshot_mode*(mcpwm_num: mcpwm_unit_t;
                                   timer_num: mcpwm_timer_t;
                                   fault_sig: mcpwm_fault_signal_t;
                                   action_on_pwmxa: mcpwm_action_on_pwmxa_t;
-                                  action_on_pwmxb: mcpwm_action_on_pwmxb_t): esp_err_t {.
+                                  action_on_pwmxb: mcpwm_action_on_pwmxb_t): EspErrorCode {.
     importc: "mcpwm_fault_set_oneshot_mode", header: "mcpwm.h".}
 ## *
 ##  @brief Set cycle-by-cycle mode on fault detection, once fault occur in cyc mode MCPWM signal resumes as soon as fault signal becomes inactive
@@ -668,7 +668,7 @@ proc mcpwm_fault_set_oneshot_mode*(mcpwm_num: mcpwm_unit_t;
 proc mcpwm_fault_set_cyc_mode*(mcpwm_num: mcpwm_unit_t; timer_num: mcpwm_timer_t;
                               fault_sig: mcpwm_fault_signal_t;
                               action_on_pwmxa: mcpwm_action_on_pwmxa_t;
-                              action_on_pwmxb: mcpwm_action_on_pwmxb_t): esp_err_t {.
+                              action_on_pwmxb: mcpwm_action_on_pwmxb_t): EspErrorCode {.
     importc: "mcpwm_fault_set_cyc_mode", header: "mcpwm.h".}
 ## *
 ##  @brief Disable fault signal
@@ -681,7 +681,7 @@ proc mcpwm_fault_set_cyc_mode*(mcpwm_num: mcpwm_unit_t; timer_num: mcpwm_timer_t
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc mcpwm_fault_deinit*(mcpwm_num: mcpwm_unit_t; fault_sig: mcpwm_fault_signal_t): esp_err_t {.
+proc mcpwm_fault_deinit*(mcpwm_num: mcpwm_unit_t; fault_sig: mcpwm_fault_signal_t): EspErrorCode {.
     importc: "mcpwm_fault_deinit", header: "mcpwm.h".}
 ## *
 ##  @brief Initialize capture submodule
@@ -699,7 +699,7 @@ proc mcpwm_fault_deinit*(mcpwm_num: mcpwm_unit_t; fault_sig: mcpwm_fault_signal_
 proc mcpwm_capture_enable*(mcpwm_num: mcpwm_unit_t;
                           cap_sig: mcpwm_capture_signal_t;
                           cap_edge: mcpwm_capture_on_edge_t;
-                          num_of_pulse: uint32): esp_err_t {.
+                          num_of_pulse: uint32): EspErrorCode {.
     importc: "mcpwm_capture_enable", header: "mcpwm.h".}
 ## *
 ##  @brief Disable capture signal
@@ -713,7 +713,7 @@ proc mcpwm_capture_enable*(mcpwm_num: mcpwm_unit_t;
 ##
 
 proc mcpwm_capture_disable*(mcpwm_num: mcpwm_unit_t;
-                           cap_sig: mcpwm_capture_signal_t): esp_err_t {.
+                           cap_sig: mcpwm_capture_signal_t): EspErrorCode {.
     importc: "mcpwm_capture_disable", header: "mcpwm.h".}
 ## *
 ##  @brief Get capture value
@@ -755,7 +755,7 @@ proc mcpwm_capture_signal_get_edge*(mcpwm_num: mcpwm_unit_t;
 ##
 
 proc mcpwm_sync_enable*(mcpwm_num: mcpwm_unit_t; timer_num: mcpwm_timer_t;
-                       sync_sig: mcpwm_sync_signal_t; phase_val: uint32): esp_err_t {.
+                       sync_sig: mcpwm_sync_signal_t; phase_val: uint32): EspErrorCode {.
     importc: "mcpwm_sync_enable", header: "mcpwm.h".}
 ## *
 ##  @brief Disable sync submodule on given timer
@@ -768,7 +768,7 @@ proc mcpwm_sync_enable*(mcpwm_num: mcpwm_unit_t; timer_num: mcpwm_timer_t;
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc mcpwm_sync_disable*(mcpwm_num: mcpwm_unit_t; timer_num: mcpwm_timer_t): esp_err_t {.
+proc mcpwm_sync_disable*(mcpwm_num: mcpwm_unit_t; timer_num: mcpwm_timer_t): EspErrorCode {.
     importc: "mcpwm_sync_disable", header: "mcpwm.h".}
 ## *
 ##  @brief Register MCPWM interrupt handler, the handler is an ISR.
@@ -789,5 +789,5 @@ proc mcpwm_sync_disable*(mcpwm_num: mcpwm_unit_t; timer_num: mcpwm_timer_t): esp
 ##
 
 proc mcpwm_isr_register*(mcpwm_num: mcpwm_unit_t; fn: proc (a1: pointer) {.cdecl.}; arg: pointer;
-                        intr_alloc_flags: esp_intr_flags; handle: ptr intr_handle_t): esp_err_t {.
+                        intr_alloc_flags: esp_intr_flags; handle: ptr intr_handle_t): EspErrorCode {.
     importc: "mcpwm_isr_register", header: "mcpwm.h".}

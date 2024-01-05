@@ -229,7 +229,7 @@ proc tcpip_adapter_init*() {.importc: "tcpip_adapter_init",
 ##
 
 proc tcpip_adapter_eth_start*(mac: ptr uint8;
-                             ip_info: ptr tcpip_adapter_ip_info_t; args: pointer): esp_err_t {.
+                             ip_info: ptr tcpip_adapter_ip_info_t; args: pointer): EspErrorCode {.
     importc: "tcpip_adapter_eth_start", header: "tcpip_adapter.h".}
 ## *
 ##  @brief  Cause the TCP/IP stack to start the Wi-Fi station interface with specified MAC and IP
@@ -246,7 +246,7 @@ proc tcpip_adapter_eth_start*(mac: ptr uint8;
 ##          - ESP_ERR_NO_MEM
 ##
 
-proc tcpip_adapter_sta_start*(mac: ptr uint8; ip_info: ptr tcpip_adapter_ip_info_t): esp_err_t {.
+proc tcpip_adapter_sta_start*(mac: ptr uint8; ip_info: ptr tcpip_adapter_ip_info_t): EspErrorCode {.
     importc: "tcpip_adapter_sta_start", header: "tcpip_adapter.h".}
 ## *
 ##  @brief  Cause the TCP/IP stack to start the Wi-Fi AP interface with specified MAC and IP
@@ -264,7 +264,7 @@ proc tcpip_adapter_sta_start*(mac: ptr uint8; ip_info: ptr tcpip_adapter_ip_info
 ##          - ESP_ERR_NO_MEM
 ##
 
-proc tcpip_adapter_ap_start*(mac: ptr uint8; ip_info: ptr tcpip_adapter_ip_info_t): esp_err_t {.
+proc tcpip_adapter_ap_start*(mac: ptr uint8; ip_info: ptr tcpip_adapter_ip_info_t): EspErrorCode {.
     importc: "tcpip_adapter_ap_start", header: "tcpip_adapter.h".}
 ## *
 ##  @brief  Cause the TCP/IP stack to stop a network interface
@@ -286,7 +286,7 @@ proc tcpip_adapter_ap_start*(mac: ptr uint8; ip_info: ptr tcpip_adapter_ip_info_
 ##          - ESP_ERR_TCPIP_ADAPTER_IF_NOT_READY
 ##
 
-proc tcpip_adapter_stop*(tcpip_if: tcpip_adapter_if_t): esp_err_t {.
+proc tcpip_adapter_stop*(tcpip_if: tcpip_adapter_if_t): EspErrorCode {.
     importc: "tcpip_adapter_stop", header: "tcpip_adapter.h".}
 ## *
 ##  @brief  Cause the TCP/IP stack to bring up an interface
@@ -303,7 +303,7 @@ proc tcpip_adapter_stop*(tcpip_if: tcpip_adapter_if_t): esp_err_t {.
 ##          - ESP_ERR_TCPIP_ADAPTER_IF_NOT_READY
 ##
 
-proc tcpip_adapter_up*(tcpip_if: tcpip_adapter_if_t): esp_err_t {.
+proc tcpip_adapter_up*(tcpip_if: tcpip_adapter_if_t): EspErrorCode {.
     importc: "tcpip_adapter_up", header: "tcpip_adapter.h".}
 ## *
 ##  @brief Cause the TCP/IP stack to shutdown an interface
@@ -320,7 +320,7 @@ proc tcpip_adapter_up*(tcpip_if: tcpip_adapter_if_t): esp_err_t {.
 ##          - ESP_ERR_TCPIP_ADAPTER_IF_NOT_READY
 ##
 
-proc tcpip_adapter_down*(tcpip_if: tcpip_adapter_if_t): esp_err_t {.
+proc tcpip_adapter_down*(tcpip_if: tcpip_adapter_if_t): EspErrorCode {.
     importc: "tcpip_adapter_down", header: "tcpip_adapter.h".}
 ## *
 ##  @brief  Get interface's IP address information
@@ -339,7 +339,7 @@ proc tcpip_adapter_down*(tcpip_if: tcpip_adapter_if_t): esp_err_t {.
 ##
 
 proc tcpip_adapter_get_ip_info*(tcpip_if: tcpip_adapter_if_t;
-                               ip_info: ptr tcpip_adapter_ip_info_t): esp_err_t {.
+                               ip_info: ptr tcpip_adapter_ip_info_t): EspErrorCode {.
     importc: "tcpip_adapter_get_ip_info", header: "tcpip_adapter.h".}
 ## *
 ##  @brief  Set interface's IP address information
@@ -366,7 +366,7 @@ proc tcpip_adapter_get_ip_info*(tcpip_if: tcpip_adapter_if_t;
 ##
 
 proc tcpip_adapter_set_ip_info*(tcpip_if: tcpip_adapter_if_t;
-                               ip_info: ptr tcpip_adapter_ip_info_t): esp_err_t {.
+                               ip_info: ptr tcpip_adapter_ip_info_t): EspErrorCode {.
     importc: "tcpip_adapter_set_ip_info", header: "tcpip_adapter.h".}
 ## *
 ##  @brief  Set DNS Server information
@@ -398,7 +398,7 @@ proc tcpip_adapter_set_ip_info*(tcpip_if: tcpip_adapter_if_t;
 
 proc tcpip_adapter_set_dns_info*(tcpip_if: tcpip_adapter_if_t;
                                 `type`: tcpip_adapter_dns_type_t;
-                                dns: ptr tcpip_adapter_dns_info_t): esp_err_t {.
+                                dns: ptr tcpip_adapter_dns_info_t): EspErrorCode {.
     importc: "tcpip_adapter_set_dns_info", header: "tcpip_adapter.h".}
 ## *
 ##  @brief  Get DNS Server information
@@ -419,7 +419,7 @@ proc tcpip_adapter_set_dns_info*(tcpip_if: tcpip_adapter_if_t;
 
 proc tcpip_adapter_get_dns_info*(tcpip_if: tcpip_adapter_if_t;
                                 `type`: tcpip_adapter_dns_type_t;
-                                dns: ptr tcpip_adapter_dns_info_t): esp_err_t {.
+                                dns: ptr tcpip_adapter_dns_info_t): EspErrorCode {.
     importc: "tcpip_adapter_get_dns_info", header: "tcpip_adapter.h".}
 ## *
 ##  @brief  Get interface's old IP information
@@ -438,7 +438,7 @@ proc tcpip_adapter_get_dns_info*(tcpip_if: tcpip_adapter_if_t;
 ##
 
 proc tcpip_adapter_get_old_ip_info*(tcpip_if: tcpip_adapter_if_t;
-                                   ip_info: ptr tcpip_adapter_ip_info_t): esp_err_t {.
+                                   ip_info: ptr tcpip_adapter_ip_info_t): EspErrorCode {.
     importc: "tcpip_adapter_get_old_ip_info", header: "tcpip_adapter.h".}
 ## *
 ##  @brief  Set interface old IP information
@@ -458,7 +458,7 @@ proc tcpip_adapter_get_old_ip_info*(tcpip_if: tcpip_adapter_if_t;
 ##
 
 proc tcpip_adapter_set_old_ip_info*(tcpip_if: tcpip_adapter_if_t;
-                                   ip_info: ptr tcpip_adapter_ip_info_t): esp_err_t {.
+                                   ip_info: ptr tcpip_adapter_ip_info_t): EspErrorCode {.
     importc: "tcpip_adapter_set_old_ip_info", header: "tcpip_adapter.h".}
 ## *
 ##  @brief  Create interface link-local IPv6 address
@@ -474,7 +474,7 @@ proc tcpip_adapter_set_old_ip_info*(tcpip_if: tcpip_adapter_if_t;
 ##          - ESP_ERR_TCPIP_ADAPTER_INVALID_PARAMS
 ##
 
-proc tcpip_adapter_create_ip6_linklocal*(tcpip_if: tcpip_adapter_if_t): esp_err_t {.
+proc tcpip_adapter_create_ip6_linklocal*(tcpip_if: tcpip_adapter_if_t): EspErrorCode {.
     importc: "tcpip_adapter_create_ip6_linklocal", header: "tcpip_adapter.h".}
 ## *
 ##  @brief  Get interface link-local IPv6 address
@@ -491,7 +491,7 @@ proc tcpip_adapter_create_ip6_linklocal*(tcpip_if: tcpip_adapter_if_t): esp_err_
 ##
 
 proc tcpip_adapter_get_ip6_linklocal*(tcpip_if: tcpip_adapter_if_t;
-                                     if_ip6: ptr ip6_addr_t): esp_err_t {.
+                                     if_ip6: ptr ip6_addr_t): EspErrorCode {.
     importc: "tcpip_adapter_get_ip6_linklocal", header: "tcpip_adapter.h".}
 ## *
 ##  @brief  Get interface global IPv6 address
@@ -508,11 +508,11 @@ proc tcpip_adapter_get_ip6_linklocal*(tcpip_if: tcpip_adapter_if_t;
 ##
 
 proc tcpip_adapter_get_ip6_global*(tcpip_if: tcpip_adapter_if_t;
-                                  if_ip6: ptr ip6_addr_t): esp_err_t {.
+                                  if_ip6: ptr ip6_addr_t): EspErrorCode {.
     importc: "tcpip_adapter_get_ip6_global", header: "tcpip_adapter.h".}
-proc tcpip_adapter_get_mac*(tcpip_if: tcpip_adapter_if_t; mac: ptr uint8): esp_err_t {.
+proc tcpip_adapter_get_mac*(tcpip_if: tcpip_adapter_if_t; mac: ptr uint8): EspErrorCode {.
     importc: "tcpip_adapter_get_mac", header: "tcpip_adapter.h".}
-proc tcpip_adapter_set_mac*(tcpip_if: tcpip_adapter_if_t; mac: ptr uint8): esp_err_t {.
+proc tcpip_adapter_set_mac*(tcpip_if: tcpip_adapter_if_t; mac: ptr uint8): EspErrorCode {.
     importc: "tcpip_adapter_set_mac", header: "tcpip_adapter.h".}
 
 ## *
@@ -526,7 +526,7 @@ proc tcpip_adapter_set_mac*(tcpip_if: tcpip_adapter_if_t; mac: ptr uint8): esp_e
 ##
 
 proc tcpip_adapter_dhcps_get_status*(tcpip_if: tcpip_adapter_if_t;
-                                    status: ptr tcpip_adapter_dhcp_status_t): esp_err_t {.
+                                    status: ptr tcpip_adapter_dhcp_status_t): EspErrorCode {.
     importc: "tcpip_adapter_dhcps_get_status", header: "tcpip_adapter.h".}
 ## *
 ##  @brief  Set or Get DHCP server option
@@ -545,7 +545,7 @@ proc tcpip_adapter_dhcps_get_status*(tcpip_if: tcpip_adapter_if_t;
 
 proc tcpip_adapter_dhcps_option*(opt_op: tcpip_adapter_dhcp_option_mode_t;
                                 opt_id: tcpip_adapter_dhcp_option_id_t;
-                                opt_val: pointer; opt_len: uint32): esp_err_t {.
+                                opt_val: pointer; opt_len: uint32): EspErrorCode {.
     importc: "tcpip_adapter_dhcps_option", header: "tcpip_adapter.h".}
 ## *
 ##  @brief  Start DHCP server
@@ -560,7 +560,7 @@ proc tcpip_adapter_dhcps_option*(opt_op: tcpip_adapter_dhcp_option_mode_t;
 ##          - ESP_ERR_TCPIP_ADAPTER_DHCP_ALREADY_STARTED
 ##
 
-proc tcpip_adapter_dhcps_start*(tcpip_if: tcpip_adapter_if_t): esp_err_t {.
+proc tcpip_adapter_dhcps_start*(tcpip_if: tcpip_adapter_if_t): EspErrorCode {.
     importc: "tcpip_adapter_dhcps_start", header: "tcpip_adapter.h".}
 ## *
 ##  @brief  Stop DHCP server
@@ -576,7 +576,7 @@ proc tcpip_adapter_dhcps_start*(tcpip_if: tcpip_adapter_if_t): esp_err_t {.
 ##       - ESP_ERR_TCPIP_ADAPTER_IF_NOT_READY
 ##
 
-proc tcpip_adapter_dhcps_stop*(tcpip_if: tcpip_adapter_if_t): esp_err_t {.
+proc tcpip_adapter_dhcps_stop*(tcpip_if: tcpip_adapter_if_t): EspErrorCode {.
     importc: "tcpip_adapter_dhcps_stop", header: "tcpip_adapter.h".}
 ## *
 ##  @brief  Get DHCP client status
@@ -589,7 +589,7 @@ proc tcpip_adapter_dhcps_stop*(tcpip_if: tcpip_adapter_if_t): esp_err_t {.
 ##
 
 proc tcpip_adapter_dhcpc_get_status*(tcpip_if: tcpip_adapter_if_t;
-                                    status: ptr tcpip_adapter_dhcp_status_t): esp_err_t {.
+                                    status: ptr tcpip_adapter_dhcp_status_t): EspErrorCode {.
     importc: "tcpip_adapter_dhcpc_get_status", header: "tcpip_adapter.h".}
 ## *
 ##  @brief  Set or Get DHCP client's option
@@ -607,7 +607,7 @@ proc tcpip_adapter_dhcpc_get_status*(tcpip_if: tcpip_adapter_if_t;
 
 proc tcpip_adapter_dhcpc_option*(opt_op: tcpip_adapter_dhcp_option_mode_t;
                                 opt_id: tcpip_adapter_dhcp_option_id_t;
-                                opt_val: pointer; opt_len: uint32): esp_err_t {.
+                                opt_val: pointer; opt_len: uint32): EspErrorCode {.
     importc: "tcpip_adapter_dhcpc_option", header: "tcpip_adapter.h".}
 ## *
 ##  @brief Start DHCP client
@@ -625,7 +625,7 @@ proc tcpip_adapter_dhcpc_option*(opt_op: tcpip_adapter_dhcp_option_mode_t;
 ##          - ESP_ERR_TCPIP_ADAPTER_DHCPC_START_FAILED
 ##
 
-proc tcpip_adapter_dhcpc_start*(tcpip_if: tcpip_adapter_if_t): esp_err_t {.
+proc tcpip_adapter_dhcpc_start*(tcpip_if: tcpip_adapter_if_t): EspErrorCode {.
     importc: "tcpip_adapter_dhcpc_start", header: "tcpip_adapter.h".}
 ## *
 ##  @brief  Stop DHCP client
@@ -643,7 +643,7 @@ proc tcpip_adapter_dhcpc_start*(tcpip_if: tcpip_adapter_if_t): esp_err_t {.
 ##       - ESP_ERR_TCPIP_ADAPTER_IF_NOT_READY
 ##
 
-proc tcpip_adapter_dhcpc_stop*(tcpip_if: tcpip_adapter_if_t): esp_err_t {.
+proc tcpip_adapter_dhcpc_stop*(tcpip_if: tcpip_adapter_if_t): EspErrorCode {.
     importc: "tcpip_adapter_dhcpc_stop", header: "tcpip_adapter.h".}
 ## *
 ##  @brief  Receive an Ethernet frame from the Ethernet interface
@@ -660,7 +660,7 @@ proc tcpip_adapter_dhcpc_stop*(tcpip_if: tcpip_adapter_if_t): esp_err_t {.
 ##          - ESP_OK
 ##
 
-proc tcpip_adapter_eth_input*(buffer: pointer; len: uint16; eb: pointer): esp_err_t {.
+proc tcpip_adapter_eth_input*(buffer: pointer; len: uint16; eb: pointer): EspErrorCode {.
     importc: "tcpip_adapter_eth_input", header: "tcpip_adapter.h".}
 ## *
 ##  @brief  Receive an 802.11 data frame from the Wi-Fi Station interface
@@ -679,7 +679,7 @@ proc tcpip_adapter_eth_input*(buffer: pointer; len: uint16; eb: pointer): esp_er
 ##          - ESP_OK
 ##
 
-proc tcpip_adapter_sta_input*(buffer: pointer; len: uint16; eb: pointer): esp_err_t {.
+proc tcpip_adapter_sta_input*(buffer: pointer; len: uint16; eb: pointer): EspErrorCode {.
     importc: "tcpip_adapter_sta_input", header: "tcpip_adapter.h".}
 ## *
 ##  @brief  Receive an 802.11 data frame from the Wi-Fi AP interface
@@ -698,7 +698,7 @@ proc tcpip_adapter_sta_input*(buffer: pointer; len: uint16; eb: pointer): esp_er
 ##          - ESP_OK
 ##
 
-proc tcpip_adapter_ap_input*(buffer: pointer; len: uint16; eb: pointer): esp_err_t {.
+proc tcpip_adapter_ap_input*(buffer: pointer; len: uint16; eb: pointer): EspErrorCode {.
     importc: "tcpip_adapter_ap_input", header: "tcpip_adapter.h".}
 ## *
 ##  @brief  Get network interface index
@@ -729,7 +729,7 @@ proc tcpip_adapter_get_esp_if*(dev: pointer): esp_interface_t {.
 ##
 
 proc tcpip_adapter_get_sta_list*(wifi_sta_list: ptr wifi_sta_list_t;
-                                tcpip_sta_list: ptr tcpip_adapter_sta_list_t): esp_err_t {.
+                                tcpip_sta_list: ptr tcpip_adapter_sta_list_t): EspErrorCode {.
     importc: "tcpip_adapter_get_sta_list", header: "tcpip_adapter.h".}
 const
   TCPIP_HOSTNAME_MAX_SIZE* = 32
@@ -746,7 +746,7 @@ const
 ##          - ESP_ERR_TCPIP_ADAPTER_INVALID_PARAMS - parameter error
 ##
 
-proc tcpip_adapter_set_hostname*(tcpip_if: tcpip_adapter_if_t; hostname: cstring): esp_err_t {.
+proc tcpip_adapter_set_hostname*(tcpip_if: tcpip_adapter_if_t; hostname: cstring): EspErrorCode {.
     importc: "tcpip_adapter_set_hostname", header: "tcpip_adapter.h".}
 ## *
 ##  @brief  Get interface hostname.
@@ -761,7 +761,7 @@ proc tcpip_adapter_set_hostname*(tcpip_if: tcpip_adapter_if_t; hostname: cstring
 ##
 
 proc tcpip_adapter_get_hostname*(tcpip_if: tcpip_adapter_if_t;
-                                hostname: cstringArray): esp_err_t {.
+                                hostname: cstringArray): EspErrorCode {.
     importc: "tcpip_adapter_get_hostname", header: "tcpip_adapter.h".}
 ## *
 ##  @brief  Get the TCP/IP stack-specific interface that is assigned to a given interface
@@ -777,7 +777,7 @@ proc tcpip_adapter_get_hostname*(tcpip_if: tcpip_adapter_if_t;
 ##          - ESP_ERR_TCPIP_ADAPTER_INVALID_PARAMS - parameter error
 ##
 
-proc tcpip_adapter_get_netif*(tcpip_if: tcpip_adapter_if_t; netif: ptr pointer): esp_err_t {.
+proc tcpip_adapter_get_netif*(tcpip_if: tcpip_adapter_if_t; netif: ptr pointer): EspErrorCode {.
     importc: "tcpip_adapter_get_netif", header: "tcpip_adapter.h".}
 ## *
 ##  @brief  Test if supplied interface is up or down
@@ -805,7 +805,7 @@ proc tcpip_adapter_is_netif_up*(tcpip_if: tcpip_adapter_if_t): bool {.
 ##
 
 proc tcpip_adapter_test_start*(mac: ptr uint8;
-                              ip_info: ptr tcpip_adapter_ip_info_t): esp_err_t {.
+                              ip_info: ptr tcpip_adapter_ip_info_t): EspErrorCode {.
     importc: "tcpip_adapter_test_start", header: "tcpip_adapter.h".}
 ## *
 ##  @brief  Install default event handlers for Ethernet interface
@@ -814,7 +814,7 @@ proc tcpip_adapter_test_start*(mac: ptr uint8;
 ##       - one of the errors from esp_event on failure
 ##
 
-proc tcpip_adapter_set_default_eth_handlers*(): esp_err_t {.
+proc tcpip_adapter_set_default_eth_handlers*(): EspErrorCode {.
     importc: "tcpip_adapter_set_default_eth_handlers", header: "tcpip_adapter.h".}
 ## *
 ##  @brief Uninstall default event handlers for Ethernet interface
@@ -823,7 +823,7 @@ proc tcpip_adapter_set_default_eth_handlers*(): esp_err_t {.
 ##       - one of the errors from esp_event on failure
 ##
 
-proc tcpip_adapter_clear_default_eth_handlers*(): esp_err_t {.
+proc tcpip_adapter_clear_default_eth_handlers*(): EspErrorCode {.
     importc: "tcpip_adapter_clear_default_eth_handlers", header: "tcpip_adapter.h".}
 ## *
 ##  @brief  Install default event handlers for Wi-Fi interfaces (station and AP)
@@ -832,7 +832,7 @@ proc tcpip_adapter_clear_default_eth_handlers*(): esp_err_t {.
 ##       - one of the errors from esp_event on failure
 ##
 
-proc tcpip_adapter_set_default_wifi_handlers*(): esp_err_t {.
+proc tcpip_adapter_set_default_wifi_handlers*(): EspErrorCode {.
     importc: "tcpip_adapter_set_default_wifi_handlers", header: "tcpip_adapter.h".}
 ## *
 ##  @brief  Uninstall default event handlers for Wi-Fi interfaces (station and AP)
@@ -841,7 +841,7 @@ proc tcpip_adapter_set_default_wifi_handlers*(): esp_err_t {.
 ##       - one of the errors from esp_event on failure
 ##
 
-proc tcpip_adapter_clear_default_wifi_handlers*(): esp_err_t {.
+proc tcpip_adapter_clear_default_wifi_handlers*(): EspErrorCode {.
     importc: "tcpip_adapter_clear_default_wifi_handlers",
     header: "tcpip_adapter.h".}
 ## *

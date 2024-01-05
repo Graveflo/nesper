@@ -35,17 +35,17 @@ type
 type
   esp_flash_os_functions_t* {.importc: "esp_flash_os_functions_t",
                              header: "esp_flash.h", bycopy.} = object
-    start_cb* {.importc: "start".}: proc (arg: pointer): esp_err_t 
+    start_cb* {.importc: "start".}: proc (arg: pointer): EspErrorCode 
     ##  Called before commencing any flash operation. Does not need to be
     ##  recursive (ie is called at most once for each call to 'end').
     ##
     ## \* Called after completing any flash operation.
-    end_cb* {.importc: "end".}: proc (arg: pointer): esp_err_t 
+    end_cb* {.importc: "end".}: proc (arg: pointer): EspErrorCode 
     ## \* Called before any erase/write operations to check whether the region is limited by the OS
     region_protected* {.importc: "region_protected".}: proc (arg: pointer;
-        start_addr: csize_t; size: csize_t): esp_err_t 
+        start_addr: csize_t; size: csize_t): EspErrorCode 
     ## \* Delay for at least 'us' microseconds. Called in between 'start' and 'end'.
-    delay_us* {.importc: "delay_us".}: proc (arg: pointer; us: cuint): esp_err_t 
+    delay_us* {.importc: "delay_us".}: proc (arg: pointer; us: cuint): EspErrorCode 
     ## \* Yield to other tasks. Called during erase operations.
     yield_cb* {.importc: "yield".}: proc (arg: pointer): esp_err_t
 
@@ -84,7 +84,7 @@ type
 ##  @return ESP_OK on success, or a flash error code if initialisation fails.
 ##
 
-proc esp_flash_init*(chip: ptr esp_flash_t): esp_err_t {.importc: "esp_flash_init",
+proc esp_flash_init*(chip: ptr esp_flash_t): EspErrorCode {.importc: "esp_flash_init",
     header: "esp_flash.h".}
 
 
@@ -110,7 +110,7 @@ proc esp_flash_chip_driver_initialized*(chip: ptr esp_flash_t): bool {.
 ##  @return ESP_OK on success, or a flash error code if operation failed.
 ##
 
-proc esp_flash_read_id*(chip: ptr esp_flash_t; out_id: ptr uint32): esp_err_t {.
+proc esp_flash_read_id*(chip: ptr esp_flash_t; out_id: ptr uint32): EspErrorCode {.
     importc: "esp_flash_read_id", header: "esp_flash.h".}
 
 
@@ -125,7 +125,7 @@ proc esp_flash_read_id*(chip: ptr esp_flash_t; out_id: ptr uint32): esp_err_t {.
 ##  @return ESP_OK on success, or a flash error code if operation failed.
 ##
 
-proc esp_flash_get_size*(chip: ptr esp_flash_t; out_size: ptr uint32): esp_err_t {.
+proc esp_flash_get_size*(chip: ptr esp_flash_t; out_size: ptr uint32): EspErrorCode {.
     importc: "esp_flash_get_size", header: "esp_flash.h".}
 
 
@@ -137,7 +137,7 @@ proc esp_flash_get_size*(chip: ptr esp_flash_t; out_size: ptr uint32): esp_err_t
 ##  @return ESP_OK on success, or a flash error code if operation failed.
 ##
 
-proc esp_flash_erase_chip*(chip: ptr esp_flash_t): esp_err_t {.
+proc esp_flash_erase_chip*(chip: ptr esp_flash_t): EspErrorCode {.
     importc: "esp_flash_erase_chip", header: "esp_flash.h".}
 
 
@@ -157,7 +157,7 @@ proc esp_flash_erase_chip*(chip: ptr esp_flash_t): esp_err_t {.
 ##  @return ESP_OK on success, or a flash error code if operation failed.
 ##
 
-proc esp_flash_erase_region*(chip: ptr esp_flash_t; start: uint32; len: uint32): esp_err_t {.
+proc esp_flash_erase_region*(chip: ptr esp_flash_t; start: uint32; len: uint32): EspErrorCode {.
     importc: "esp_flash_erase_region", header: "esp_flash.h".}
 
 
@@ -173,7 +173,7 @@ proc esp_flash_erase_region*(chip: ptr esp_flash_t; start: uint32; len: uint32):
 ##
 
 proc esp_flash_get_chip_write_protect*(chip: ptr esp_flash_t;
-                                      write_protected: ptr bool): esp_err_t {.
+                                      write_protected: ptr bool): EspErrorCode {.
     importc: "esp_flash_get_chip_write_protect", header: "esp_flash.h".}
 
 
@@ -191,7 +191,7 @@ proc esp_flash_get_chip_write_protect*(chip: ptr esp_flash_t;
 ##  @return ESP_OK on success, or a flash error code if operation failed.
 ##
 
-proc esp_flash_set_chip_write_protect*(chip: ptr esp_flash_t; write_protect: bool): esp_err_t {.
+proc esp_flash_set_chip_write_protect*(chip: ptr esp_flash_t; write_protect: bool): EspErrorCode {.
     importc: "esp_flash_set_chip_write_protect", header: "esp_flash.h".}
 
 
@@ -209,7 +209,7 @@ proc esp_flash_set_chip_write_protect*(chip: ptr esp_flash_t; write_protect: boo
 
 proc esp_flash_get_protectable_regions*(chip: ptr esp_flash_t;
                                        out_regions: ptr ptr esp_flash_region_t;
-                                       out_num_regions: ptr uint32): esp_err_t {.
+                                       out_num_regions: ptr uint32): EspErrorCode {.
     importc: "esp_flash_get_protectable_regions", header: "esp_flash.h".}
 
 
@@ -229,7 +229,7 @@ proc esp_flash_get_protectable_regions*(chip: ptr esp_flash_t;
 
 proc esp_flash_get_protected_region*(chip: ptr esp_flash_t;
                                     region: ptr esp_flash_region_t;
-                                    out_protected: ptr bool): esp_err_t {.
+                                    out_protected: ptr bool): EspErrorCode {.
     importc: "esp_flash_get_protected_region", header: "esp_flash.h".}
 
 
@@ -248,7 +248,7 @@ proc esp_flash_get_protected_region*(chip: ptr esp_flash_t;
 ##
 
 proc esp_flash_set_protected_region*(chip: ptr esp_flash_t;
-                                    region: ptr esp_flash_region_t; protect: bool): esp_err_t {.
+                                    region: ptr esp_flash_region_t; protect: bool): EspErrorCode {.
     importc: "esp_flash_set_protected_region", header: "esp_flash.h".}
 
 
@@ -271,7 +271,7 @@ proc esp_flash_set_protected_region*(chip: ptr esp_flash_t;
 ##
 
 proc esp_flash_read*(chip: ptr esp_flash_t; buffer: pointer; address: uint32;
-                    length: uint32): esp_err_t {.importc: "esp_flash_read",
+                    length: uint32): EspErrorCode {.importc: "esp_flash_read",
     header: "esp_flash.h".}
 
 
@@ -288,7 +288,7 @@ proc esp_flash_read*(chip: ptr esp_flash_t; buffer: pointer; address: uint32;
 ##
 
 proc esp_flash_write*(chip: ptr esp_flash_t; buffer: pointer; address: uint32;
-                     length: uint32): esp_err_t {.importc: "esp_flash_write",
+                     length: uint32): EspErrorCode {.importc: "esp_flash_write",
     header: "esp_flash.h".}
 
 
@@ -309,7 +309,7 @@ proc esp_flash_write*(chip: ptr esp_flash_t; buffer: pointer; address: uint32;
 ##
 
 proc esp_flash_write_encrypted*(chip: ptr esp_flash_t; address: uint32;
-                               buffer: pointer; length: uint32): esp_err_t {.
+                               buffer: pointer; length: uint32): EspErrorCode {.
     importc: "esp_flash_write_encrypted", header: "esp_flash.h".}
 
 
@@ -327,7 +327,7 @@ proc esp_flash_write_encrypted*(chip: ptr esp_flash_t; address: uint32;
 ##
 
 proc esp_flash_read_encrypted*(chip: ptr esp_flash_t; address: uint32;
-                              out_buffer: pointer; length: uint32): esp_err_t {.
+                              out_buffer: pointer; length: uint32): EspErrorCode {.
     importc: "esp_flash_read_encrypted", header: "esp_flash.h".}
 
 

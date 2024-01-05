@@ -32,7 +32,7 @@ proc esp_eth_new_netif_glue*(eth_hdl: esp_eth_handle_t): pointer {.
 ##  @return -ESP_OK: delete netif glue successfully
 ##
 
-proc esp_eth_del_netif_glue*(glue: pointer): esp_err_t {.
+proc esp_eth_del_netif_glue*(glue: pointer): EspErrorCode {.
     importc: "esp_eth_del_netif_glue", header: "esp_eth_netif_glue.h".}
 ## *
 ##  @brief Register default IP layer handlers for Ethernet
@@ -46,7 +46,7 @@ proc esp_eth_del_netif_glue*(glue: pointer): esp_err_t {.
 ##       - others: other failure occurred during register esp_event handler
 ##
 
-proc esp_eth_set_default_handlers*(esp_netif: pointer): esp_err_t {.
+proc esp_eth_set_default_handlers*(esp_netif: pointer): EspErrorCode {.
     importc: "esp_eth_set_default_handlers", header: "esp_eth_netif_glue.h".}
 ## *
 ##  @brief Unregister default IP layer handlers for Ethernet
@@ -58,5 +58,5 @@ proc esp_eth_set_default_handlers*(esp_netif: pointer): esp_err_t {.
 ##       - others: other failure occurred during unregister esp_event handler
 ##
 
-proc esp_eth_clear_default_handlers*(esp_netif: pointer): esp_err_t {.
+proc esp_eth_clear_default_handlers*(esp_netif: pointer): EspErrorCode {.
     importc: "esp_eth_clear_default_handlers", header: "esp_eth_netif_glue.h".}

@@ -144,7 +144,7 @@ type
 ## * Event handler function type
 
 type
-  system_event_handler_t* = proc (event: ptr system_event_t): esp_err_t {.cdecl.}
+  system_event_handler_t* = proc (event: ptr system_event_t): EspErrorCode {.cdecl.}
 
 ## *
 ##  @brief  Send a event to event task
@@ -159,7 +159,7 @@ type
 ##  @return others : fail
 ##
 
-proc esp_event_send*(event: ptr system_event_t): esp_err_t {.
+proc esp_event_send*(event: ptr system_event_t): EspErrorCode {.
     importc: "esp_event_send", header: "esp_event_legacy.h".}
 ## *
 ##  @brief  Default event handler for system events
@@ -177,7 +177,7 @@ proc esp_event_send*(event: ptr system_event_t): esp_err_t {.
 ##  @return ESP_OK if an event was handled successfully
 ##
 
-proc esp_event_process_default*(event: ptr system_event_t): esp_err_t {.
+proc esp_event_process_default*(event: ptr system_event_t): EspErrorCode {.
     importc: "esp_event_process_default", header: "esp_event_legacy.h".}
 ## *
 ##  @brief  Install default event handlers for Ethernet interface
@@ -211,7 +211,7 @@ proc esp_event_set_default_wifi_handlers*() {.
 ##
 
 type
-  system_event_cb_t* = proc (ctx: pointer; event: ptr system_event_t): esp_err_t {.cdecl.}
+  system_event_cb_t* = proc (ctx: pointer; event: ptr system_event_t): EspErrorCode {.cdecl.}
 
 ## *
 ##  @brief  Initialize event loop
@@ -228,7 +228,7 @@ type
 ##     - others: fail
 ##
 
-proc esp_event_loop_init*(cb: system_event_cb_t; ctx: pointer): esp_err_t {.
+proc esp_event_loop_init*(cb: system_event_cb_t; ctx: pointer): EspErrorCode {.
     importc: "esp_event_loop_init", header: "esp_event_legacy.h".}
 ## *
 ##  @brief  Set application specified event callback function

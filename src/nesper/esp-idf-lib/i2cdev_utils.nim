@@ -38,9 +38,9 @@ proc i2cDeviceInit*() =
 
 i2cDeviceInit()
 
-proc i2c_read_reg*(dev: ptr i2c_dev_t; reg: uint8, val: var uint8): esp_err_t =
+proc i2c_read_reg*(dev: ptr i2c_dev_t; reg: uint8, val: var uint8): EspErrorCode =
   var buf: array[2, uint8]
-  var res: esp_err_t = i2c_dev_read_reg(dev, reg, addr buf[0], 2)
+  var res: EspErrorCode = i2c_dev_read_reg(dev, reg, addr buf[0], 2)
   if res != ESP_OK:
     TAG.logd("Could not read from register 0x%02x", reg)
     return res
@@ -48,26 +48,26 @@ proc i2c_read_reg*(dev: ptr i2c_dev_t; reg: uint8, val: var uint8): esp_err_t =
   val = (buf[0] shl 8) or buf[1]
   return ESP_OK
 
-proc i2c_write_reg*(dev: ptr i2c_dev_t; reg: uint8; val: uint8): esp_err_t =
+proc i2c_write_reg*(dev: ptr i2c_dev_t; reg: uint8; val: uint8): EspErrorCode =
   var buf: array[2, uint8] = [uint8(val shr 8), val.uint8]
-  var res: esp_err_t = i2c_dev_write_reg(dev, reg, addr buf[0], 2)
+  var res: EspErrorCode = i2c_dev_write_reg(dev, reg, addr buf[0], 2)
   if res != ESP_OK:
     TAG.logd("Could not write 0x%04x to register 0x%02x", val, reg)
     return res
   return ESP_OK
 
-proc i2c_read_reg16*(dev: ptr i2c_dev_t; reg: uint8, val: var uint16): esp_err_t =
+proc i2c_read_reg16*(dev: ptr i2c_dev_t; reg: uint8, val: var uint16): EspErrorCode =
   var buf: array[2, uint8]
-  var res: esp_err_t = i2c_dev_read_reg(dev, reg, addr buf[0], 2)
+  var res: EspErrorCode = i2c_dev_read_reg(dev, reg, addr buf[0], 2)
   if res != ESP_OK:
     TAG.loge("Could not read from register 0x%02x", reg)
     return res
   val = (buf[0] shl 8) or buf[1]
   return ESP_OK
 
-proc i2c_write_reg16*(dev: ptr i2c_dev_t; reg: uint8; val: uint16): esp_err_t =
+proc i2c_write_reg16*(dev: ptr i2c_dev_t; reg: uint8; val: uint16): EspErrorCode =
   var buf: array[2, uint8] = [uint8(val shr 8), val.uint8]
-  var res: esp_err_t = i2c_dev_write_reg(dev, reg, addr buf[0], 2)
+  var res: EspErrorCode = i2c_dev_write_reg(dev, reg, addr buf[0], 2)
   if res != ESP_OK:
     TAG.loge("Could not write 0x%04x to register 0x%02x", val, reg)
     return res

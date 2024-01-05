@@ -194,7 +194,7 @@ type
 ##
 
 proc ads111x_init_desc*(dev: ptr i2c_dev_t; `addr`: uint8; port: i2c_port_t;
-                       sda_gpio: gpio_num_t; scl_gpio: gpio_num_t): esp_err_t {.
+                       sda_gpio: gpio_num_t; scl_gpio: gpio_num_t): EspErrorCode {.
     importc: "ads111x_init_desc", header: hdr.}
 ## *
 ##  @brief Free device descriptor
@@ -203,7 +203,7 @@ proc ads111x_init_desc*(dev: ptr i2c_dev_t; `addr`: uint8; port: i2c_port_t;
 ##  @return `ESP_OK` on success
 ##
 
-proc ads111x_free_desc*(dev: ptr i2c_dev_t): esp_err_t {.
+proc ads111x_free_desc*(dev: ptr i2c_dev_t): EspErrorCode {.
     importc: "ads111x_free_desc", header: hdr.}
 ## *
 ##  @brief Get device operational status
@@ -213,7 +213,7 @@ proc ads111x_free_desc*(dev: ptr i2c_dev_t): esp_err_t {.
 ##  @return `ESP_OK` on success
 ##
 
-proc ads111x_is_busy*(dev: ptr i2c_dev_t; busy: ptr bool): esp_err_t {.
+proc ads111x_is_busy*(dev: ptr i2c_dev_t; busy: ptr bool): EspErrorCode {.
     importc: "ads111x_is_busy", header: hdr.}
 ## *
 ##  @brief Begin a single conversion
@@ -224,7 +224,7 @@ proc ads111x_is_busy*(dev: ptr i2c_dev_t; busy: ptr bool): esp_err_t {.
 ##  @return `ESP_OK` on success
 ##
 
-proc ads111x_start_conversion*(dev: ptr i2c_dev_t): esp_err_t {.
+proc ads111x_start_conversion*(dev: ptr i2c_dev_t): EspErrorCode {.
     importc: "ads111x_start_conversion", header: hdr.}
 ## *
 ##  @brief Read last conversion result
@@ -234,7 +234,7 @@ proc ads111x_start_conversion*(dev: ptr i2c_dev_t): esp_err_t {.
 ##  @return `ESP_OK` on success
 ##
 
-proc ads111x_get_value*(dev: ptr i2c_dev_t; value: ptr int16): esp_err_t {.
+proc ads111x_get_value*(dev: ptr i2c_dev_t; value: ptr int16): EspErrorCode {.
     importc: "ads111x_get_value", header: hdr.}
 ## *
 ##  @brief Read last conversion result for ADS101x
@@ -244,7 +244,7 @@ proc ads111x_get_value*(dev: ptr i2c_dev_t; value: ptr int16): esp_err_t {.
 ##  @return `ESP_OK` on success
 ##
 
-proc ads101x_get_value*(dev: ptr i2c_dev_t; value: ptr int16): esp_err_t {.
+proc ads101x_get_value*(dev: ptr i2c_dev_t; value: ptr int16): EspErrorCode {.
     importc: "ads101x_get_value", header: hdr.}
 ## *
 ##  @brief Read the programmable gain amplifier configuration
@@ -257,7 +257,7 @@ proc ads101x_get_value*(dev: ptr i2c_dev_t; value: ptr int16): esp_err_t {.
 ##  @return `ESP_OK` on success
 ##
 
-proc ads111x_get_gain*(dev: ptr i2c_dev_t; gain: ptr ads111x_gain_t): esp_err_t {.
+proc ads111x_get_gain*(dev: ptr i2c_dev_t; gain: ptr ads111x_gain_t): EspErrorCode {.
     importc: "ads111x_get_gain", header: hdr.}
 ## *
 ##  @brief Configure the programmable gain amplifier
@@ -269,7 +269,7 @@ proc ads111x_get_gain*(dev: ptr i2c_dev_t; gain: ptr ads111x_gain_t): esp_err_t 
 ##  @return `ESP_OK` on success
 ##
 
-proc ads111x_set_gain*(dev: ptr i2c_dev_t; gain: ads111x_gain_t): esp_err_t {.
+proc ads111x_set_gain*(dev: ptr i2c_dev_t; gain: ads111x_gain_t): EspErrorCode {.
     importc: "ads111x_set_gain", header: hdr.}
 ## *
 ##  @brief Read the input multiplexer configuration
@@ -281,7 +281,7 @@ proc ads111x_set_gain*(dev: ptr i2c_dev_t; gain: ads111x_gain_t): esp_err_t {.
 ##  @return `ESP_OK` on success
 ##
 
-proc ads111x_get_input_mux*(dev: ptr i2c_dev_t; mux: ptr ads111x_mux_t): esp_err_t {.
+proc ads111x_get_input_mux*(dev: ptr i2c_dev_t; mux: ptr ads111x_mux_t): EspErrorCode {.
     importc: "ads111x_get_input_mux", header: hdr.}
 ## *
 ##  @brief Configure the input multiplexer configuration
@@ -293,7 +293,7 @@ proc ads111x_get_input_mux*(dev: ptr i2c_dev_t; mux: ptr ads111x_mux_t): esp_err
 ##  @return `ESP_OK` on success
 ##
 
-proc ads111x_set_input_mux*(dev: ptr i2c_dev_t; mux: ads111x_mux_t): esp_err_t {.
+proc ads111x_set_input_mux*(dev: ptr i2c_dev_t; mux: ads111x_mux_t): EspErrorCode {.
     importc: "ads111x_set_input_mux", header: hdr.}
 ## *
 ##  @brief Read the device operating mode
@@ -303,7 +303,7 @@ proc ads111x_set_input_mux*(dev: ptr i2c_dev_t; mux: ads111x_mux_t): esp_err_t {
 ##  @return `ESP_OK` on success
 ##
 
-proc ads111x_get_mode*(dev: ptr i2c_dev_t; mode: ptr ads111x_mode_t): esp_err_t {.
+proc ads111x_get_mode*(dev: ptr i2c_dev_t; mode: ptr ads111x_mode_t): EspErrorCode {.
     importc: "ads111x_get_mode", header: hdr.}
 ## *
 ##  @brief Set the device operating mode
@@ -313,7 +313,7 @@ proc ads111x_get_mode*(dev: ptr i2c_dev_t; mode: ptr ads111x_mode_t): esp_err_t 
 ##  @return `ESP_OK` on success
 ##
 
-proc ads111x_set_mode*(dev: ptr i2c_dev_t; mode: ads111x_mode_t): esp_err_t {.
+proc ads111x_set_mode*(dev: ptr i2c_dev_t; mode: ads111x_mode_t): EspErrorCode {.
     importc: "ads111x_set_mode", header: hdr.}
 ## *
 ##  @brief Read the data rate
@@ -323,7 +323,7 @@ proc ads111x_set_mode*(dev: ptr i2c_dev_t; mode: ads111x_mode_t): esp_err_t {.
 ##  @return `ESP_OK` on success
 ##
 
-proc ads111x_get_data_rate*(dev: ptr i2c_dev_t; rate: ptr ads111x_data_rate_t): esp_err_t {.
+proc ads111x_get_data_rate*(dev: ptr i2c_dev_t; rate: ptr ads111x_data_rate_t): EspErrorCode {.
     importc: "ads111x_get_data_rate", header: hdr.}
 ## *
 ##  @brief Configure the data rate
@@ -333,7 +333,7 @@ proc ads111x_get_data_rate*(dev: ptr i2c_dev_t; rate: ptr ads111x_data_rate_t): 
 ##  @return `ESP_OK` on success
 ##
 
-proc ads111x_set_data_rate*(dev: ptr i2c_dev_t; rate: ads111x_data_rate_t): esp_err_t {.
+proc ads111x_set_data_rate*(dev: ptr i2c_dev_t; rate: ads111x_data_rate_t): EspErrorCode {.
     importc: "ads111x_set_data_rate", header: hdr.}
 ## *
 ##  @brief Get comparator mode
@@ -345,7 +345,7 @@ proc ads111x_set_data_rate*(dev: ptr i2c_dev_t; rate: ads111x_data_rate_t): esp_
 ##  @return `ESP_OK` on success
 ##
 
-proc ads111x_get_comp_mode*(dev: ptr i2c_dev_t; mode: ptr ads111x_comp_mode_t): esp_err_t {.
+proc ads111x_get_comp_mode*(dev: ptr i2c_dev_t; mode: ptr ads111x_comp_mode_t): EspErrorCode {.
     importc: "ads111x_get_comp_mode", header: hdr.}
 ## *
 ##  @brief Set comparator mode
@@ -357,7 +357,7 @@ proc ads111x_get_comp_mode*(dev: ptr i2c_dev_t; mode: ptr ads111x_comp_mode_t): 
 ##  @return `ESP_OK` on success
 ##
 
-proc ads111x_set_comp_mode*(dev: ptr i2c_dev_t; mode: ads111x_comp_mode_t): esp_err_t {.
+proc ads111x_set_comp_mode*(dev: ptr i2c_dev_t; mode: ads111x_comp_mode_t): EspErrorCode {.
     importc: "ads111x_set_comp_mode", header: hdr.}
 ## *
 ##  @brief Get polarity of the comparator output pin ALERT/RDY
@@ -370,7 +370,7 @@ proc ads111x_set_comp_mode*(dev: ptr i2c_dev_t; mode: ads111x_comp_mode_t): esp_
 ##
 
 proc ads111x_get_comp_polarity*(dev: ptr i2c_dev_t;
-                               polarity: ptr ads111x_comp_polarity_t): esp_err_t {.
+                               polarity: ptr ads111x_comp_polarity_t): EspErrorCode {.
     importc: "ads111x_get_comp_polarity", header: hdr.}
 ## *
 ##  @brief Set polarity of the comparator output pin ALERT/RDY
@@ -383,7 +383,7 @@ proc ads111x_get_comp_polarity*(dev: ptr i2c_dev_t;
 ##
 
 proc ads111x_set_comp_polarity*(dev: ptr i2c_dev_t;
-                               polarity: ads111x_comp_polarity_t): esp_err_t {.
+                               polarity: ads111x_comp_polarity_t): EspErrorCode {.
     importc: "ads111x_set_comp_polarity", header: hdr.}
 ## *
 ##  @brief Get comparator output latch mode
@@ -395,7 +395,7 @@ proc ads111x_set_comp_polarity*(dev: ptr i2c_dev_t;
 ##  @return `ESP_OK` on success
 ##
 
-proc ads111x_get_comp_latch*(dev: ptr i2c_dev_t; latch: ptr ads111x_comp_latch_t): esp_err_t {.
+proc ads111x_get_comp_latch*(dev: ptr i2c_dev_t; latch: ptr ads111x_comp_latch_t): EspErrorCode {.
     importc: "ads111x_get_comp_latch", header: hdr.}
 ## *
 ##  @brief Set comparator output latch mode
@@ -407,7 +407,7 @@ proc ads111x_get_comp_latch*(dev: ptr i2c_dev_t; latch: ptr ads111x_comp_latch_t
 ##  @return `ESP_OK` on success
 ##
 
-proc ads111x_set_comp_latch*(dev: ptr i2c_dev_t; latch: ads111x_comp_latch_t): esp_err_t {.
+proc ads111x_set_comp_latch*(dev: ptr i2c_dev_t; latch: ads111x_comp_latch_t): EspErrorCode {.
     importc: "ads111x_set_comp_latch", header: hdr.}
 ## *
 ##  @brief Get comparator queue size
@@ -420,7 +420,7 @@ proc ads111x_set_comp_latch*(dev: ptr i2c_dev_t; latch: ads111x_comp_latch_t): e
 ##  @return `ESP_OK` on success
 ##
 
-proc ads111x_get_comp_queue*(dev: ptr i2c_dev_t; queue: ptr ads111x_comp_queue_t): esp_err_t {.
+proc ads111x_get_comp_queue*(dev: ptr i2c_dev_t; queue: ptr ads111x_comp_queue_t): EspErrorCode {.
     importc: "ads111x_get_comp_queue", header: hdr.}
 ## *
 ##  @brief Set comparator queue size
@@ -433,7 +433,7 @@ proc ads111x_get_comp_queue*(dev: ptr i2c_dev_t; queue: ptr ads111x_comp_queue_t
 ##  @return `ESP_OK` on success
 ##
 
-proc ads111x_set_comp_queue*(dev: ptr i2c_dev_t; queue: ads111x_comp_queue_t): esp_err_t {.
+proc ads111x_set_comp_queue*(dev: ptr i2c_dev_t; queue: ads111x_comp_queue_t): EspErrorCode {.
     importc: "ads111x_set_comp_queue", header: hdr.}
 ## *
 ##  @brief Get the lower threshold value used by comparator
@@ -443,7 +443,7 @@ proc ads111x_set_comp_queue*(dev: ptr i2c_dev_t; queue: ads111x_comp_queue_t): e
 ##  @return `ESP_OK` on success
 ##
 
-proc ads111x_get_comp_low_thresh*(dev: ptr i2c_dev_t; th: ptr int16): esp_err_t {.
+proc ads111x_get_comp_low_thresh*(dev: ptr i2c_dev_t; th: ptr int16): EspErrorCode {.
     importc: "ads111x_get_comp_low_thresh", header: hdr.}
 ## *
 ##  @brief Set the lower threshold value used by comparator
@@ -453,7 +453,7 @@ proc ads111x_get_comp_low_thresh*(dev: ptr i2c_dev_t; th: ptr int16): esp_err_t 
 ##  @return `ESP_OK` on success
 ##
 
-proc ads111x_set_comp_low_thresh*(dev: ptr i2c_dev_t; th: int16): esp_err_t {.
+proc ads111x_set_comp_low_thresh*(dev: ptr i2c_dev_t; th: int16): EspErrorCode {.
     importc: "ads111x_set_comp_low_thresh", header: hdr.}
 ## *
 ##  @brief Get the upper threshold value used by comparator
@@ -463,7 +463,7 @@ proc ads111x_set_comp_low_thresh*(dev: ptr i2c_dev_t; th: int16): esp_err_t {.
 ##  @return `ESP_OK` on success
 ##
 
-proc ads111x_get_comp_high_thresh*(dev: ptr i2c_dev_t; th: ptr int16): esp_err_t {.
+proc ads111x_get_comp_high_thresh*(dev: ptr i2c_dev_t; th: ptr int16): EspErrorCode {.
     importc: "ads111x_get_comp_high_thresh", header: hdr.}
 ## *
 ##  @brief Set the upper threshold value used by comparator
@@ -473,7 +473,7 @@ proc ads111x_get_comp_high_thresh*(dev: ptr i2c_dev_t; th: ptr int16): esp_err_t
 ##  @return `ESP_OK` on success
 ##
 
-proc ads111x_set_comp_high_thresh*(dev: ptr i2c_dev_t; th: int16): esp_err_t {.
+proc ads111x_set_comp_high_thresh*(dev: ptr i2c_dev_t; th: int16): EspErrorCode {.
     importc: "ads111x_set_comp_high_thresh", header: hdr.}
 ## *@}
 

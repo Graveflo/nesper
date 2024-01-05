@@ -244,7 +244,7 @@ proc esp_partition_verify*(partition: ptr esp_partition_t): ptr esp_partition_t 
 ##
 
 proc esp_partition_read*(partition: ptr esp_partition_t; src_offset: csize_t;
-                        dst: pointer; size: csize_t): esp_err_t {.
+                        dst: pointer; size: csize_t): EspErrorCode {.
     importc: "esp_partition_read", header: "esp_partition.h".}
 
 
@@ -280,7 +280,7 @@ proc esp_partition_read*(partition: ptr esp_partition_t; src_offset: csize_t;
 ##
 
 proc esp_partition_write*(partition: ptr esp_partition_t; dst_offset: csize_t;
-                         src: pointer; size: csize_t): esp_err_t {.
+                         src: pointer; size: csize_t): EspErrorCode {.
     importc: "esp_partition_write", header: "esp_partition.h".}
 
 
@@ -302,7 +302,7 @@ proc esp_partition_write*(partition: ptr esp_partition_t; dst_offset: csize_t;
 ##
 
 proc esp_partition_erase_range*(partition: ptr esp_partition_t; offset: csize_t;
-                               size: csize_t): esp_err_t {.
+                               size: csize_t): EspErrorCode {.
     importc: "esp_partition_erase_range", header: "esp_partition.h".}
 
 
@@ -335,7 +335,7 @@ proc esp_partition_erase_range*(partition: ptr esp_partition_t; offset: csize_t;
 proc esp_partition_mmap*(partition: ptr esp_partition_t; offset: csize_t;
                         size: csize_t; memory: spi_flash_mmap_memory_t;
                         out_ptr: ptr pointer;
-                        out_handle: ptr spi_flash_mmap_handle_t): esp_err_t {.
+                        out_handle: ptr spi_flash_mmap_handle_t): EspErrorCode {.
     importc: "esp_partition_mmap", header: "esp_partition.h".}
 
 
@@ -358,7 +358,7 @@ proc esp_partition_mmap*(partition: ptr esp_partition_t; offset: csize_t;
 ##           - ESP_FAIL: An allocation error occurred.
 ##
 
-proc esp_partition_get_sha256*(partition: ptr esp_partition_t; sha_256: ptr uint8): esp_err_t {.
+proc esp_partition_get_sha256*(partition: ptr esp_partition_t; sha_256: ptr uint8): EspErrorCode {.
     importc: "esp_partition_get_sha256", header: "esp_partition.h".}
 
 ## *
@@ -403,7 +403,7 @@ proc esp_partition_register_external*(flash_chip: ptr esp_flash_t; offset: csize
                                      size: csize_t; label: cstring;
                                      `type`: esp_partition_type_t;
                                      subtype: esp_partition_subtype_t;
-                                     out_partition: ptr ptr esp_partition_t): esp_err_t {.
+                                     out_partition: ptr ptr esp_partition_t): EspErrorCode {.
     importc: "esp_partition_register_external", header: "esp_partition.h".}
 
 
@@ -418,5 +418,5 @@ proc esp_partition_register_external*(flash_chip: ptr esp_flash_t; offset: csize
 ##         esp_partition_register_external function.
 ##
 
-proc esp_partition_deregister_external*(partition: ptr esp_partition_t): esp_err_t {.
+proc esp_partition_deregister_external*(partition: ptr esp_partition_t): EspErrorCode {.
     importc: "esp_partition_deregister_external", header: "esp_partition.h".}

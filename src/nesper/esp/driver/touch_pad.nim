@@ -102,7 +102,7 @@ const
 ##      - ESP_FAIL Touch pad init error
 ##
 
-proc touch_pad_init*(): esp_err_t {.importc: "touch_pad_init", header: "touch_pad.h".}
+proc touch_pad_init*(): EspErrorCode {.importc: "touch_pad_init", header: "touch_pad.h".}
 ## *
 ##  @brief Un-install touch pad driver.
 ##  @note  After this function is called, other touch functions are prohibited from being called.
@@ -111,7 +111,7 @@ proc touch_pad_init*(): esp_err_t {.importc: "touch_pad_init", header: "touch_pa
 ##      - ESP_FAIL Touch pad driver not initialized
 ##
 
-proc touch_pad_deinit*(): esp_err_t {.importc: "touch_pad_deinit",
+proc touch_pad_deinit*(): EspErrorCode {.importc: "touch_pad_deinit",
                                    header: "touch_pad.h".}
 ## *
 ##  @brief Configure touch pad interrupt threshold.
@@ -127,7 +127,7 @@ proc touch_pad_deinit*(): esp_err_t {.importc: "touch_pad_deinit",
 ##      - ESP_FAIL if touch pad not initialized
 ##
 
-proc touch_pad_config*(touch_num: touch_pad_t; threshold: uint16): esp_err_t {.
+proc touch_pad_config*(touch_num: touch_pad_t; threshold: uint16): EspErrorCode {.
     importc: "touch_pad_config", header: "touch_pad.h".}
 ## *
 ##  @brief get touch sensor counter value.
@@ -148,7 +148,7 @@ proc touch_pad_config*(touch_num: touch_pad_t; threshold: uint16): esp_err_t {.
 ##      - ESP_FAIL Touch pad not initialized
 ##
 
-proc touch_pad_read*(touch_num: touch_pad_t; touch_value: ptr uint16): esp_err_t {.
+proc touch_pad_read*(touch_num: touch_pad_t; touch_value: ptr uint16): EspErrorCode {.
     importc: "touch_pad_read", header: "touch_pad.h".}
 ## *
 ##  @brief get filtered touch sensor counter value by IIR filter.
@@ -166,7 +166,7 @@ proc touch_pad_read*(touch_num: touch_pad_t; touch_value: ptr uint16): esp_err_t
 ##      - ESP_FAIL Touch pad not initialized
 ##
 
-proc touch_pad_read_filtered*(touch_num: touch_pad_t; touch_value: ptr uint16): esp_err_t {.
+proc touch_pad_read_filtered*(touch_num: touch_pad_t; touch_value: ptr uint16): EspErrorCode {.
     importc: "touch_pad_read_filtered", header: "touch_pad.h".}
 ## *
 ##  @brief get raw data (touch sensor counter value) from IIR filter process.
@@ -185,7 +185,7 @@ proc touch_pad_read_filtered*(touch_num: touch_pad_t; touch_value: ptr uint16): 
 ##      - ESP_FAIL Touch pad not initialized
 ##
 
-proc touch_pad_read_raw_data*(touch_num: touch_pad_t; touch_value: ptr uint16): esp_err_t {.
+proc touch_pad_read_raw_data*(touch_num: touch_pad_t; touch_value: ptr uint16): EspErrorCode {.
     importc: "touch_pad_read_raw_data", header: "touch_pad.h".}
 ## *
 ##  @brief Callback function that is called after each IIR filter calculation.
@@ -211,7 +211,7 @@ type
 ##       - ESP_ERR_INVALID_ARG set error
 ##
 
-proc touch_pad_set_filter_read_cb*(read_cb: filter_cb_t): esp_err_t {.
+proc touch_pad_set_filter_read_cb*(read_cb: filter_cb_t): EspErrorCode {.
     importc: "touch_pad_set_filter_read_cb", header: "touch_pad.h".}
 ## *
 ##  @brief   Register touch-pad ISR.
@@ -224,7 +224,7 @@ proc touch_pad_set_filter_read_cb*(read_cb: filter_cb_t): esp_err_t {.
 ##      - ESP_ERR_NO_MEM No memory
 ##
 
-proc touch_pad_isr_register*(fn: intr_handler_t; arg: pointer): esp_err_t {.
+proc touch_pad_isr_register*(fn: intr_handler_t; arg: pointer): EspErrorCode {.
     importc: "touch_pad_isr_register", header: "touch_pad.h".}
 ## *
 ##  @brief Deregister the handler previously registered using touch_pad_isr_handler_register
@@ -236,7 +236,7 @@ proc touch_pad_isr_register*(fn: intr_handler_t; arg: pointer): esp_err_t {.
 ##         arg isn't registered
 ##
 
-proc touch_pad_isr_deregister*(fn: proc (a1: pointer) {.cdecl.}; arg: pointer): esp_err_t {.
+proc touch_pad_isr_deregister*(fn: proc (a1: pointer) {.cdecl.}; arg: pointer): EspErrorCode {.
     importc: "touch_pad_isr_deregister", header: "touch_pad.h".}
 ## *
 ##  @brief Set touch sensor measurement and sleep time
@@ -250,7 +250,7 @@ proc touch_pad_isr_deregister*(fn: proc (a1: pointer) {.cdecl.}; arg: pointer): 
 ##       - ESP_OK on success
 ##
 
-proc touch_pad_set_meas_time*(sleep_cycle: uint16; meas_cycle: uint16): esp_err_t {.
+proc touch_pad_set_meas_time*(sleep_cycle: uint16; meas_cycle: uint16): EspErrorCode {.
     importc: "touch_pad_set_meas_time", header: "touch_pad.h".}
 ## *
 ##  @brief Get touch sensor measurement and sleep time
@@ -260,7 +260,7 @@ proc touch_pad_set_meas_time*(sleep_cycle: uint16; meas_cycle: uint16): esp_err_
 ##       - ESP_OK on success
 ##
 
-proc touch_pad_get_meas_time*(sleep_cycle: ptr uint16; meas_cycle: ptr uint16): esp_err_t {.
+proc touch_pad_get_meas_time*(sleep_cycle: ptr uint16; meas_cycle: ptr uint16): EspErrorCode {.
     importc: "touch_pad_get_meas_time", header: "touch_pad.h".}
 ## *
 ##  @brief Set touch sensor reference voltage, if the voltage gap between high and low reference voltage get less,
@@ -277,7 +277,7 @@ proc touch_pad_get_meas_time*(sleep_cycle: ptr uint16; meas_cycle: ptr uint16): 
 ##
 
 proc touch_pad_set_voltage*(refh: touch_high_volt_t; refl: touch_low_volt_t;
-                           atten: touch_volt_atten_t): esp_err_t {.
+                           atten: touch_volt_atten_t): EspErrorCode {.
     importc: "touch_pad_set_voltage", header: "touch_pad.h".}
 ## *
 ##  @brief Get touch sensor reference voltage,
@@ -289,7 +289,7 @@ proc touch_pad_set_voltage*(refh: touch_high_volt_t; refl: touch_low_volt_t;
 ##
 
 proc touch_pad_get_voltage*(refh: ptr touch_high_volt_t; refl: ptr touch_low_volt_t;
-                           atten: ptr touch_volt_atten_t): esp_err_t {.
+                           atten: ptr touch_volt_atten_t): EspErrorCode {.
     importc: "touch_pad_get_voltage", header: "touch_pad.h".}
 ## *
 ##  @brief Set touch sensor charge/discharge speed for each pad.
@@ -306,7 +306,7 @@ proc touch_pad_get_voltage*(refh: ptr touch_high_volt_t; refl: ptr touch_low_vol
 ##
 
 proc touch_pad_set_cnt_mode*(touch_num: touch_pad_t; slope: touch_cnt_slope_t;
-                            opt: touch_tie_opt_t): esp_err_t {.
+                            opt: touch_tie_opt_t): EspErrorCode {.
     importc: "touch_pad_set_cnt_mode", header: "touch_pad.h".}
 ## *
 ##  @brief Get touch sensor charge/discharge speed for each pad
@@ -319,7 +319,7 @@ proc touch_pad_set_cnt_mode*(touch_num: touch_pad_t; slope: touch_cnt_slope_t;
 ##
 
 proc touch_pad_get_cnt_mode*(touch_num: touch_pad_t; slope: ptr touch_cnt_slope_t;
-                            opt: ptr touch_tie_opt_t): esp_err_t {.
+                            opt: ptr touch_tie_opt_t): EspErrorCode {.
     importc: "touch_pad_get_cnt_mode", header: "touch_pad.h".}
 ## *
 ##  @brief Initialize touch pad GPIO
@@ -329,7 +329,7 @@ proc touch_pad_get_cnt_mode*(touch_num: touch_pad_t; slope: ptr touch_cnt_slope_
 ##       - ESP_ERR_INVALID_ARG if argument is wrong
 ##
 
-proc touch_pad_io_init*(touch_num: touch_pad_t): esp_err_t {.
+proc touch_pad_io_init*(touch_num: touch_pad_t): EspErrorCode {.
     importc: "touch_pad_io_init", header: "touch_pad.h".}
 ## *
 ##  @brief Set touch sensor FSM mode, the test action can be triggered by the timer,
@@ -340,7 +340,7 @@ proc touch_pad_io_init*(touch_num: touch_pad_t): esp_err_t {.
 ##       - ESP_ERR_INVALID_ARG if argument is wrong
 ##
 
-proc touch_pad_set_fsm_mode*(mode: touch_fsm_mode_t): esp_err_t {.
+proc touch_pad_set_fsm_mode*(mode: touch_fsm_mode_t): EspErrorCode {.
     importc: "touch_pad_set_fsm_mode", header: "touch_pad.h".}
 ## *
 ##  @brief Get touch sensor FSM mode
@@ -349,7 +349,7 @@ proc touch_pad_set_fsm_mode*(mode: touch_fsm_mode_t): esp_err_t {.
 ##       - ESP_OK on success
 ##
 
-proc touch_pad_get_fsm_mode*(mode: ptr touch_fsm_mode_t): esp_err_t {.
+proc touch_pad_get_fsm_mode*(mode: ptr touch_fsm_mode_t): EspErrorCode {.
     importc: "touch_pad_get_fsm_mode", header: "touch_pad.h".}
 ## *
 ##  @brief Trigger a touch sensor measurement, only support in SW mode of FSM
@@ -357,7 +357,7 @@ proc touch_pad_get_fsm_mode*(mode: ptr touch_fsm_mode_t): esp_err_t {.
 ##       - ESP_OK on success
 ##
 
-proc touch_pad_sw_start*(): esp_err_t {.importc: "touch_pad_sw_start",
+proc touch_pad_sw_start*(): EspErrorCode {.importc: "touch_pad_sw_start",
                                      header: "touch_pad.h".}
 ## *
 ##  @brief Set touch sensor interrupt threshold
@@ -368,7 +368,7 @@ proc touch_pad_sw_start*(): esp_err_t {.importc: "touch_pad_sw_start",
 ##       - ESP_ERR_INVALID_ARG if argument is wrong
 ##
 
-proc touch_pad_set_thresh*(touch_num: touch_pad_t; threshold: uint16): esp_err_t {.
+proc touch_pad_set_thresh*(touch_num: touch_pad_t; threshold: uint16): EspErrorCode {.
     importc: "touch_pad_set_thresh", header: "touch_pad.h".}
 ## *
 ##  @brief Get touch sensor interrupt threshold
@@ -379,7 +379,7 @@ proc touch_pad_set_thresh*(touch_num: touch_pad_t; threshold: uint16): esp_err_t
 ##       - ESP_ERR_INVALID_ARG if argument is wrong
 ##
 
-proc touch_pad_get_thresh*(touch_num: touch_pad_t; threshold: ptr uint16): esp_err_t {.
+proc touch_pad_get_thresh*(touch_num: touch_pad_t; threshold: ptr uint16): EspErrorCode {.
     importc: "touch_pad_get_thresh", header: "touch_pad.h".}
 ## *
 ##  @brief Set touch sensor interrupt trigger mode.
@@ -391,7 +391,7 @@ proc touch_pad_get_thresh*(touch_num: touch_pad_t; threshold: ptr uint16): esp_e
 ##       - ESP_ERR_INVALID_ARG if argument is wrong
 ##
 
-proc touch_pad_set_trigger_mode*(mode: touch_trigger_mode_t): esp_err_t {.
+proc touch_pad_set_trigger_mode*(mode: touch_trigger_mode_t): EspErrorCode {.
     importc: "touch_pad_set_trigger_mode", header: "touch_pad.h".}
 ## *
 ##  @brief Get touch sensor interrupt trigger mode
@@ -400,7 +400,7 @@ proc touch_pad_set_trigger_mode*(mode: touch_trigger_mode_t): esp_err_t {.
 ##       - ESP_OK on success
 ##
 
-proc touch_pad_get_trigger_mode*(mode: ptr touch_trigger_mode_t): esp_err_t {.
+proc touch_pad_get_trigger_mode*(mode: ptr touch_trigger_mode_t): EspErrorCode {.
     importc: "touch_pad_get_trigger_mode", header: "touch_pad.h".}
 ## *
 ##  @brief Set touch sensor interrupt trigger source. There are two sets of touch signals.
@@ -413,7 +413,7 @@ proc touch_pad_get_trigger_mode*(mode: ptr touch_trigger_mode_t): esp_err_t {.
 ##       - ESP_ERR_INVALID_ARG if argument is wrong
 ##
 
-proc touch_pad_set_trigger_source*(src: touch_trigger_src_t): esp_err_t {.
+proc touch_pad_set_trigger_source*(src: touch_trigger_src_t): EspErrorCode {.
     importc: "touch_pad_set_trigger_source", header: "touch_pad.h".}
 ## *
 ##  @brief Get touch sensor interrupt trigger source
@@ -422,7 +422,7 @@ proc touch_pad_set_trigger_source*(src: touch_trigger_src_t): esp_err_t {.
 ##       - ESP_OK on success
 ##
 
-proc touch_pad_get_trigger_source*(src: ptr touch_trigger_src_t): esp_err_t {.
+proc touch_pad_get_trigger_source*(src: ptr touch_trigger_src_t): EspErrorCode {.
     importc: "touch_pad_get_trigger_source", header: "touch_pad.h".}
 ## *
 ##  @brief Set touch sensor group mask.
@@ -438,7 +438,7 @@ proc touch_pad_get_trigger_source*(src: ptr touch_trigger_src_t): esp_err_t {.
 ##
 
 proc touch_pad_set_group_mask*(set1_mask: uint16; set2_mask: uint16;
-                              en_mask: uint16): esp_err_t {.
+                              en_mask: uint16): EspErrorCode {.
     importc: "touch_pad_set_group_mask", header: "touch_pad.h".}
 ## *
 ##  @brief Get touch sensor group mask.
@@ -450,7 +450,7 @@ proc touch_pad_set_group_mask*(set1_mask: uint16; set2_mask: uint16;
 ##
 
 proc touch_pad_get_group_mask*(set1_mask: ptr uint16; set2_mask: ptr uint16;
-                              en_mask: ptr uint16): esp_err_t {.
+                              en_mask: ptr uint16): EspErrorCode {.
     importc: "touch_pad_get_group_mask", header: "touch_pad.h".}
 ## *
 ##  @brief Clear touch sensor group mask.
@@ -466,7 +466,7 @@ proc touch_pad_get_group_mask*(set1_mask: ptr uint16; set2_mask: ptr uint16;
 ##
 
 proc touch_pad_clear_group_mask*(set1_mask: uint16; set2_mask: uint16;
-                                en_mask: uint16): esp_err_t {.
+                                en_mask: uint16): EspErrorCode {.
     importc: "touch_pad_clear_group_mask", header: "touch_pad.h".}
 ## *
 ##  @brief To clear the touch status register, usually use this function in touch ISR to clear status.
@@ -474,7 +474,7 @@ proc touch_pad_clear_group_mask*(set1_mask: uint16; set2_mask: uint16;
 ##       - ESP_OK on success
 ##
 
-proc touch_pad_clear_status*(): esp_err_t {.importc: "touch_pad_clear_status",
+proc touch_pad_clear_status*(): EspErrorCode {.importc: "touch_pad_clear_status",
     header: "touch_pad.h".}
 ## *
 ##  @brief Get the touch sensor status, usually used in ISR to decide which pads are 'touched'.
@@ -490,7 +490,7 @@ proc touch_pad_get_status*(): uint32 {.importc: "touch_pad_get_status",
 ##       - ESP_OK on success
 ##
 
-proc touch_pad_intr_enable*(): esp_err_t {.importc: "touch_pad_intr_enable",
+proc touch_pad_intr_enable*(): EspErrorCode {.importc: "touch_pad_intr_enable",
                                         header: "touch_pad.h".}
 ## *
 ##  @brief To disable touch pad interrupt
@@ -498,7 +498,7 @@ proc touch_pad_intr_enable*(): esp_err_t {.importc: "touch_pad_intr_enable",
 ##       - ESP_OK on success
 ##
 
-proc touch_pad_intr_disable*(): esp_err_t {.importc: "touch_pad_intr_disable",
+proc touch_pad_intr_disable*(): EspErrorCode {.importc: "touch_pad_intr_disable",
     header: "touch_pad.h".}
 ## *
 ##  @brief set touch pad filter calibration period, in ms.
@@ -510,7 +510,7 @@ proc touch_pad_intr_disable*(): esp_err_t {.importc: "touch_pad_intr_disable",
 ##       - ESP_ERR_INVALID_ARG parameter error
 ##
 
-proc touch_pad_set_filter_period*(new_period_ms: uint32): esp_err_t {.
+proc touch_pad_set_filter_period*(new_period_ms: uint32): EspErrorCode {.
     importc: "touch_pad_set_filter_period", header: "touch_pad.h".}
 ## *
 ##  @brief get touch pad filter calibration period, in ms
@@ -522,7 +522,7 @@ proc touch_pad_set_filter_period*(new_period_ms: uint32): esp_err_t {.
 ##       - ESP_ERR_INVALID_ARG parameter error
 ##
 
-proc touch_pad_get_filter_period*(p_period_ms: ptr uint32): esp_err_t {.
+proc touch_pad_get_filter_period*(p_period_ms: ptr uint32): EspErrorCode {.
     importc: "touch_pad_get_filter_period", header: "touch_pad.h".}
 ## *
 ##  @brief start touch pad filter function
@@ -542,7 +542,7 @@ proc touch_pad_get_filter_period*(p_period_ms: ptr uint32): esp_err_t {.
 ##       - ESP_ERR_INVALID_STATE driver state error
 ##
 
-proc touch_pad_filter_start*(filter_period_ms: uint32): esp_err_t {.
+proc touch_pad_filter_start*(filter_period_ms: uint32): EspErrorCode {.
     importc: "touch_pad_filter_start", header: "touch_pad.h".}
 ## *
 ##  @brief stop touch pad filter function
@@ -552,7 +552,7 @@ proc touch_pad_filter_start*(filter_period_ms: uint32): esp_err_t {.
 ##       - ESP_ERR_INVALID_STATE driver state error
 ##
 
-proc touch_pad_filter_stop*(): esp_err_t {.importc: "touch_pad_filter_stop",
+proc touch_pad_filter_stop*(): EspErrorCode {.importc: "touch_pad_filter_stop",
                                         header: "touch_pad.h".}
 ## *
 ##  @brief delete touch pad filter driver and release the memory
@@ -562,7 +562,7 @@ proc touch_pad_filter_stop*(): esp_err_t {.importc: "touch_pad_filter_stop",
 ##       - ESP_ERR_INVALID_STATE driver state error
 ##
 
-proc touch_pad_filter_delete*(): esp_err_t {.importc: "touch_pad_filter_delete",
+proc touch_pad_filter_delete*(): EspErrorCode {.importc: "touch_pad_filter_delete",
     header: "touch_pad.h".}
 ## *
 ##  @brief Get the touch pad which caused wakeup from sleep
@@ -572,5 +572,5 @@ proc touch_pad_filter_delete*(): esp_err_t {.importc: "touch_pad_filter_delete",
 ##       - ESP_FAIL get status err
 ##
 
-proc touch_pad_get_wakeup_status*(pad_num: ptr touch_pad_t): esp_err_t {.
+proc touch_pad_get_wakeup_status*(pad_num: ptr touch_pad_t): EspErrorCode {.
     importc: "touch_pad_get_wakeup_status", header: "touch_pad.h".}

@@ -368,7 +368,7 @@ const
 ##
 ##
 
-proc gpio_config*(pGPIOConfig: ptr gpio_config_t): esp_err_t {.
+proc gpio_config*(pGPIOConfig: ptr gpio_config_t): EspErrorCode {.
     importc: "gpio_config", header: "driver/gpio.h".}
 ## *
 ##  @brief Reset an gpio to default state (select gpio function, enable pullup and disable input and output).
@@ -382,7 +382,7 @@ proc gpio_config*(pGPIOConfig: ptr gpio_config_t): esp_err_t {.
 ##  @return Always return ESP_OK.
 ##
 
-proc gpio_reset_pin*(gpio_num: gpio_num_t): esp_err_t {.importc: "gpio_reset_pin",
+proc gpio_reset_pin*(gpio_num: gpio_num_t): EspErrorCode {.importc: "gpio_reset_pin",
     header: "driver/gpio.h".}
 ## *
 ##  @brief  GPIO set interrupt trigger type
@@ -396,7 +396,7 @@ proc gpio_reset_pin*(gpio_num: gpio_num_t): esp_err_t {.importc: "gpio_reset_pin
 ##
 ##
 
-proc gpio_set_intr_type*(gpio_num: gpio_num_t; intr_type: gpio_int_type_t): esp_err_t {.
+proc gpio_set_intr_type*(gpio_num: gpio_num_t; intr_type: gpio_int_type_t): EspErrorCode {.
     importc: "gpio_set_intr_type", header: "driver/gpio.h".}
 ## *
 ##  @brief  Enable GPIO module interrupt signal
@@ -413,7 +413,7 @@ proc gpio_set_intr_type*(gpio_num: gpio_num_t; intr_type: gpio_int_type_t): esp_
 ##
 ##
 
-proc gpio_intr_enable*(gpio_num: gpio_num_t): esp_err_t {.
+proc gpio_intr_enable*(gpio_num: gpio_num_t): EspErrorCode {.
     importc: "gpio_intr_enable", header: "driver/gpio.h".}
 ## *
 ##  @brief  Disable GPIO module interrupt signal
@@ -426,7 +426,7 @@ proc gpio_intr_enable*(gpio_num: gpio_num_t): esp_err_t {.
 ##
 ##
 
-proc gpio_intr_disable*(gpio_num: gpio_num_t): esp_err_t {.
+proc gpio_intr_disable*(gpio_num: gpio_num_t): EspErrorCode {.
     importc: "gpio_intr_disable", header: "driver/gpio.h".}
 ## *
 ##  @brief  GPIO set output level
@@ -440,7 +440,7 @@ proc gpio_intr_disable*(gpio_num: gpio_num_t): esp_err_t {.
 ##
 ##
 
-proc gpio_set_level*(gpio_num: gpio_num_t; level: uint32): esp_err_t {.
+proc gpio_set_level*(gpio_num: gpio_num_t; level: uint32): EspErrorCode {.
     importc: "gpio_set_level", header: "driver/gpio.h".}
 ## *
 ##  @brief  GPIO get input level
@@ -471,7 +471,7 @@ proc gpio_get_level*(gpio_num: gpio_num_t): cint {.importc: "gpio_get_level",
 ##
 ##
 
-proc gpio_set_direction*(gpio_num: gpio_num_t; mode: gpio_mode_t): esp_err_t {.
+proc gpio_set_direction*(gpio_num: gpio_num_t; mode: gpio_mode_t): EspErrorCode {.
     importc: "gpio_set_direction", header: "driver/gpio.h".}
 ## *
 ##  @brief  Configure GPIO pull-up/pull-down resistors
@@ -487,7 +487,7 @@ proc gpio_set_direction*(gpio_num: gpio_num_t; mode: gpio_mode_t): esp_err_t {.
 ##
 ##
 
-proc gpio_set_pull_mode*(gpio_num: gpio_num_t; pull: gpio_pull_mode_t): esp_err_t {.
+proc gpio_set_pull_mode*(gpio_num: gpio_num_t; pull: gpio_pull_mode_t): EspErrorCode {.
     importc: "gpio_set_pull_mode", header: "driver/gpio.h".}
 ## *
 ##  @brief Enable GPIO wake-up function.
@@ -501,7 +501,7 @@ proc gpio_set_pull_mode*(gpio_num: gpio_num_t; pull: gpio_pull_mode_t): esp_err_
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc gpio_wakeup_enable*(gpio_num: gpio_num_t; intr_type: gpio_int_type_t): esp_err_t {.
+proc gpio_wakeup_enable*(gpio_num: gpio_num_t; intr_type: gpio_int_type_t): EspErrorCode {.
     importc: "gpio_wakeup_enable", header: "driver/gpio.h".}
 ## *
 ##  @brief Disable GPIO wake-up function.
@@ -513,7 +513,7 @@ proc gpio_wakeup_enable*(gpio_num: gpio_num_t; intr_type: gpio_int_type_t): esp_
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc gpio_wakeup_disable*(gpio_num: gpio_num_t): esp_err_t {.
+proc gpio_wakeup_disable*(gpio_num: gpio_num_t): EspErrorCode {.
     importc: "gpio_wakeup_disable", header: "driver/gpio.h".}
 ## *
 ##  @brief   Register GPIO interrupt handler, the handler is an ISR.
@@ -541,7 +541,7 @@ proc gpio_wakeup_disable*(gpio_num: gpio_num_t): esp_err_t {.
 ##
 
 proc gpio_isr_register*(fn: proc (a1: pointer) {.cdecl.}; arg: pointer; intr_alloc_flags: esp_intr_flags;
-                       handle: ptr gpio_isr_handle_t): esp_err_t {.
+                       handle: ptr gpio_isr_handle_t): EspErrorCode {.
     importc: "gpio_isr_register", header: "driver/gpio.h".}
 ## *
 ##  @brief Enable pull-up on GPIO.
@@ -553,7 +553,7 @@ proc gpio_isr_register*(fn: proc (a1: pointer) {.cdecl.}; arg: pointer; intr_all
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc gpio_pullup_en*(gpio_num: gpio_num_t): esp_err_t {.importc: "gpio_pullup_en",
+proc gpio_pullup_en*(gpio_num: gpio_num_t): EspErrorCode {.importc: "gpio_pullup_en",
     header: "driver/gpio.h".}
 ## *
 ##  @brief Disable pull-up on GPIO.
@@ -565,7 +565,7 @@ proc gpio_pullup_en*(gpio_num: gpio_num_t): esp_err_t {.importc: "gpio_pullup_en
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc gpio_pullup_dis*(gpio_num: gpio_num_t): esp_err_t {.importc: "gpio_pullup_dis",
+proc gpio_pullup_dis*(gpio_num: gpio_num_t): EspErrorCode {.importc: "gpio_pullup_dis",
     header: "driver/gpio.h".}
 ## *
 ##  @brief Enable pull-down on GPIO.
@@ -577,7 +577,7 @@ proc gpio_pullup_dis*(gpio_num: gpio_num_t): esp_err_t {.importc: "gpio_pullup_d
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc gpio_pulldown_en*(gpio_num: gpio_num_t): esp_err_t {.
+proc gpio_pulldown_en*(gpio_num: gpio_num_t): EspErrorCode {.
     importc: "gpio_pulldown_en", header: "driver/gpio.h".}
 ## *
 ##  @brief Disable pull-down on GPIO.
@@ -589,7 +589,7 @@ proc gpio_pulldown_en*(gpio_num: gpio_num_t): esp_err_t {.
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc gpio_pulldown_dis*(gpio_num: gpio_num_t): esp_err_t {.
+proc gpio_pulldown_dis*(gpio_num: gpio_num_t): EspErrorCode {.
     importc: "gpio_pulldown_dis", header: "driver/gpio.h".}
 ## *
 ##  @brief Install the driver's GPIO ISR handler service, which allows per-pin GPIO interrupt handlers.
@@ -607,7 +607,7 @@ proc gpio_pulldown_dis*(gpio_num: gpio_num_t): esp_err_t {.
 ##      - ESP_ERR_INVALID_ARG GPIO error
 ##
 
-proc gpio_install_isr_service*(intr_alloc_flags: esp_intr_flags): esp_err_t {.
+proc gpio_install_isr_service*(intr_alloc_flags: esp_intr_flags): EspErrorCode {.
     importc: "gpio_install_isr_service", header: "driver/gpio.h".}
 ## *
 ##  @brief Uninstall the driver's GPIO ISR service, freeing related resources.
@@ -641,7 +641,7 @@ proc gpio_uninstall_isr_service*() {.importc: "gpio_uninstall_isr_service",
 ##
 
 proc gpio_isr_handler_add*(gpio_num: gpio_num_t; isr_handler: gpio_isr_t;
-                          args: pointer): esp_err_t {.
+                          args: pointer): EspErrorCode {.
     importc: "gpio_isr_handler_add", header: "driver/gpio.h".}
 ## *
 ##  @brief Remove ISR handler for the corresponding GPIO pin.
@@ -654,7 +654,7 @@ proc gpio_isr_handler_add*(gpio_num: gpio_num_t; isr_handler: gpio_isr_t;
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc gpio_isr_handler_remove*(gpio_num: gpio_num_t): esp_err_t {.
+proc gpio_isr_handler_remove*(gpio_num: gpio_num_t): EspErrorCode {.
     importc: "gpio_isr_handler_remove", header: "driver/gpio.h".}
 ## *
 ##  @brief Set GPIO pad drive capability
@@ -667,7 +667,7 @@ proc gpio_isr_handler_remove*(gpio_num: gpio_num_t): esp_err_t {.
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc gpio_set_drive_capability*(gpio_num: gpio_num_t; strength: gpio_drive_cap_t): esp_err_t {.
+proc gpio_set_drive_capability*(gpio_num: gpio_num_t; strength: gpio_drive_cap_t): EspErrorCode {.
     importc: "gpio_set_drive_capability", header: "driver/gpio.h".}
 ## *
 ##  @brief Get GPIO pad drive capability
@@ -681,7 +681,7 @@ proc gpio_set_drive_capability*(gpio_num: gpio_num_t; strength: gpio_drive_cap_t
 ##
 
 proc gpio_get_drive_capability*(gpio_num: gpio_num_t;
-                               strength: ptr gpio_drive_cap_t): esp_err_t {.
+                               strength: ptr gpio_drive_cap_t): EspErrorCode {.
     importc: "gpio_get_drive_capability", header: "driver/gpio.h".}
 ## *
 ##  @brief Enable gpio pad hold function.
@@ -704,7 +704,7 @@ proc gpio_get_drive_capability*(gpio_num: gpio_num_t;
 ##      - ESP_ERR_NOT_SUPPORTED Not support pad hold function
 ##
 
-proc gpio_hold_en*(gpio_num: gpio_num_t): esp_err_t {.importc: "gpio_hold_en",
+proc gpio_hold_en*(gpio_num: gpio_num_t): EspErrorCode {.importc: "gpio_hold_en",
     header: "driver/gpio.h".}
 ## *
 ##  @brief Disable gpio pad hold function.
@@ -724,7 +724,7 @@ proc gpio_hold_en*(gpio_num: gpio_num_t): esp_err_t {.importc: "gpio_hold_en",
 ##      - ESP_ERR_NOT_SUPPORTED Not support pad hold function
 ##
 
-proc gpio_hold_dis*(gpio_num: gpio_num_t): esp_err_t {.importc: "gpio_hold_dis",
+proc gpio_hold_dis*(gpio_num: gpio_num_t): EspErrorCode {.importc: "gpio_hold_dis",
     header: "driver/gpio.h".}
 ## *
 ##  @brief Enable all digital gpio pad hold function during Deep-sleep.

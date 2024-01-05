@@ -116,7 +116,7 @@ type
 ##       - other errors from interrupt allocator
 ##
 
-proc esp_timer_init*(): esp_err_t {.importc: "esp_timer_init", header: "esp_timer.h".}
+proc esp_timer_init*(): EspErrorCode {.importc: "esp_timer_init", header: "esp_timer.h".}
 
 
 ## *
@@ -129,7 +129,7 @@ proc esp_timer_init*(): esp_err_t {.importc: "esp_timer_init", header: "esp_time
 ##       - ESP_ERR_INVALID_STATE if not yet initialized
 ##
 
-proc esp_timer_deinit*(): esp_err_t {.importc: "esp_timer_deinit",
+proc esp_timer_deinit*(): EspErrorCode {.importc: "esp_timer_deinit",
                                    header: "esp_timer.h".}
 
 
@@ -151,7 +151,7 @@ proc esp_timer_deinit*(): esp_err_t {.importc: "esp_timer_deinit",
 ##
 
 proc esp_timer_create*(create_args: ptr esp_timer_create_args_t;
-                      out_handle: ptr esp_timer_handle_t): esp_err_t {.
+                      out_handle: ptr esp_timer_handle_t): EspErrorCode {.
     importc: "esp_timer_create", header: "esp_timer.h".}
 ## *
 ##  @brief Start one-shot timer
@@ -166,7 +166,7 @@ proc esp_timer_create*(create_args: ptr esp_timer_create_args_t;
 ##       - ESP_ERR_INVALID_STATE if the timer is already running
 ##
 
-proc esp_timer_start_once*(timer: esp_timer_handle_t; timeout_us: uint64): esp_err_t {.
+proc esp_timer_start_once*(timer: esp_timer_handle_t; timeout_us: uint64): EspErrorCode {.
     importc: "esp_timer_start_once", header: "esp_timer.h".}
 ## *
 ##  @brief Start a periodic timer
@@ -182,7 +182,7 @@ proc esp_timer_start_once*(timer: esp_timer_handle_t; timeout_us: uint64): esp_e
 ##       - ESP_ERR_INVALID_STATE if the timer is already running
 ##
 
-proc esp_timer_start_periodic*(timer: esp_timer_handle_t; period: uint64): esp_err_t {.
+proc esp_timer_start_periodic*(timer: esp_timer_handle_t; period: uint64): EspErrorCode {.
     importc: "esp_timer_start_periodic", header: "esp_timer.h".}
 ## *
 ##  @brief Stop the timer
@@ -196,7 +196,7 @@ proc esp_timer_start_periodic*(timer: esp_timer_handle_t; period: uint64): esp_e
 ##       - ESP_ERR_INVALID_STATE if the timer is not running
 ##
 
-proc esp_timer_stop*(timer: esp_timer_handle_t): esp_err_t {.
+proc esp_timer_stop*(timer: esp_timer_handle_t): EspErrorCode {.
     importc: "esp_timer_stop", header: "esp_timer.h".}
 ## *
 ##  @brief Delete an esp_timer instance
@@ -210,7 +210,7 @@ proc esp_timer_stop*(timer: esp_timer_handle_t): esp_err_t {.
 ##       - ESP_ERR_INVALID_STATE if the timer is not running
 ##
 
-proc esp_timer_delete*(timer: esp_timer_handle_t): esp_err_t {.
+proc esp_timer_delete*(timer: esp_timer_handle_t): EspErrorCode {.
     importc: "esp_timer_delete", header: "esp_timer.h".}
 ## *
 ##  @brief Get time in microseconds since boot
@@ -257,5 +257,5 @@ proc esp_timer_get_next_alarm*(): int64 {.importc: "esp_timer_get_next_alarm",
 ##       - ESP_ERR_NO_MEM if can not allocate temporary buffer for the output
 ##
 
-proc esp_timer_dump*(stream: ptr FILE): esp_err_t {.importc: "esp_timer_dump",
+proc esp_timer_dump*(stream: ptr FILE): EspErrorCode {.importc: "esp_timer_dump",
     header: "esp_timer.h".}

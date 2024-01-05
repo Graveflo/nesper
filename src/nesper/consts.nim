@@ -1,7 +1,7 @@
 include soc, strutils, macros
 
 type
-  esp_err_t* = int32
+  #esp_err_t* = int32
   # maybe try distinct type later
   esp_intr_flags* = distinct uint32
   EspErrorCode* = distinct cint

@@ -129,7 +129,7 @@ type
 
 proc i2c_driver_install*(i2c_num: i2c_port_t; mode: i2c_mode_t;
                         slv_rx_buf_len: csize_t; slv_tx_buf_len: csize_t;
-                        intr_alloc_flags: esp_intr_flags): esp_err_t {.
+                        intr_alloc_flags: esp_intr_flags): EspErrorCode {.
     importc: "i2c_driver_install", header: hdr_i2c.}
 
 
@@ -143,7 +143,7 @@ proc i2c_driver_install*(i2c_num: i2c_port_t; mode: i2c_mode_t;
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc i2c_driver_delete*(i2c_num: i2c_port_t): esp_err_t {.
+proc i2c_driver_delete*(i2c_num: i2c_port_t): EspErrorCode {.
     importc: "i2c_driver_delete", header: hdr_i2c.}
 
 
@@ -158,7 +158,7 @@ proc i2c_driver_delete*(i2c_num: i2c_port_t): esp_err_t {.
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc i2c_param_config*(i2c_num: i2c_port_t; i2c_conf: ptr i2c_config_t): esp_err_t {.
+proc i2c_param_config*(i2c_num: i2c_port_t; i2c_conf: ptr i2c_config_t): EspErrorCode {.
     importc: "i2c_param_config", header: hdr_i2c.}
 
 
@@ -172,7 +172,7 @@ proc i2c_param_config*(i2c_num: i2c_port_t; i2c_conf: ptr i2c_config_t): esp_err
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc i2c_reset_tx_fifo*(i2c_num: i2c_port_t): esp_err_t {.
+proc i2c_reset_tx_fifo*(i2c_num: i2c_port_t): EspErrorCode {.
     importc: "i2c_reset_tx_fifo", header: hdr_i2c.}
 
 
@@ -186,7 +186,7 @@ proc i2c_reset_tx_fifo*(i2c_num: i2c_port_t): esp_err_t {.
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc i2c_reset_rx_fifo*(i2c_num: i2c_port_t): esp_err_t {.
+proc i2c_reset_rx_fifo*(i2c_num: i2c_port_t): EspErrorCode {.
     importc: "i2c_reset_rx_fifo", header: hdr_i2c.}
 
 
@@ -206,7 +206,7 @@ proc i2c_reset_rx_fifo*(i2c_num: i2c_port_t): esp_err_t {.
 ##
 
 proc i2c_isr_register*(i2c_num: i2c_port_t; fn: proc (a1: pointer) {.cdecl.}; arg: pointer;
-                      intr_alloc_flags: esp_intr_flags; handle: ptr intr_handle_t): esp_err_t {.
+                      intr_alloc_flags: esp_intr_flags; handle: ptr intr_handle_t): EspErrorCode {.
     importc: "i2c_isr_register", header: hdr_i2c.}
 
 
@@ -220,7 +220,7 @@ proc i2c_isr_register*(i2c_num: i2c_port_t; fn: proc (a1: pointer) {.cdecl.}; ar
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc i2c_isr_free*(handle: intr_handle_t): esp_err_t {.importc: "i2c_isr_free",
+proc i2c_isr_free*(handle: intr_handle_t): EspErrorCode {.importc: "i2c_isr_free",
     header: hdr_i2c.}
 
 
@@ -240,7 +240,7 @@ proc i2c_isr_free*(handle: intr_handle_t): esp_err_t {.importc: "i2c_isr_free",
 ##
 
 proc i2c_set_pin*(i2c_num: i2c_port_t; sda_io_num: cint; scl_io_num: cint;
-                 sda_pullup_en: bool; scl_pullup_en: bool; mode: i2c_mode_t): esp_err_t {.
+                 sda_pullup_en: bool; scl_pullup_en: bool; mode: i2c_mode_t): EspErrorCode {.
     importc: "i2c_set_pin", header: hdr_i2c.}
 
 
@@ -287,7 +287,7 @@ proc i2c_cmd_link_delete*(cmd_handle: i2c_cmd_handle_t) {.
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc i2c_master_start*(cmd_handle: i2c_cmd_handle_t): esp_err_t {.
+proc i2c_master_start*(cmd_handle: i2c_cmd_handle_t): EspErrorCode {.
     importc: "i2c_master_start", header: hdr_i2c.}
 
 
@@ -306,7 +306,7 @@ proc i2c_master_start*(cmd_handle: i2c_cmd_handle_t): esp_err_t {.
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc i2c_master_write_byte*(cmd_handle: i2c_cmd_handle_t; data: uint8; ack_en: bool): esp_err_t {.
+proc i2c_master_write_byte*(cmd_handle: i2c_cmd_handle_t; data: uint8; ack_en: bool): EspErrorCode {.
     importc: "i2c_master_write_byte", header: hdr_i2c.}
 
 
@@ -329,7 +329,7 @@ proc i2c_master_write_byte*(cmd_handle: i2c_cmd_handle_t; data: uint8; ack_en: b
 ##
 
 proc i2c_master_write*(cmd_handle: i2c_cmd_handle_t; data: ptr uint8;
-                      data_len: csize_t; ack_en: bool): esp_err_t {.
+                      data_len: csize_t; ack_en: bool): EspErrorCode {.
     importc: "i2c_master_write", header: hdr_i2c.}
 
 
@@ -351,7 +351,7 @@ proc i2c_master_write*(cmd_handle: i2c_cmd_handle_t; data: ptr uint8;
 ##
 
 proc i2c_master_read_byte*(cmd_handle: i2c_cmd_handle_t; data: ptr uint8;
-                          ack: i2c_ack_type_t): esp_err_t {.
+                          ack: i2c_ack_type_t): EspErrorCode {.
     importc: "i2c_master_read_byte", header: hdr_i2c.}
 
 
@@ -374,7 +374,7 @@ proc i2c_master_read_byte*(cmd_handle: i2c_cmd_handle_t; data: ptr uint8;
 ##
 
 proc i2c_master_read*(cmd_handle: i2c_cmd_handle_t; data: ptr uint8;
-                     data_len: csize_t; ack: i2c_ack_type_t): esp_err_t {.
+                     data_len: csize_t; ack: i2c_ack_type_t): EspErrorCode {.
     importc: "i2c_master_read", header: hdr_i2c.}
 
 
@@ -391,7 +391,7 @@ proc i2c_master_read*(cmd_handle: i2c_cmd_handle_t; data: ptr uint8;
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc i2c_master_stop*(cmd_handle: i2c_cmd_handle_t): esp_err_t {.
+proc i2c_master_stop*(cmd_handle: i2c_cmd_handle_t): EspErrorCode {.
     importc: "i2c_master_stop", header: hdr_i2c.}
 
 
@@ -417,7 +417,7 @@ proc i2c_master_stop*(cmd_handle: i2c_cmd_handle_t): esp_err_t {.
 ##
 
 proc i2c_master_cmd_begin*(i2c_num: i2c_port_t; cmd_handle: i2c_cmd_handle_t;
-                          ticks_to_wait: TickType_t): esp_err_t {.
+                          ticks_to_wait: TickType_t): EspErrorCode {.
     importc: "i2c_master_cmd_begin", header: hdr_i2c.}
 
 
@@ -475,7 +475,7 @@ proc i2c_slave_read_buffer*(i2c_num: i2c_port_t; data: ptr uint8; max_size: csiz
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc i2c_set_period*(i2c_num: i2c_port_t; high_period: cint; low_period: cint): esp_err_t {.
+proc i2c_set_period*(i2c_num: i2c_port_t; high_period: cint; low_period: cint): EspErrorCode {.
     importc: "i2c_set_period", header: hdr_i2c.}
 
 
@@ -491,7 +491,7 @@ proc i2c_set_period*(i2c_num: i2c_port_t; high_period: cint; low_period: cint): 
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc i2c_get_period*(i2c_num: i2c_port_t; high_period: ptr cint; low_period: ptr cint): esp_err_t {.
+proc i2c_get_period*(i2c_num: i2c_port_t; high_period: ptr cint; low_period: ptr cint): EspErrorCode {.
     importc: "i2c_get_period", header: hdr_i2c.}
 
 
@@ -512,7 +512,7 @@ proc i2c_get_period*(i2c_num: i2c_port_t; high_period: ptr cint; low_period: ptr
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc i2c_filter_enable*(i2c_num: i2c_port_t; cyc_num: uint8): esp_err_t {.
+proc i2c_filter_enable*(i2c_num: i2c_port_t; cyc_num: uint8): EspErrorCode {.
     importc: "i2c_filter_enable", header: hdr_i2c.}
 
 
@@ -526,7 +526,7 @@ proc i2c_filter_enable*(i2c_num: i2c_port_t; cyc_num: uint8): esp_err_t {.
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc i2c_filter_disable*(i2c_num: i2c_port_t): esp_err_t {.
+proc i2c_filter_disable*(i2c_num: i2c_port_t): EspErrorCode {.
     importc: "i2c_filter_disable", header: hdr_i2c.}
 
 
@@ -542,7 +542,7 @@ proc i2c_filter_disable*(i2c_num: i2c_port_t): esp_err_t {.
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc i2c_set_start_timing*(i2c_num: i2c_port_t; setup_time: cint; hold_time: cint): esp_err_t {.
+proc i2c_set_start_timing*(i2c_num: i2c_port_t; setup_time: cint; hold_time: cint): EspErrorCode {.
     importc: "i2c_set_start_timing", header: hdr_i2c.}
 
 
@@ -559,7 +559,7 @@ proc i2c_set_start_timing*(i2c_num: i2c_port_t; setup_time: cint; hold_time: cin
 ##
 
 proc i2c_get_start_timing*(i2c_num: i2c_port_t; setup_time: ptr cint;
-                          hold_time: ptr cint): esp_err_t {.
+                          hold_time: ptr cint): EspErrorCode {.
     importc: "i2c_get_start_timing", header: hdr_i2c.}
 
 
@@ -575,7 +575,7 @@ proc i2c_get_start_timing*(i2c_num: i2c_port_t; setup_time: ptr cint;
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc i2c_set_stop_timing*(i2c_num: i2c_port_t; setup_time: cint; hold_time: cint): esp_err_t {.
+proc i2c_set_stop_timing*(i2c_num: i2c_port_t; setup_time: cint; hold_time: cint): EspErrorCode {.
     importc: "i2c_set_stop_timing", header: hdr_i2c.}
 
 
@@ -592,7 +592,7 @@ proc i2c_set_stop_timing*(i2c_num: i2c_port_t; setup_time: cint; hold_time: cint
 ##
 
 proc i2c_get_stop_timing*(i2c_num: i2c_port_t; setup_time: ptr cint;
-                         hold_time: ptr cint): esp_err_t {.
+                         hold_time: ptr cint): EspErrorCode {.
     importc: "i2c_get_stop_timing", header: hdr_i2c.}
 
 
@@ -608,7 +608,7 @@ proc i2c_get_stop_timing*(i2c_num: i2c_port_t; setup_time: ptr cint;
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc i2c_set_data_timing*(i2c_num: i2c_port_t; sample_time: cint; hold_time: cint): esp_err_t {.
+proc i2c_set_data_timing*(i2c_num: i2c_port_t; sample_time: cint; hold_time: cint): EspErrorCode {.
     importc: "i2c_set_data_timing", header: hdr_i2c.}
 
 
@@ -625,7 +625,7 @@ proc i2c_set_data_timing*(i2c_num: i2c_port_t; sample_time: cint; hold_time: cin
 ##
 
 proc i2c_get_data_timing*(i2c_num: i2c_port_t; sample_time: ptr cint;
-                         hold_time: ptr cint): esp_err_t {.
+                         hold_time: ptr cint): EspErrorCode {.
     importc: "i2c_get_data_timing", header: hdr_i2c.}
 
 
@@ -638,7 +638,7 @@ proc i2c_get_data_timing*(i2c_num: i2c_port_t; sample_time: ptr cint;
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc i2c_set_timeout*(i2c_num: i2c_port_t; timeout: cint): esp_err_t {.
+proc i2c_set_timeout*(i2c_num: i2c_port_t; timeout: cint): EspErrorCode {.
     importc: "i2c_set_timeout", header: hdr_i2c.}
 
 
@@ -651,7 +651,7 @@ proc i2c_set_timeout*(i2c_num: i2c_port_t; timeout: cint): esp_err_t {.
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc i2c_get_timeout*(i2c_num: i2c_port_t; timeout: ptr cint): esp_err_t {.
+proc i2c_get_timeout*(i2c_num: i2c_port_t; timeout: ptr cint): EspErrorCode {.
     importc: "i2c_get_timeout", header: hdr_i2c.}
 
 
@@ -668,7 +668,7 @@ proc i2c_get_timeout*(i2c_num: i2c_port_t; timeout: ptr cint): esp_err_t {.
 ##
 
 proc i2c_set_data_mode*(i2c_num: i2c_port_t; tx_trans_mode: i2c_trans_mode_t;
-                       rx_trans_mode: i2c_trans_mode_t): esp_err_t {.
+                       rx_trans_mode: i2c_trans_mode_t): EspErrorCode {.
     importc: "i2c_set_data_mode", header: hdr_i2c.}
 
 
@@ -685,5 +685,5 @@ proc i2c_set_data_mode*(i2c_num: i2c_port_t; tx_trans_mode: i2c_trans_mode_t;
 ##
 
 proc i2c_get_data_mode*(i2c_num: i2c_port_t; tx_trans_mode: ptr i2c_trans_mode_t;
-                       rx_trans_mode: ptr i2c_trans_mode_t): esp_err_t {.
+                       rx_trans_mode: ptr i2c_trans_mode_t): EspErrorCode {.
     importc: "i2c_get_data_mode", header: hdr_i2c.}

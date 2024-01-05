@@ -26,7 +26,7 @@ type
     I2CPort1 = I2C_NUM_1          ## !< I2C port 1
 
   I2CError* = object of OSError
-    code*: esp_err_t
+    code*: EspErrorCode
 
   I2CMasterPort* = ref object
     port*: i2c_port_t
@@ -40,7 +40,7 @@ type
 
   # i2c_obj_t = distinct pointer
 
-var i2c_err: esp_err_t # may be racey? We'll ignore it for now... 
+var i2c_err: EspErrorCode # may be racey? We'll ignore it for now... 
 
 converter toPort*(i2c_port: I2CPorts): i2c_port_t =
   result = i2c_port_t(i2c_port)
@@ -203,7 +203,7 @@ proc read*(cmd: I2CCmd; data: var seq[byte], ack: i2c_ack_type_t) =
   if ret != ESP_OK:
     raise newEspError[I2CError]("i2c write cmd error (" & $esp_err_to_name(ret) & ")", ret)
 
-proc submit*(port: I2CMasterPort; cmd: I2CCmd; ticks_to_wait: TickType_t, ignoreError = false): esp_err_t {.discardable.} =
+proc submit*(port: I2CMasterPort; cmd: I2CCmd; ticks_to_wait: TickType_t, ignoreError = false): EspErrorCode {.discardable.} =
   let ret = i2c_master_cmd_begin(port.port, cmd.handle, ticks_to_wait)
   if ignoreError:
     return ret

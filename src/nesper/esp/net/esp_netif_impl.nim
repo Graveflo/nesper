@@ -39,7 +39,7 @@ import esp_netif_types
 ##  @note This function should be called exactly once from application code, when the application starts up.
 ##
 
-proc esp_netif_init*(): esp_err_t {.importc: "esp_netif_init", header: "esp_netif.h".}
+proc esp_netif_init*(): EspErrorCode {.importc: "esp_netif_init", header: "esp_netif.h".}
 ## *
 ##  @brief  Deinitialize the esp-netif component (and the underlying TCP/IP stack)
 ##
@@ -50,7 +50,7 @@ proc esp_netif_init*(): esp_err_t {.importc: "esp_netif_init", header: "esp_neti
 ##          - ESP_ERR_NOT_SUPPORTED otherwise
 ##
 
-proc esp_netif_deinit*(): esp_err_t {.importc: "esp_netif_deinit",
+proc esp_netif_deinit*(): EspErrorCode {.importc: "esp_netif_deinit",
                                    header: "esp_netif.h".}
 ## *
 ##  @brief   Creates an instance of new esp-netif object based on provided config
@@ -84,7 +84,7 @@ proc esp_netif_destroy*(esp_netif: ptr esp_netif_t) {.importc: "esp_netif_destro
 ##
 
 proc esp_netif_set_driver_config*(esp_netif: ptr esp_netif_t;
-                                 driver_config: ptr esp_netif_driver_ifconfig_t): esp_err_t {.
+                                 driver_config: ptr esp_netif_driver_ifconfig_t): EspErrorCode {.
     importc: "esp_netif_set_driver_config", header: "esp_netif.h".}
 ## *
 ##  @brief   Attaches esp_netif instance to the io driver handle
@@ -102,7 +102,7 @@ proc esp_netif_set_driver_config*(esp_netif: ptr esp_netif_t;
 ##
 
 proc esp_netif_attach*(esp_netif: ptr esp_netif_t;
-                      driver_handle: esp_netif_iodriver_handle): esp_err_t {.
+                      driver_handle: esp_netif_iodriver_handle): EspErrorCode {.
     importc: "esp_netif_attach", header: "esp_netif.h".}
 ## *
 ##  @}
@@ -142,7 +142,7 @@ proc esp_netif_attach*(esp_netif: ptr esp_netif_t;
 ##
 
 proc esp_netif_receive*(esp_netif: ptr esp_netif_t; buffer: pointer; len: csize_t;
-                       eb: pointer): esp_err_t {.importc: "esp_netif_receive",
+                       eb: pointer): EspErrorCode {.importc: "esp_netif_receive",
     header: "esp_netif.h".}
 ## *
 ##  @}
@@ -246,7 +246,7 @@ proc esp_netif_action_got_ip*(esp_netif: pointer; base: esp_event_base_t;
 ##  @return     ESP_OK
 ##
 
-proc esp_netif_set_mac*(esp_netif: ptr esp_netif_t; mac: ptr uint8): esp_err_t {.
+proc esp_netif_set_mac*(esp_netif: ptr esp_netif_t; mac: ptr uint8): EspErrorCode {.
     importc: "esp_netif_set_mac", header: "esp_netif.h".}
 ## *
 ##  @brief  Set the hostname of an interface
@@ -260,7 +260,7 @@ proc esp_netif_set_mac*(esp_netif: ptr esp_netif_t; mac: ptr uint8): esp_err_t {
 ##          - ESP_ERR_ESP_NETIF_INVALID_PARAMS - parameter error
 ##
 
-proc esp_netif_set_hostname*(esp_netif: ptr esp_netif_t; hostname: cstring): esp_err_t {.
+proc esp_netif_set_hostname*(esp_netif: ptr esp_netif_t; hostname: cstring): EspErrorCode {.
     importc: "esp_netif_set_hostname", header: "esp_netif.h".}
 ## *
 ##  @brief  Get interface hostname.
@@ -274,7 +274,7 @@ proc esp_netif_set_hostname*(esp_netif: ptr esp_netif_t; hostname: cstring): esp
 ##          - ESP_ERR_ESP_NETIF_INVALID_PARAMS - parameter error
 ##
 
-proc esp_netif_get_hostname*(esp_netif: ptr esp_netif_t; hostname: cstringArray): esp_err_t {.
+proc esp_netif_get_hostname*(esp_netif: ptr esp_netif_t; hostname: cstringArray): EspErrorCode {.
     importc: "esp_netif_get_hostname", header: "esp_netif.h".}
 ## *
 ##  @brief  Test if supplied interface is up or down
@@ -303,7 +303,7 @@ proc esp_netif_is_netif_up*(esp_netif: ptr esp_netif_t): bool {.
 ##
 
 proc esp_netif_get_ip_info*(esp_netif: ptr esp_netif_t;
-                           ip_info: ptr esp_netif_ip_info_t): esp_err_t {.
+                           ip_info: ptr esp_netif_ip_info_t): EspErrorCode {.
     importc: "esp_netif_get_ip_info", header: "esp_netif.h".}
 ## *
 ##  @brief  Get interface's old IP information
@@ -322,7 +322,7 @@ proc esp_netif_get_ip_info*(esp_netif: ptr esp_netif_t;
 ##
 
 proc esp_netif_get_old_ip_info*(esp_netif: ptr esp_netif_t;
-                               ip_info: ptr esp_netif_ip_info_t): esp_err_t {.
+                               ip_info: ptr esp_netif_ip_info_t): EspErrorCode {.
     importc: "esp_netif_get_old_ip_info", header: "esp_netif.h".}
 ## *
 ##  @brief  Set interface's IP address information
@@ -348,7 +348,7 @@ proc esp_netif_get_old_ip_info*(esp_netif: ptr esp_netif_t;
 ##
 
 proc esp_netif_set_ip_info*(esp_netif: ptr esp_netif_t;
-                           ip_info: ptr esp_netif_ip_info_t): esp_err_t {.
+                           ip_info: ptr esp_netif_ip_info_t): EspErrorCode {.
     importc: "esp_netif_set_ip_info", header: "esp_netif.h".}
 ## *
 ##  @brief  Set interface old IP information
@@ -369,7 +369,7 @@ proc esp_netif_set_ip_info*(esp_netif: ptr esp_netif_t;
 ##
 
 proc esp_netif_set_old_ip_info*(esp_netif: ptr esp_netif_t;
-                               ip_info: ptr esp_netif_ip_info_t): esp_err_t {.
+                               ip_info: ptr esp_netif_ip_info_t): EspErrorCode {.
     importc: "esp_netif_set_old_ip_info", header: "esp_netif.h".}
 ## *
 ##  @brief  Get net interface index from network stack implementation
@@ -413,7 +413,7 @@ proc esp_netif_get_netif_impl_index*(esp_netif: ptr esp_netif_t): cint {.
 proc esp_netif_dhcps_option*(esp_netif: ptr esp_netif_t;
                             opt_op: esp_netif_dhcp_option_mode_t;
                             opt_id: esp_netif_dhcp_option_id_t; opt_val: pointer;
-                            opt_len: uint32): esp_err_t {.
+                            opt_len: uint32): EspErrorCode {.
     importc: "esp_netif_dhcps_option", header: "esp_netif.h".}
 ## *
 ##  @brief  Set or Get DHCP client option
@@ -434,7 +434,7 @@ proc esp_netif_dhcps_option*(esp_netif: ptr esp_netif_t;
 proc esp_netif_dhcpc_option*(esp_netif: ptr esp_netif_t;
                             opt_op: esp_netif_dhcp_option_mode_t;
                             opt_id: esp_netif_dhcp_option_id_t; opt_val: pointer;
-                            opt_len: uint32): esp_err_t {.
+                            opt_len: uint32): EspErrorCode {.
     importc: "esp_netif_dhcpc_option", header: "esp_netif.h".}
 ## *
 ##  @brief Start DHCP client (only if enabled in interface object)
@@ -450,7 +450,7 @@ proc esp_netif_dhcpc_option*(esp_netif: ptr esp_netif_t;
 ##          - ESP_ERR_ESP_NETIF_DHCPC_START_FAILED
 ##
 
-proc esp_netif_dhcpc_start*(esp_netif: ptr esp_netif_t): esp_err_t {.
+proc esp_netif_dhcpc_start*(esp_netif: ptr esp_netif_t): EspErrorCode {.
     importc: "esp_netif_dhcpc_start", header: "esp_netif.h".}
 ## *
 ##  @brief  Stop DHCP client (only if enabled in interface object)
@@ -466,7 +466,7 @@ proc esp_netif_dhcpc_start*(esp_netif: ptr esp_netif_t): esp_err_t {.
 ##       - ESP_ERR_ESP_NETIF_IF_NOT_READY
 ##
 
-proc esp_netif_dhcpc_stop*(esp_netif: ptr esp_netif_t): esp_err_t {.
+proc esp_netif_dhcpc_stop*(esp_netif: ptr esp_netif_t): EspErrorCode {.
     importc: "esp_netif_dhcpc_stop", header: "esp_netif.h".}
 ## *
 ##  @brief  Get DHCP client status
@@ -479,7 +479,7 @@ proc esp_netif_dhcpc_stop*(esp_netif: ptr esp_netif_t): esp_err_t {.
 ##
 
 proc esp_netif_dhcpc_get_status*(esp_netif: ptr esp_netif_t;
-                                status: ptr esp_netif_dhcp_status_t): esp_err_t {.
+                                status: ptr esp_netif_dhcp_status_t): EspErrorCode {.
     importc: "esp_netif_dhcpc_get_status", header: "esp_netif.h".}
 ## *
 ##  @brief  Get DHCP Server status
@@ -492,7 +492,7 @@ proc esp_netif_dhcpc_get_status*(esp_netif: ptr esp_netif_t;
 ##
 
 proc esp_netif_dhcps_get_status*(esp_netif: ptr esp_netif_t;
-                                status: ptr esp_netif_dhcp_status_t): esp_err_t {.
+                                status: ptr esp_netif_dhcp_status_t): EspErrorCode {.
     importc: "esp_netif_dhcps_get_status", header: "esp_netif.h".}
 ## *
 ##  @brief  Start DHCP server (only if enabled in interface object)
@@ -505,7 +505,7 @@ proc esp_netif_dhcps_get_status*(esp_netif: ptr esp_netif_t;
 ##          - ESP_ERR_ESP_NETIF_DHCP_ALREADY_STARTED
 ##
 
-proc esp_netif_dhcps_start*(esp_netif: ptr esp_netif_t): esp_err_t {.
+proc esp_netif_dhcps_start*(esp_netif: ptr esp_netif_t): EspErrorCode {.
     importc: "esp_netif_dhcps_start", header: "esp_netif.h".}
 ## *
 ##  @brief  Stop DHCP server (only if enabled in interface object)
@@ -519,7 +519,7 @@ proc esp_netif_dhcps_start*(esp_netif: ptr esp_netif_t): esp_err_t {.
 ##       - ESP_ERR_ESP_NETIF_IF_NOT_READY
 ##
 
-proc esp_netif_dhcps_stop*(esp_netif: ptr esp_netif_t): esp_err_t {.
+proc esp_netif_dhcps_stop*(esp_netif: ptr esp_netif_t): EspErrorCode {.
     importc: "esp_netif_dhcps_stop", header: "esp_netif.h".}
 ## *
 ##  @}
@@ -558,7 +558,7 @@ proc esp_netif_dhcps_stop*(esp_netif: ptr esp_netif_t): esp_err_t {.
 
 proc esp_netif_set_dns_info*(esp_netif: ptr esp_netif_t;
                             `type`: esp_netif_dns_type_t;
-                            dns: ptr esp_netif_dns_info_t): esp_err_t {.
+                            dns: ptr esp_netif_dns_info_t): EspErrorCode {.
     importc: "esp_netif_set_dns_info", header: "esp_netif.h".}
 ## *
 ##  @brief  Get DNS Server information
@@ -579,7 +579,7 @@ proc esp_netif_set_dns_info*(esp_netif: ptr esp_netif_t;
 
 proc esp_netif_get_dns_info*(esp_netif: ptr esp_netif_t;
                             `type`: esp_netif_dns_type_t;
-                            dns: ptr esp_netif_dns_info_t): esp_err_t {.
+                            dns: ptr esp_netif_dns_info_t): EspErrorCode {.
     importc: "esp_netif_get_dns_info", header: "esp_netif.h".}
 ## *
 ##  @}
@@ -606,7 +606,7 @@ proc esp_netif_get_dns_info*(esp_netif: ptr esp_netif_t;
 ##          - ESP_ERR_ESP_NETIF_INVALID_PARAMS
 ##
 
-proc esp_netif_create_ip6_linklocal*(esp_netif: ptr esp_netif_t): esp_err_t {.
+proc esp_netif_create_ip6_linklocal*(esp_netif: ptr esp_netif_t): EspErrorCode {.
     importc: "esp_netif_create_ip6_linklocal", header: "esp_netif.h".}
 ## *
 ##  @brief  Get interface link-local IPv6 address
@@ -624,7 +624,7 @@ proc esp_netif_create_ip6_linklocal*(esp_netif: ptr esp_netif_t): esp_err_t {.
 ##
 
 proc esp_netif_get_ip6_linklocal*(esp_netif: ptr esp_netif_t;
-                                 if_ip6: ptr esp_ip6_addr_t): esp_err_t {.
+                                 if_ip6: ptr esp_ip6_addr_t): EspErrorCode {.
     importc: "esp_netif_get_ip6_linklocal", header: "esp_netif.h".}
 ## *
 ##  @brief  Get interface global IPv6 address
@@ -642,7 +642,7 @@ proc esp_netif_get_ip6_linklocal*(esp_netif: ptr esp_netif_t;
 ##
 
 proc esp_netif_get_ip6_global*(esp_netif: ptr esp_netif_t;
-                              if_ip6: ptr esp_ip6_addr_t): esp_err_t {.
+                              if_ip6: ptr esp_ip6_addr_t): EspErrorCode {.
     importc: "esp_netif_get_ip6_global", header: "esp_netif.h".}
 ## *
 ##  @brief Sets IPv4 address to the specified octets

@@ -31,7 +31,7 @@ var i2c_frequency*: uint32_t = 100000
 
 var i2c_port*: i2c_port_t = I2C_NUM_0
 
-proc i2c_get_port*(port: cint; i2c_port: ptr i2c_port_t): esp_err_t {.cdecl.} =
+proc i2c_get_port*(port: cint; i2c_port: ptr i2c_port_t): EspErrorCode {.cdecl.} =
   if port >= I2C_NUM_MAX:
     ESP_LOGE(TAG, "Wrong port number: %d", port)
     return ESP_FAIL
@@ -44,7 +44,7 @@ proc i2c_get_port*(port: cint; i2c_port: ptr i2c_port_t): esp_err_t {.cdecl.} =
     i2c_port[] = I2C_NUM_0
   return ESP_OK
 
-proc i2c_master_driver_initialize*(): esp_err_t {.cdecl.} =
+proc i2c_master_driver_initialize*(): EspErrorCode {.cdecl.} =
   var conf: i2c_config_t
   conf.mode = I2C_MODE_MASTER
   conf.sda_io_num = i2c_gpio_sda
@@ -104,7 +104,7 @@ proc do_i2cdetect_cmd*(argc: cint; argv: cstringArray): cint {.cdecl.} =
       i2c_master_start(cmd)
       i2c_master_write_byte(cmd, (address shl 1) or WRITE_BIT, ACK_CHECK_EN)
       i2c_master_stop(cmd)
-      var ret: esp_err_t = i2c_master_cmd_begin(i2c_port, cmd, 50 div
+      var ret: EspErrorCode = i2c_master_cmd_begin(i2c_port, cmd, 50 div
           portTICK_RATE_MS)
       i2c_cmd_link_delete(cmd)
       if ret == ESP_OK:
@@ -159,7 +159,7 @@ proc do_i2cget_cmd*(argc: cint; argv: cstringArray): cint {.cdecl.} =
     i2c_master_read(cmd, data, len - 1, ACK_VAL)
   i2c_master_read_byte(cmd, data + len - 1, NACK_VAL)
   i2c_master_stop(cmd)
-  var ret: esp_err_t = i2c_master_cmd_begin(i2c_port, cmd, 1000 div portTICK_RATE_MS)
+  var ret: EspErrorCode = i2c_master_cmd_begin(i2c_port, cmd, 1000 div portTICK_RATE_MS)
   i2c_cmd_link_delete(cmd)
   if ret == ESP_OK:
     var i: cint = 0
@@ -218,7 +218,7 @@ proc do_i2cset_cmd*(argc: cint; argv: cstringArray): cint {.cdecl.} =
     i2c_master_write_byte(cmd, i2cset_args.data.ival[i], ACK_CHECK_EN)
     inc(i)
   i2c_master_stop(cmd)
-  var ret: esp_err_t = i2c_master_cmd_begin(i2c_port, cmd, 1000 div portTICK_RATE_MS)
+  var ret: EspErrorCode = i2c_master_cmd_begin(i2c_port, cmd, 1000 div portTICK_RATE_MS)
   i2c_cmd_link_delete(cmd)
   if ret == ESP_OK:
     ESP_LOGI(TAG, "Write OK")
@@ -283,7 +283,7 @@ proc do_i2cdump_cmd*(argc: cint; argv: cstringArray): cint {.cdecl.} =
         i2c_master_read(cmd, data, size - 1, ACK_VAL)
       i2c_master_read_byte(cmd, data + size - 1, NACK_VAL)
       i2c_master_stop(cmd)
-      var ret: esp_err_t = i2c_master_cmd_begin(i2c_port, cmd, 50 div
+      var ret: EspErrorCode = i2c_master_cmd_begin(i2c_port, cmd, 50 div
           portTICK_RATE_MS)
       i2c_cmd_link_delete(cmd)
       if ret == ESP_OK:

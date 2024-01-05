@@ -200,7 +200,7 @@ proc app_main*() {.cdecl.} =
         TAG.loge("Diagnostics failed! Start rollback to the previous version ...")
         esp_ota_mark_app_invalid_rollback_and_reboot()
 
-  var err: esp_err_t = nvs_flash_init()
+  var err: EspErrorCode = nvs_flash_init()
   if err == ESP_ERR_NVS_NO_FREE_PAGES or err == ESP_ERR_NVS_NEW_VERSION_FOUND:
     ##  OTA app partition table has a smaller NVS partition size than the non-OTA
     ##  partition table. This size mismatch may cause NVS initialization to fail.

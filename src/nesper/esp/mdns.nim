@@ -105,7 +105,7 @@ type
 ##      - ESP_FAIL when failed to start mdns task
 ##
 
-proc mdns_init*(): esp_err_t {.importc: "mdns_init", header: hdr.}
+proc mdns_init*(): EspErrorCode {.importc: "mdns_init", header: hdr.}
 
 ## *
 ##  @brief  Stop and free mDNS server
@@ -125,7 +125,7 @@ proc mdns_free*() {.importc: "mdns_free", header: hdr.}
 ##      - ESP_ERR_NO_MEM memory error
 ##
 
-proc mdns_hostname_set*(hostname: cstring): esp_err_t {.
+proc mdns_hostname_set*(hostname: cstring): EspErrorCode {.
     importc: "mdns_hostname_set", header: hdr.}
 ## *
 ##  @brief  Set the default instance name for mDNS server
@@ -138,7 +138,7 @@ proc mdns_hostname_set*(hostname: cstring): esp_err_t {.
 ##      - ESP_ERR_NO_MEM memory error
 ##
 
-proc mdns_instance_name_set*(instance_name: cstring): esp_err_t {.
+proc mdns_instance_name_set*(instance_name: cstring): EspErrorCode {.
     importc: "mdns_instance_name_set", header: hdr.}
 ## *
 ##  @brief  Add service to mDNS server
@@ -159,7 +159,7 @@ proc mdns_instance_name_set*(instance_name: cstring): esp_err_t {.
 ##
 
 proc mdns_service_add*(instance_name: cstring; service_type: cstring; proto: cstring;
-                    port: uint16; txt: ptr mdns_txt_item_t; num_items: csize_t): esp_err_t {.
+                    port: uint16; txt: ptr mdns_txt_item_t; num_items: csize_t): EspErrorCode {.
     importc: "mdns_service_add", header: hdr.}
 
 ## *
@@ -175,7 +175,7 @@ proc mdns_service_add*(instance_name: cstring; service_type: cstring; proto: cst
 ##      - ESP_ERR_NO_MEM memory error
 ##
 
-proc mdns_service_remove*(service_type: cstring; proto: cstring): esp_err_t {.
+proc mdns_service_remove*(service_type: cstring; proto: cstring): EspErrorCode {.
     importc: "mdns_service_remove", header: hdr.}
 
 ## *
@@ -193,7 +193,7 @@ proc mdns_service_remove*(service_type: cstring; proto: cstring): esp_err_t {.
 ##
 
 proc mdns_service_instance_name_set*(service_type: cstring; proto: cstring;
-                                    instance_name: cstring): esp_err_t {.
+                                    instance_name: cstring): EspErrorCode {.
     importc: "mdns_service_instance_name_set", header: hdr.}
 ## *
 ##  @brief  Set service port
@@ -209,7 +209,7 @@ proc mdns_service_instance_name_set*(service_type: cstring; proto: cstring;
 ##      - ESP_ERR_NO_MEM memory error
 ##
 
-proc mdns_service_port_set*(service_type: cstring; proto: cstring; port: uint16): esp_err_t {.
+proc mdns_service_port_set*(service_type: cstring; proto: cstring; port: uint16): EspErrorCode {.
     importc: "mdns_service_port_set", header: hdr.}
 ## *
 ##  @brief  Replace all TXT items for service
@@ -227,7 +227,7 @@ proc mdns_service_port_set*(service_type: cstring; proto: cstring; port: uint16)
 ##
 
 proc mdns_service_txt_set*(service_type: cstring; proto: cstring;
-                        txt: ptr mdns_txt_item_t; num_items: uint8): esp_err_t {.
+                        txt: ptr mdns_txt_item_t; num_items: uint8): EspErrorCode {.
     importc: "mdns_service_txt_set", header: hdr.}
 
 ## *
@@ -246,7 +246,7 @@ proc mdns_service_txt_set*(service_type: cstring; proto: cstring;
 ##
 
 proc mdns_service_txt_item_set*(service_type: cstring; proto: cstring; key: cstring;
-                            value: cstring): esp_err_t {.
+                            value: cstring): EspErrorCode {.
     importc: "mdns_service_txt_item_set", header: hdr.}
 ## *
 ##  @brief  Remove TXT item for service TXT record
@@ -263,7 +263,7 @@ proc mdns_service_txt_item_set*(service_type: cstring; proto: cstring; key: cstr
 ##
 
 proc mdns_service_txt_item_remove*(service_type: cstring; proto: cstring;
-                                key: cstring): esp_err_t {.
+                                key: cstring): EspErrorCode {.
     importc: "mdns_service_txt_item_remove", header: hdr.}
 ## *
 ##  @brief  Remove and free all services from mDNS server
@@ -273,7 +273,7 @@ proc mdns_service_txt_item_remove*(service_type: cstring; proto: cstring;
 ##      - ESP_ERR_INVALID_ARG Parameter error
 ##
 
-proc mdns_service_remove_all*(): esp_err_t {.importc: "mdns_service_remove_all",
+proc mdns_service_remove_all*(): EspErrorCode {.importc: "mdns_service_remove_all",
     header: hdr.}
 
 
@@ -293,14 +293,14 @@ proc mdns_service_remove_all*(): esp_err_t {.importc: "mdns_service_remove_all",
         
     
 #     # err_t mdns_resp_add_service_txtitem(struct mdns_service *service, const char *txt, u8_t txt_len);
-#     proc mdns_resp_add_service_txtitem*(service: ptr mdns_service, txt: cstring, txt_len: uint8): esp_err_t {.importc: "$1", header: hdr.}
+#     proc mdns_resp_add_service_txtitem*(service: ptr mdns_service, txt: cstring, txt_len: uint8): EspErrorCode {.importc: "$1", header: hdr.}
 #     # s8_t  mdns_resp_add_service(struct netif *netif, const char *name, const char *service, enum mdns_sd_proto proto, u16_t port, u32_t dns_ttl, service_get_txt_fn_t txt_fn, void *txt_userdata);
 #     proc mdns_resp_add_service*(netif: ptr esp_netif_t, name: cstring, service: cstring, proto: mdns_sd_proto, port: uint16, dns_ttl: uint32, txt_fn: service_get_txt_fn_t, txt_userdata: pointer) {.importc: "$1", header: hdr.}
 
 
 proc mdns_query*(name: cstring; service_type: cstring; proto: cstring;
                 `type`: uint16; timeout: uint32; max_results: csize_t;
-                results: ptr ptr mdns_result_t): esp_err_t {.importc: "mdns_query",
+                results: ptr ptr mdns_result_t): EspErrorCode {.importc: "mdns_query",
     header: hdr.}
     ## *
     ##  @brief  Query mDNS for host or service
@@ -348,7 +348,7 @@ proc mdns_query_results_free*(results: ptr mdns_result_t) {.
 ##
 
 proc mdns_query_ptr*(service_type: cstring; proto: cstring; timeout: uint32;
-                    max_results: csize_t; results: ptr ptr mdns_result_t): esp_err_t {.
+                    max_results: csize_t; results: ptr ptr mdns_result_t): EspErrorCode {.
     importc: "mdns_query_ptr", header: hdr.}
 ## *
 ##  @brief  Query mDNS for SRV record
@@ -367,7 +367,7 @@ proc mdns_query_ptr*(service_type: cstring; proto: cstring; timeout: uint32;
 ##
 
 proc mdns_query_srv*(instance_name: cstring; service_type: cstring; proto: cstring;
-                    timeout: uint32; result: ptr ptr mdns_result_t): esp_err_t {.
+                    timeout: uint32; result: ptr ptr mdns_result_t): EspErrorCode {.
     importc: "mdns_query_srv", header: hdr.}
 ## *
 ##  @brief  Query mDNS for TXT record
@@ -386,7 +386,7 @@ proc mdns_query_srv*(instance_name: cstring; service_type: cstring; proto: cstri
 ##
 
 proc mdns_query_txt*(instance_name: cstring; service_type: cstring; proto: cstring;
-                    timeout: uint32; result: ptr ptr mdns_result_t): esp_err_t {.
+                    timeout: uint32; result: ptr ptr mdns_result_t): EspErrorCode {.
     importc: "mdns_query_txt", header: hdr.}
 ## *
 ##  @brief  Query mDNS for A record
@@ -402,7 +402,7 @@ proc mdns_query_txt*(instance_name: cstring; service_type: cstring; proto: cstri
 ##      - ESP_ERR_INVALID_ARG    parameter error
 ##
 
-proc mdns_query_a*(host_name: cstring; timeout: uint32; `addr`: ptr ip4_addr_t): esp_err_t {.
+proc mdns_query_a*(host_name: cstring; timeout: uint32; `addr`: ptr ip4_addr_t): EspErrorCode {.
     importc: "mdns_query_a", header: hdr.}
 ## *
 ##  @brief  Query mDNS for A record
@@ -418,7 +418,7 @@ proc mdns_query_a*(host_name: cstring; timeout: uint32; `addr`: ptr ip4_addr_t):
 ##      - ESP_ERR_INVALID_ARG    parameter error
 ##
 
-proc mdns_query_aaaa*(host_name: cstring; timeout: uint32; `addr`: ptr ip6_addr_t): esp_err_t {.
+proc mdns_query_aaaa*(host_name: cstring; timeout: uint32; `addr`: ptr ip6_addr_t): EspErrorCode {.
     importc: "mdns_query_aaaa", header: hdr.}
 ## *
 ##  @brief   System event handler
@@ -429,5 +429,5 @@ proc mdns_query_aaaa*(host_name: cstring; timeout: uint32; `addr`: ptr ip6_addr_
 ##  @param  event        The system event
 ##
 
-proc mdns_handle_system_event*(ctx: pointer; event: ptr system_event_t): esp_err_t {.
+proc mdns_handle_system_event*(ctx: pointer; event: ptr system_event_t): EspErrorCode {.
     importc: "mdns_handle_system_event", header: hdr.}

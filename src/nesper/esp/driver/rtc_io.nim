@@ -46,7 +46,7 @@ template RTC_GPIO_IS_VALID_GPIO*(gpio_num: untyped): untyped =
 ##      - ESP_ERR_INVALID_ARG GPIO is not an RTC IO
 ##
 
-proc rtc_gpio_init*(gpio_num: gpio_num_t): esp_err_t {.importc: "rtc_gpio_init",
+proc rtc_gpio_init*(gpio_num: gpio_num_t): EspErrorCode {.importc: "rtc_gpio_init",
     header: "rtc_io.h".}
 ## *
 ##  @brief Init a GPIO as digital GPIO
@@ -58,7 +58,7 @@ proc rtc_gpio_init*(gpio_num: gpio_num_t): esp_err_t {.importc: "rtc_gpio_init",
 ##      - ESP_ERR_INVALID_ARG GPIO is not an RTC IO
 ##
 
-proc rtc_gpio_deinit*(gpio_num: gpio_num_t): esp_err_t {.importc: "rtc_gpio_deinit",
+proc rtc_gpio_deinit*(gpio_num: gpio_num_t): EspErrorCode {.importc: "rtc_gpio_deinit",
     header: "rtc_io.h".}
 ## *
 ##  @brief Get the RTC IO input level
@@ -84,7 +84,7 @@ proc rtc_gpio_get_level*(gpio_num: gpio_num_t): uint32 {.
 ##      - ESP_ERR_INVALID_ARG GPIO is not an RTC IO
 ##
 
-proc rtc_gpio_set_level*(gpio_num: gpio_num_t; level: uint32): esp_err_t {.
+proc rtc_gpio_set_level*(gpio_num: gpio_num_t; level: uint32): EspErrorCode {.
     importc: "rtc_gpio_set_level", header: "rtc_io.h".}
 ## *
 ##  @brief    RTC GPIO set direction
@@ -100,7 +100,7 @@ proc rtc_gpio_set_level*(gpio_num: gpio_num_t; level: uint32): esp_err_t {.
 ##      - ESP_ERR_INVALID_ARG GPIO is not an RTC IO
 ##
 
-proc rtc_gpio_set_direction*(gpio_num: gpio_num_t; mode: rtc_gpio_mode_t): esp_err_t {.
+proc rtc_gpio_set_direction*(gpio_num: gpio_num_t; mode: rtc_gpio_mode_t): EspErrorCode {.
     importc: "rtc_gpio_set_direction", header: "rtc_io.h".}
 ## *
 ##  @brief  RTC GPIO pullup enable
@@ -115,7 +115,7 @@ proc rtc_gpio_set_direction*(gpio_num: gpio_num_t; mode: rtc_gpio_mode_t): esp_e
 ##      - ESP_ERR_INVALID_ARG GPIO is not an RTC IO
 ##
 
-proc rtc_gpio_pullup_en*(gpio_num: gpio_num_t): esp_err_t {.
+proc rtc_gpio_pullup_en*(gpio_num: gpio_num_t): EspErrorCode {.
     importc: "rtc_gpio_pullup_en", header: "rtc_io.h".}
 ## *
 ##  @brief  RTC GPIO pulldown enable
@@ -130,7 +130,7 @@ proc rtc_gpio_pullup_en*(gpio_num: gpio_num_t): esp_err_t {.
 ##      - ESP_ERR_INVALID_ARG GPIO is not an RTC IO
 ##
 
-proc rtc_gpio_pulldown_en*(gpio_num: gpio_num_t): esp_err_t {.
+proc rtc_gpio_pulldown_en*(gpio_num: gpio_num_t): EspErrorCode {.
     importc: "rtc_gpio_pulldown_en", header: "rtc_io.h".}
 ## *
 ##  @brief  RTC GPIO pullup disable
@@ -145,7 +145,7 @@ proc rtc_gpio_pulldown_en*(gpio_num: gpio_num_t): esp_err_t {.
 ##      - ESP_ERR_INVALID_ARG GPIO is not an RTC IO
 ##
 
-proc rtc_gpio_pullup_dis*(gpio_num: gpio_num_t): esp_err_t {.
+proc rtc_gpio_pullup_dis*(gpio_num: gpio_num_t): EspErrorCode {.
     importc: "rtc_gpio_pullup_dis", header: "rtc_io.h".}
 ## *
 ##  @brief  RTC GPIO pulldown disable
@@ -160,7 +160,7 @@ proc rtc_gpio_pullup_dis*(gpio_num: gpio_num_t): esp_err_t {.
 ##      - ESP_ERR_INVALID_ARG GPIO is not an RTC IO
 ##
 
-proc rtc_gpio_pulldown_dis*(gpio_num: gpio_num_t): esp_err_t {.
+proc rtc_gpio_pulldown_dis*(gpio_num: gpio_num_t): EspErrorCode {.
     importc: "rtc_gpio_pulldown_dis", header: "rtc_io.h".}
 ## *
 ##  @brief Enable hold function on an RTC IO pad
@@ -176,7 +176,7 @@ proc rtc_gpio_pulldown_dis*(gpio_num: gpio_num_t): esp_err_t {.
 ##      - ESP_ERR_INVALID_ARG GPIO is not an RTC IO
 ##
 
-proc rtc_gpio_hold_en*(gpio_num: gpio_num_t): esp_err_t {.
+proc rtc_gpio_hold_en*(gpio_num: gpio_num_t): EspErrorCode {.
     importc: "rtc_gpio_hold_en", header: "rtc_io.h".}
 ## *
 ##  @brief Disable hold function on an RTC IO pad
@@ -191,7 +191,7 @@ proc rtc_gpio_hold_en*(gpio_num: gpio_num_t): esp_err_t {.
 ##      - ESP_ERR_INVALID_ARG GPIO is not an RTC IO
 ##
 
-proc rtc_gpio_hold_dis*(gpio_num: gpio_num_t): esp_err_t {.
+proc rtc_gpio_hold_dis*(gpio_num: gpio_num_t): EspErrorCode {.
     importc: "rtc_gpio_hold_dis", header: "rtc_io.h".}
 ## *
 ##  @brief Helper function to disconnect internal circuits from an RTC IO
@@ -210,7 +210,7 @@ proc rtc_gpio_hold_dis*(gpio_num: gpio_num_t): esp_err_t {.
 ##       - ESP_ERR_INVALID_ARG if GPIO is not an RTC IO
 ##
 
-proc rtc_gpio_isolate*(gpio_num: gpio_num_t): esp_err_t {.
+proc rtc_gpio_isolate*(gpio_num: gpio_num_t): EspErrorCode {.
     importc: "rtc_gpio_isolate", header: "rtc_io.h".}
 ## *
 ##  @brief Disable force hold signal for all RTC IOs
@@ -236,7 +236,7 @@ proc rtc_gpio_force_hold_dis_all*() {.importc: "rtc_gpio_force_hold_dis_all",
 ##
 
 proc rtc_gpio_set_drive_capability*(gpio_num: gpio_num_t;
-                                   strength: gpio_drive_cap_t): esp_err_t {.
+                                   strength: gpio_drive_cap_t): EspErrorCode {.
     importc: "rtc_gpio_set_drive_capability", header: "rtc_io.h".}
 ## *
 ##  @brief Get RTC GPIO pad drive capability
@@ -250,7 +250,7 @@ proc rtc_gpio_set_drive_capability*(gpio_num: gpio_num_t;
 ##
 
 proc rtc_gpio_get_drive_capability*(gpio_num: gpio_num_t;
-                                   strength: ptr gpio_drive_cap_t): esp_err_t {.
+                                   strength: ptr gpio_drive_cap_t): EspErrorCode {.
     importc: "rtc_gpio_get_drive_capability", header: "rtc_io.h".}
 ## *
 ##  @brief Enable wakeup from sleep mode using specific GPIO
@@ -263,7 +263,7 @@ proc rtc_gpio_get_drive_capability*(gpio_num: gpio_num_t;
 ##         one of GPIO_INTR_HIGH_LEVEL, GPIO_INTR_LOW_LEVEL.
 ##
 
-proc rtc_gpio_wakeup_enable*(gpio_num: gpio_num_t; intr_type: gpio_int_type_t): esp_err_t {.
+proc rtc_gpio_wakeup_enable*(gpio_num: gpio_num_t; intr_type: gpio_int_type_t): EspErrorCode {.
     importc: "rtc_gpio_wakeup_enable", header: "rtc_io.h".}
 ## *
 ##  @brief Disable wakeup from sleep mode using specific GPIO
@@ -273,5 +273,5 @@ proc rtc_gpio_wakeup_enable*(gpio_num: gpio_num_t; intr_type: gpio_int_type_t): 
 ##       - ESP_ERR_INVALID_ARG if gpio_num is not an RTC IO
 ##
 
-proc rtc_gpio_wakeup_disable*(gpio_num: gpio_num_t): esp_err_t {.
+proc rtc_gpio_wakeup_disable*(gpio_num: gpio_num_t): EspErrorCode {.
     importc: "rtc_gpio_wakeup_disable", header: "rtc_io.h".}
