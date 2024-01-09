@@ -13,14 +13,14 @@
 ##  limitations under the License.
 import support_macros
 
-import_vals int, "soc.h":
+importCConst int, "soc.h":
   const
     PRO_CPU_NUM* = (0)
     APP_CPU_NUM* = (1)
 
 ##  Overall memory map
 
-import_vals int, "soc.h":
+importCConst int, "soc.h":
   const
     SOC_MAX_CONTIGUOUS_RAM_SIZE* = 0x00400000
     DR_REG_DPORT_BASE* = 0x3FF00000
@@ -81,7 +81,7 @@ import_vals int, "soc.h":
     PERIPHS_SPI_ENCRYPT_BASEADDR* = DR_REG_SPI_ENCRYPT_BASE
 
 ## Periheral Clock {{
-import_vals int, "soc.h":
+importCConst int, "soc.h":
   const
     APB_CLK_FREQ* = (80 * 1000000)  ## unit: Hz
     APB_CLK_FREQ_ROM* = (26 * 1000000)
@@ -97,7 +97,7 @@ import_vals int, "soc.h":
 
 ## }}
 ##  Overall memory map
-import_vals int, "soc.h":
+importCConst int, "soc.h":
   const
     SOC_DROM_LOW* = 0x3F400000
     SOC_DROM_HIGH* = 0x3F800000
@@ -119,7 +119,7 @@ import_vals int, "soc.h":
     SOC_RTC_DATA_HIGH* = 0x50002000
 
 ## First and last words of the D/IRAM region, for both the DRAM address as well as the IRAM alias.
-import_vals int, "soc.h":
+importCConst int, "soc.h":
   const
     SOC_DIRAM_IRAM_LOW* = 0x400A0000
     SOC_DIRAM_IRAM_HIGH* = 0x400BFFFC
@@ -127,27 +127,27 @@ import_vals int, "soc.h":
     SOC_DIRAM_DRAM_HIGH* = 0x3FFFFFFC
 
 ##  Region of memory accessible via DMA. See esp_ptr_dma_capable().
-import_vals int, "soc.h":
+importCConst int, "soc.h":
   const
     SOC_DMA_LOW* = 0x3FFAE000
     SOC_DMA_HIGH* = 0x40000000
 
 ##  Region of memory that is byte-accessible. See esp_ptr_byte_accessible().
-import_vals int, "soc.h":
+importCConst int, "soc.h":
   const
     SOC_BYTE_ACCESSIBLE_LOW* = 0x3FF90000
     SOC_BYTE_ACCESSIBLE_HIGH* = 0x40000000
 
 ## Region of memory that is internal, as in on the same silicon die as the ESP32 CPUs
 ## (excluding RTC data region, that's checked separately.) See esp_ptr_internal().
-import_vals int, "soc.h":
+importCConst int, "soc.h":
   const
     SOC_MEM_INTERNAL_LOW* = 0x3FF90000
     SOC_MEM_INTERNAL_HIGH* = 0x400C2000
 
 ## Interrupt hardware source table
 ## This table is decided by hardware, don't touch this.
-import_vals int, "soc.h":
+importCConst int, "soc.h":
   const
     ETS_WIFI_MAC_INTR_SOURCE* = 0
     ETS_WIFI_MAC_NMI_SOURCE* = 1
@@ -257,7 +257,7 @@ import_vals int, "soc.h":
 ## ************************************************************************************************************
 ##
 ## CPU0 Interrupt number reserved, not touch this.
-import_vals int, "soc.h":
+importCConst int, "soc.h":
   const
     ETS_WMAC_INUM* = 0
     ETS_BT_HOST_INUM* = 1
@@ -269,7 +269,7 @@ import_vals int, "soc.h":
     ETS_DPORT_INUM* = 28
 
 ## CPU0 Interrupt number used in ROM, should be cancelled in SDK
-import_vals int, "soc.h":
+importCConst int, "soc.h":
   const
     ETS_SLC_INUM* = 1
     ETS_UART0_INUM* = 5
@@ -277,6 +277,6 @@ import_vals int, "soc.h":
 
 ## Other interrupt number should be managed by the user
 ## Invalid interrupt for number interrupt matrix
-import_vals int, "soc.h":
+importCConst int, "soc.h":
   const
     ETS_INVALID_INUM* = 6

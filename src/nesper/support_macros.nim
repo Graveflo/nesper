@@ -1,6 +1,6 @@
 import std/macros
 
-macro import_vals*(tn: typed, header_file: typed, names: untyped) =
+macro importCConst*(tn: typed, header_file: typed, names: untyped) =
   names.expectKind(nnkStmtList)
   var resultStmtLet = newTree(nnkLetSection)
   
@@ -25,7 +25,7 @@ macro import_vals*(tn: typed, header_file: typed, names: untyped) =
     else:
       error("Unexpected node kind for declaration(" & $child.kind & "): " & repr(child))
     resultStmtLet.add (quote do:
-      let `sname.strVal`* {.importc, header: `header_file`.}: `tn`)[0]
+      let `sname.strVal`* {.importc, header: `header_file`, nodecl.}: `tn`)[0]
   resultStmtLet
 
 template borrowBasicOperations*(typ: typedesc) =
