@@ -1,8 +1,6 @@
-include soc, strutils, macros
+include support_macros, soc, strutils
 
 type
-  #esp_err_t* = int32
-  # maybe try distinct type later
   esp_intr_flags* = distinct uint32
   EspErrorCode* = distinct cint
   IdfTarget* = enum
@@ -12,14 +10,6 @@ const IdfTargetDefinition {. define: "IDF_TARGET" .} = $IdfTarget.unKnown
 const espVariant* = parseEnum[IdfTarget](IdfTargetDefinition, IdfTarget.unKnown)
 
 ##  Definitions for error constants.
-
-macro import_vals*(tn: typed, header_file: typed, names: untyped) =
-  names.expectKind(nnkStmtList)
-  var transformed = newTree(nnkStmtList)
-  for child in names:
-    transformed.add quote do:
-      let `child.strVal`* {. importc, header: `header_file`.}: `tn`
-  transformed
 
 import_vals EspErrorCode, "esp_err.h":
   ESP_OK
@@ -51,16 +41,6 @@ template ESP_INTR_ENABLE*(inum: untyped): untyped =
 
 template ESP_INTR_DISABLE*(inum: untyped): untyped =
   xt_ints_off((1 shl inum))
-
-template borrowBasicOperations(typ: typedesc) =
-  proc `+` *(x, y: typ): typ {.borrow.}
-  proc `-` *(x, y: typ): typ {.borrow.}
-
-  proc `<` *(a, b: typ): bool {.borrow.}
-  proc `<=` *(a, b: typ): bool {.borrow.}
-  proc `==` *(a, b: typ): bool {.borrow.}
-
-  proc `$` *(v: typ): string {.borrow.}
 
 type 
   SzBytes* = distinct int
