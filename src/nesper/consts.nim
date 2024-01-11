@@ -1,27 +1,30 @@
-include soc, strutils, macros
+include support_macros, soc, strutils
 
 type
-  #esp_err_t* = int32
-  # maybe try distinct type later
   esp_intr_flags* = distinct uint32
   EspErrorCode* = distinct cint
   IdfTarget* = enum
-    unKnown, esp32, esp32s2, esp32s3
+    unKnown, esp32, esp8266, esp32s2, esp32s3, esp32c3
 
-const IdfTargetDefinition {. define: "IDF_TARGET" .} = $IdfTarget.unKnown
-const espVariant* = parseEnum[IdfTarget](IdfTargetDefinition, IdfTarget.unKnown)
+const
+  checkIdfTarget* {. define: "checkIdfTarget" .} = false
+  IdfTargetDefinition {. define: "IDF_TARGET" .} = $IdfTarget.unKnown
+  espVariant* = parseEnum[IdfTarget](IdfTargetDefinition, IdfTarget.unKnown)
+  
+  espTempSensEnabled* = {esp32s2, esp32s3}
+  espHmacEnabled* = {esp32s2, esp32s3, esp32c3}
+
+template checkFeatureEnabled*(fname: string, accept: set[IdfTarget])=
+  when espVariant notin accept:
+    {. error: "Device: \"" & $espVariant & "\" does not support \"" & fname & "\" operations." &
+    "\nSupported device types are: " & $accept & 
+    "\nUse the environment variable \"IDF_TARGET\" as per the esp-idf documentation or define the \"IDF_TARGET\" " &
+    "symbol at the nim command-line to change this." &
+    "\nDevice types and ability sets are defined in \"consts.nim\" (nesper) near the \"IdfTarget\" enum." .}
 
 ##  Definitions for error constants.
 
-macro import_vals*(tn: typed, header_file: typed, names: untyped) =
-  names.expectKind(nnkStmtList)
-  var transformed = newTree(nnkStmtList)
-  for child in names:
-    transformed.add quote do:
-      let `child.strVal`* {. importc, header: `header_file`.}: `tn`
-  transformed
-
-import_vals EspErrorCode, "esp_err.h":
+importCConst EspErrorCode, "esp_err.h":
   ESP_OK
   ESP_FAIL
   ESP_ERR_NO_MEM
@@ -51,16 +54,6 @@ template ESP_INTR_ENABLE*(inum: untyped): untyped =
 
 template ESP_INTR_DISABLE*(inum: untyped): untyped =
   xt_ints_off((1 shl inum))
-
-template borrowBasicOperations(typ: typedesc) =
-  proc `+` *(x, y: typ): typ {.borrow.}
-  proc `-` *(x, y: typ): typ {.borrow.}
-
-  proc `<` *(a, b: typ): bool {.borrow.}
-  proc `<=` *(a, b: typ): bool {.borrow.}
-  proc `==` *(a, b: typ): bool {.borrow.}
-
-  proc `$` *(v: typ): string {.borrow.}
 
 type 
   SzBytes* = distinct int
