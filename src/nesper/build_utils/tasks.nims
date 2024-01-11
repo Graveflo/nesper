@@ -68,7 +68,7 @@ proc parseNimbleArgs(): NimbleArgs =
 
   let
     npathcmd = "nimble --silent path nesper"
-    nesperPath = currentSourcePath().parentDir.parentDir
+    nesperPath = currentSourcePath().parentDir.parentDir.parentDir
 
   # Try setting wifi password
   let wifi_ssid = getEnv("ESP_WIFI_SSID")
@@ -154,15 +154,21 @@ task esp_setup, "Setup a new esp-idf / nesper project structure":
   echo fmt"{'\n'}Copying esp32 template files for `{nopts.esp32_template}`:" 
   for tmpltPth in esp_template_files:
     let fileName = tmpltPth.extractFilename()
-    echo "...copying template: ", fileName, " from: ", tmpltPth, " to: ", getCurrentDir()
-    writeFile(nopts.projsrc / fileName, readFile(tmpltPth) % tmplt_args )
+    let outPath = nopts.projsrc / fileName
+    echo "try: ", outPath
+    if not fileExists(outPath):
+      echo "...copying template: ", fileName, " from: ", tmpltPth, " to: ", getCurrentDir()
+      writeFile(outPath, readFile(tmpltPth) % tmplt_args )
   
   echo fmt"{'\n'}Copying app template files for `{nopts.app_template}`:" 
   mkdir(nopts.appsrc / nopts.projname)
   for tmpltPth in app_template_files:
     let fileName = tmpltPth.extractFilename()
-    echo "...copying template: ", fileName, " from: ", tmpltPth, " to: ", getCurrentDir()
-    writeFile(nopts.appsrc / nopts.projname / fileName, readFile(tmpltPth) % tmplt_args )
+    let outPath = nopts.appsrc / nopts.projname / fileName
+    echo "try: ", outPath
+    if not fileExists(outPath):
+      echo "...copying template: ", fileName, " from: ", tmpltPth, " to: ", getCurrentDir()
+      writeFile(outPath, readFile(tmpltPth) % tmplt_args )
 
 
 task esp_install_headers, "Install nim headers":
@@ -255,6 +261,7 @@ task esp_compile, "Compile Nim project for esp-idf program":
   espInstallHeadersTask()
 
 task esp_build, "Build esp-idf project":
+  espCompileTask()
   if findExe("idf.py") == "":
     echo "\nError: idf.py not found. Please run the esp-idf export commands: `. $IDF_PATH/export.sh` and try again.\n"
     quit(2)
@@ -262,6 +269,5 @@ task esp_build, "Build esp-idf project":
     exec("idf.py set-target " & getEnv("IDF_TARGET", ""))
   else:
     exec("idf.py reconfigure")
-  espCompileTask()
   echo "\n[Nesper ESP] Building ESP-IDF project:"
   exec("idf.py build")
